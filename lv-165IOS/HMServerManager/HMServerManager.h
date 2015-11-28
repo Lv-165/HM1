@@ -15,9 +15,16 @@
 
 + (HMServerManager*) sharedManager;
 
-- (void) getCountriesWithOffset:(NSInteger) offset
-                      onSuccess:(void(^)(NSArray* placeInfo)) success
-                      onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+- (void) getContinentWithonSuccess:(void(^)(NSArray* continents)) success
+                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void) getCountryWithISO:(NSString *)iso
+                 onSuccess:(void(^)(NSArray* continents)) success
+                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void)getPlaceWithID:(NSString *)placeID
+             onSuccess:(void(^)(NSArray* continents)) success
+             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 @property (weak, nonatomic) NSDictionary <HMCoreDataDelegate>* delegate;
 
