@@ -94,6 +94,24 @@
      }];
 }
 
+- (void)getCityByName:(NSString *)cityName
+            onSuccess:(void(^)(NSArray* cities)) success
+            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+    
+    NSString* city = [NSString stringWithFormat:@"?city=%@",cityName];
+    
+    [self.requestOperationManager
+     GET:city
+     parameters:nil
+     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+     }];
+}
+
+
 - (void) saveCountriesCoreData {
     
     for (int i=0; i<self.countriesResponceObjects.count; i++) {

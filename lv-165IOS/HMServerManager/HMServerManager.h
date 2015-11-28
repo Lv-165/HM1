@@ -30,6 +30,10 @@
                    onSuccess:(void(^)(NSArray* placesWithDots)) success
                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
+- (void)getCityByName:(NSString *)cityName
+            onSuccess:(void(^)(NSArray* cities)) success
+            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
 @property (weak, nonatomic) NSDictionary <HMCoreDataDelegate>* delegate;
 
 @end

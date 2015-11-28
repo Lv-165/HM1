@@ -17,6 +17,7 @@
 @property (strong, nonatomic)NSMutableArray *arrayOfCountriesByISO;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
+@property (strong, nonatomic)NSMutableArray *arrayOfPlacesByCity;
 
 @end
 
@@ -35,7 +36,8 @@
 //    [self getCountriesFromServer];
 //    [self getCountriesFromServerByISOname:@"ua"];
 //    [self getPlaceFromServerByID:@"355"];
-    [self getPlaceFromServerByIDandDot:@"355"];
+//    [self getPlaceFromServerByIDandDot:@"355"];
+    [self getCityFromServerByName:@"Kiev"];
     
     self.mapView.showsUserLocation = YES;
     
@@ -81,6 +83,18 @@
 - (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
     NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
     [self getPlaceFromServerByID:stringForRequest];
+}
+
+- (void)getCityFromServerByName:(NSString *)cityName {
+    [[HMServerManager sharedManager]
+     getCityByName:cityName
+     onSuccess:^(NSArray* city) {
+         [self.arrayOfPlacesByCity addObjectsFromArray:city];
+     }
+     onFailure:^(NSError *error, NSInteger statusCode) {
+         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+     }];
+
 }
 
 - (void)didReceiveMemoryWarning {
