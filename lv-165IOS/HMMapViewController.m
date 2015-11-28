@@ -13,9 +13,10 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (strong, nonatomic)NSMutableArray *arrayOfContinent;
-@property (strong, nonatomic)NSMutableArray *arrayOfCountry;
+@property (strong, nonatomic)NSMutableArray *arrayOfCountries;
+@property (strong, nonatomic)NSMutableArray *arrayOfCountriesByISO;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
+@property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
 
 @end
 
@@ -31,10 +32,10 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    
-    //[self getContinentFromServer];
-    //[self getCountryFromServer:@"ua"];
-    [self getPlaceFromServerByID:@"355"];
+//    [self getCountriesFromServer];
+//    [self getCountriesFromServerByISOname:@"ua"];
+//    [self getPlaceFromServerByID:@"355"];
+    [self getPlaceFromServerByIDandDot:@"355"];
     
     self.mapView.showsUserLocation = YES;
     
@@ -42,22 +43,22 @@
 
 #pragma mark - API
 
-- (void)getContinentFromServer {
+- (void)getCountriesFromServer {
     [[HMServerManager sharedManager]
      
-     getContinentWithonSuccess:^(NSArray *continents) {
-         [self.arrayOfContinent addObjectsFromArray:continents];
+     getCountriesWithonSuccess:^(NSArray *countries) {
+         [self.arrayOfCountries addObjectsFromArray:countries];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
 }
 
-- (void)getCountryFromServerByISOname:(NSString *)iso {
+- (void)getCountriesFromServerByISOname:(NSString *)iso {
     [[HMServerManager sharedManager]
-     getCountryWithISO:iso
-     onSuccess:^(NSArray *countries) {
-         [self.arrayOfCountry addObjectsFromArray:countries];
+     getCountriesWithISO:iso
+     onSuccess:^(NSArray *countriesWithISO) {
+         [self.arrayOfCountriesByISO addObjectsFromArray:countriesWithISO];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
@@ -75,6 +76,11 @@
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
     
+}
+
+- (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
+    NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
+    [self getPlaceFromServerByID:stringForRequest];
 }
 
 - (void)didReceiveMemoryWarning {

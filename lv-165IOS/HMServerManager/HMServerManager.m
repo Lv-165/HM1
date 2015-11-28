@@ -45,7 +45,7 @@
     return self;
 }
 
-- (void) getContinentWithonSuccess:(void(^)(NSArray* continents)) success
+- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     [self.requestOperationManager
      GET:@"?countries"
@@ -59,14 +59,14 @@
     
 }
 
-- (void) getCountryWithISO:(NSString *)iso
-                 onSuccess:(void(^)(NSArray* continents)) success
+- (void) getCountriesWithISO:(NSString *)iso
+                 onSuccess:(void(^)(NSArray* countries)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
-    NSString* countries = [NSString stringWithFormat:@"?country=%@",iso];
+    NSString* countriesForGet = [NSString stringWithFormat:@"?country=%@",iso];
     
     [self.requestOperationManager
-     GET:countries
+     GET:countriesForGet
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
          NSLog(@"JSON: %@", responseObject);
