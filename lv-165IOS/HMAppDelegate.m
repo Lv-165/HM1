@@ -7,6 +7,7 @@
 //
 
 #import "HMAppDelegate.h"
+#import "HMCoreDataManager.h"
 
 @interface HMAppDelegate ()
 
@@ -16,8 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
+ 
     return YES;
 }
 

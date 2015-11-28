@@ -53,6 +53,8 @@
     [NSEntityDescription entityForName:@"Countries"
                 inManagedObjectContext:self.managedObjectContext];
     
+    
+    
     [request setEntity:description];
     
     NSError* requestError = nil;

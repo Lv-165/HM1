@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Automatic">
-    <entity name="Comments" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9053" systemVersion="14F27" minimumToolsVersion="Automatic">
+    <entity name="Comments" representedClassName="Comments" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="comments" inverseEntity="Place" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Continent" syncable="YES">
+    <entity name="Continent" representedClassName="Continent" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="continent" inverseEntity="Location" syncable="YES"/>
     </entity>
-    <entity name="Continents" syncable="YES">
+    <entity name="Continents" representedClassName="Continents" parentEntity="HMCoreDataObjects" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="places" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="countriesOnContinent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Countries" inverseName="continentOfCountry" inverseEntity="Countries" syncable="YES"/>
     </entity>
-    <entity name="Countries" syncable="YES">
+    <entity name="Countries" representedClassName="Countries" parentEntity="HMCoreDataObjects" syncable="YES">
         <attribute name="iso" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="places" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="allPlacesInCountry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="country" inverseEntity="Place" syncable="YES"/>
         <relationship name="continentOfCountry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Continents" inverseName="countriesOnContinent" inverseEntity="Continents" syncable="YES"/>
     </entity>
-    <entity name="Country" syncable="YES">
+    <entity name="Country" representedClassName="Country" syncable="YES">
         <attribute name="iso" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="country" inverseEntity="Location" syncable="YES"/>
     </entity>
-    <entity name="Description" syncable="YES">
+    <entity name="Description" representedClassName="Description" syncable="YES">
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="descriptInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DescriptionInfo" inverseName="descript" inverseEntity="DescriptionInfo" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="descript" inverseEntity="Place" syncable="YES"/>
     </entity>
-    <entity name="DescriptionInfo" syncable="YES">
+    <entity name="DescriptionInfo" representedClassName="DescriptionInfo" syncable="YES">
         <attribute name="attribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionString" optional="YES" attributeType="String" syncable="YES"/>
@@ -43,13 +43,14 @@
         <attribute name="versions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="descript" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Description" inverseName="descriptInfo" inverseEntity="Description" syncable="YES"/>
     </entity>
-    <entity name="Location" syncable="YES">
+    <entity name="HMCoreDataObjects" representedClassName="HMCoreDataObjects" syncable="YES"/>
+    <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="continent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Continent" inverseName="location" inverseEntity="Continent" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="location" inverseEntity="Country" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="location" inverseEntity="Place" syncable="YES"/>
     </entity>
-    <entity name="Place" syncable="YES">
+    <entity name="Place" representedClassName="Place" parentEntity="HMCoreDataObjects" syncable="YES">
         <attribute name="comments_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="elevation" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -64,7 +65,7 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="place" inverseEntity="Location" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="place" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="User" syncable="YES">
+    <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comments" inverseName="user" inverseEntity="Comments" syncable="YES"/>
@@ -81,5 +82,6 @@
         <element name="Location" positionX="-99" positionY="-36" width="128" height="103"/>
         <element name="Place" positionX="-308" positionY="-193" width="128" height="238"/>
         <element name="User" positionX="-63" positionY="131" width="128" height="103"/>
+        <element name="HMCoreDataObjects" positionX="-315" positionY="-315" width="128" height="43"/>
     </elements>
 </model>

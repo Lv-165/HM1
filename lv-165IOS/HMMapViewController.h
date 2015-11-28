@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "HMCoreDataManager.h"
+#import "HMServerManager.h"
 
 @interface HMMapViewController : UIViewController <MKMapViewDelegate>
 

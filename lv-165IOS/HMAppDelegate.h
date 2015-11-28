@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "HMCoreDataManager.h"
 
 @interface HMAppDelegate : UIResponder <UIApplicationDelegate>
 

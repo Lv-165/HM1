@@ -7,15 +7,13 @@
 //
 
 #import "HMMapViewController.h"
-#import "HMServerManager.h"
+
 
 @interface HMMapViewController ()
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSMutableArray *arrayOfContinent;
 
-@property (strong, nonatomic)NSMutableArray *arrayOfContinent;
-@property (strong, nonatomic)NSMutableArray *arrayOfCountry;
-@property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
 
 @end
 
@@ -32,49 +30,26 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    //[self getContinentFromServer];
-    //[self getCountryFromServer:@"ua"];
-    [self getPlaceFromServerByID:@"355"];
+    [self getCountriesWithOffset];
     
     self.mapView.showsUserLocation = YES;
+    
+    //затираю все и записываю
+    
     
 }
 
 #pragma mark - API
 
-- (void)getContinentFromServer {
+- (void)getCountriesWithOffset {
     [[HMServerManager sharedManager]
-     
-     getContinentWithonSuccess:^(NSArray *continents) {
+     getCountriesWithOffset:[self.arrayOfContinent count]
+     onSuccess:^(NSArray *continents) {
          [self.arrayOfContinent addObjectsFromArray:continents];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
-}
-
-- (void)getCountryFromServerByISOname:(NSString *)iso {
-    [[HMServerManager sharedManager]
-     getCountryWithISO:iso
-     onSuccess:^(NSArray *countries) {
-         [self.arrayOfCountry addObjectsFromArray:countries];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-
-}
-
-- (void)getPlaceFromServerByID:(NSString *)placeID {
-    [[HMServerManager sharedManager]
-     getPlaceWithID:placeID
-     onSuccess:^(NSArray* places) {
-         [self.arrayOfPlaces addObjectsFromArray:places];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {
