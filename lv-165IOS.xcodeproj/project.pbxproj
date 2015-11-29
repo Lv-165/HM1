@@ -271,6 +271,33 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		30E661A01C0B17C50076EBAC /* HPServer Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3018962E1C0895DC00178A04 /* HMServerManager.h */,
+				3018962F1C0895DC00178A04 /* HMServerManager.m */,
+			);
+			name = "HPServer Manager";
+			sourceTree = "<group>";
+		};
+		30E661A11C0B17DF0076EBAC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				30E661A21C0B17F00076EBAC /* HMCoreDate Manager */,
+				30E661A01C0B17C50076EBAC /* HPServer Manager */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		30E661A21C0B17F00076EBAC /* HMCoreDate Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */,
+				C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */,
+			);
+			name = "HMCoreDate Manager";
+			sourceTree = "<group>";
+		};
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
@@ -306,10 +333,6 @@
 				C01442F51C0333A5000F8F6F /* Info.plist */,
 				C01442ED1C0333A5000F8F6F /* lv_165IOS.xcdatamodeld */,
 				C01442E11C0333A5000F8F6F /* Supporting Files */,
-				3018962E1C0895DC00178A04 /* HMServerManager.h */,
-				3018962F1C0895DC00178A04 /* HMServerManager.m */,
-				C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */,
-				C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */,
 			);
 			path = "lv-165IOS";
 			sourceTree = "<group>";
@@ -317,6 +340,7 @@
 		C01442E11C0333A5000F8F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				30E661A11C0B17DF0076EBAC /* Managers */,
 				C01442E21C0333A5000F8F6F /* main.m */,
 			);
 			name = "Supporting Files";

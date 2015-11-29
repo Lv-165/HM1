@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9053" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
     <entity name="Comments" representedClassName="Comments" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -79,9 +79,9 @@
         <element name="Country" positionX="160" positionY="36" width="128" height="88"/>
         <element name="Description" positionX="-110" positionY="-162" width="128" height="88"/>
         <element name="DescriptionInfo" positionX="160" positionY="-226" width="128" height="133"/>
+        <element name="HMCoreDataObjects" positionX="-315" positionY="-315" width="128" height="45"/>
         <element name="Location" positionX="-99" positionY="-36" width="128" height="103"/>
         <element name="Place" positionX="-308" positionY="-193" width="128" height="238"/>
         <element name="User" positionX="-63" positionY="131" width="128" height="103"/>
-        <element name="HMCoreDataObjects" positionX="-315" positionY="-315" width="128" height="43"/>
     </elements>
 </model>

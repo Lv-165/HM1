@@ -15,24 +15,20 @@
 
 + (HMServerManager*) sharedManager;
 
-- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
+- (void)getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
-- (void) getCountriesWithISO:(NSString *)iso
-                 onSuccess:(void(^)(NSArray* countriesWithISO)) success
+- (void)getPlacesByCountryWithISO:(NSString *)iso
+                 onSuccess:(void(^)(NSArray* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlaceWithID:(NSString *)placeID
              onSuccess:(void(^)(NSArray* places)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
-- (void)getPlaceWithIDandDot:(NSString *)placeIDWithDot
-                   onSuccess:(void(^)(NSArray* placesWithDots)) success
-                   onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
-
-- (void)getCityByName:(NSString *)cityName
-            onSuccess:(void(^)(NSArray* cities)) success
-            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+- (void)getPlacesByContinentName:(NSString *)continentName
+                  onSuccess:(void(^)(NSArray* places)) success
+                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 @property (weak, nonatomic) NSDictionary <HMCoreDataDelegate>* delegate;
 

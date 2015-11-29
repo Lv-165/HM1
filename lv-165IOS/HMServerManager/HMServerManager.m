@@ -59,8 +59,8 @@
     
 }
 
-- (void) getCountriesWithISO:(NSString *)iso
-                 onSuccess:(void(^)(NSArray* countries)) success
+- (void) getPlacesByCountryWithISO:(NSString *)iso
+                 onSuccess:(void(^)(NSArray* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
     NSString* countriesForGet = [NSString stringWithFormat:@"?country=%@",iso];
@@ -94,7 +94,7 @@
      }];
 }
 
-- (void)getCityByName:(NSString *)cityName
+- (void)getPlaceyByName:(NSString *)cityName
             onSuccess:(void(^)(NSArray* cities)) success
             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
@@ -110,6 +110,23 @@
          NSLog(@"Error: %@", error);
      }];
 }
+
+- (void)getPlacesByContinentName:(NSString *)continentName
+                  onSuccess:(void (^)(NSArray *))success
+                  onFailure:(void (^)(NSError *, NSInteger))failure {
+    NSString* continent = [NSString stringWithFormat:@"?continent=%@",continentName];
+    
+    [self.requestOperationManager
+     GET:continent
+     parameters:nil
+     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+     }];
+}
+
 
 
 - (void) saveCountriesCoreData {
