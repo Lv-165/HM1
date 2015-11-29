@@ -14,6 +14,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (strong, nonatomic)NSMutableArray *arrayOfCountries;
+@property (strong, nonatomic)NSMutableArray *araryOfContinents;
 @property (strong, nonatomic)NSMutableArray *arrayOfCountriesByISO;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
@@ -34,16 +35,7 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-<<<<<<< HEAD
-    [self getPlaceFromServerByID:@"355"];
-=======
-    [self getCountriesFromServer];
-//    [self getCountriesFromServerByISOname:@"ua"];
-//    [self getPlaceFromServerByID:@"355"];
-//    [self getPlaceFromServerByIDandDot:@"355"];
-//    [self getCityFromServerByName:@"Kiev"];
-    
->>>>>>> d57994984ff273734d306026b394240b61ddbbf6
+    [self getContinentsFromServer];
     self.mapView.showsUserLocation = YES;
     
 }
@@ -55,6 +47,17 @@
      
      getCountriesWithonSuccess:^(NSArray *countries) {
          [self.arrayOfCountries addObjectsFromArray:countries];
+     }
+     onFailure:^(NSError *error, NSInteger statusCode) {
+         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+     }];
+}
+
+- (void)getContinentsFromServer {
+    [[HMServerManager sharedManager]
+     
+     getContinentsWithonSuccess:^(NSArray *continents) {
+         [self.araryOfContinents addObjectsFromArray:continents];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);

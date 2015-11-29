@@ -59,6 +59,18 @@
     
 }
 
+- (void) getContinentsWithonSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *, NSInteger))failure {
+    [self.requestOperationManager
+     GET:@"?continents"
+     parameters:nil
+     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+     }];
+}
+
 - (void) getPlacesByCountryWithISO:(NSString *)iso
                  onSuccess:(void(^)(NSArray* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {

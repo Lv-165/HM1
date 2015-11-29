@@ -15,7 +15,10 @@
 
 + (HMServerManager*) sharedManager;
 
-- (void)getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
+- (void)getContinentsWithonSuccess:(void(^)(NSArray* countries)) success
+                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void)getCountriesWithonSuccess:(void(^)(NSArray* continents)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlacesByCountryWithISO:(NSString *)iso
