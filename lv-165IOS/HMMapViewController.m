@@ -33,11 +33,11 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-//    [self getCountriesFromServer];
+    [self getCountriesFromServer];
 //    [self getCountriesFromServerByISOname:@"ua"];
 //    [self getPlaceFromServerByID:@"355"];
 //    [self getPlaceFromServerByIDandDot:@"355"];
-    [self getCityFromServerByName:@"Kiev"];
+//    [self getCityFromServerByName:@"Kiev"];
     
     self.mapView.showsUserLocation = YES;
     
