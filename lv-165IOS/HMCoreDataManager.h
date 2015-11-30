@@ -25,4 +25,6 @@
 
 + (HMCoreDataManager*) sharedManager;
 
+- (void) addContinents:(NSArray*) countryArray;
+
 @end

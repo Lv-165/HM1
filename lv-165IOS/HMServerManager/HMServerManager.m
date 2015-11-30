@@ -14,7 +14,6 @@
 @interface HMServerManager ()
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager* requestOperationManager;
-@property (strong, nonatomic) NSArray* countriesResponceObjects;
 
 @end
 
@@ -67,9 +66,8 @@
      GET:@"?continents"
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         self.countriesResponceObjects = [responseObject allValues];
                   NSLog(@"Countries get GOOD");// вызов записи в кор дату
-                  [self moveContinentsCoreData];
+         [[HMCoreDataManager sharedManager] addContinents:[responseObject allValues]];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -144,63 +142,6 @@
      }];
 }
 
-
-
-//- (void) moveCountriesCoreData {
-//    
-////    NSLog(@"ALL VALUES%@",self.countriesResponceObjects);
-//
-//
-//    for (NSDictionary* dict in self.countriesResponceObjects) {
-//        
-////        NSLog(@" DICT %@",dict);
-//        //Countries* country = [self.delegate addCountry:dict];//не передает
-//        
-//        Countries* country = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
-//                                                           inManagedObjectContext:[self managedObjectContext]];
-//        country.iso = [dict objectForKey:@"iso"];
-//        country.name = [dict objectForKey:@"name"];
-////      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
-//        NSLog(@"%@  AND %@ PLACES",country.name, country.iso);
-//
-//    }
-//   
-//    [self.delegate printCountries];//не пашет
-//    
-//    
-//    NSError* error = nil;
-//    
-//    if (![[self managedObjectContext] save:&error]) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }
-//
-//    
-//}
-
-- (void) moveContinentsCoreData {
-  
-    for (NSDictionary* dict in self.countriesResponceObjects) {
-
-        
-        Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
-                                                           inManagedObjectContext:[self managedObjectContext]];
-        continent.code = [dict objectForKey:@"code"];
-        continent.name = [dict objectForKey:@"name"];
-        NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
-        continent.places = [NSNumber numberWithInteger:tempInteger];
-        
-        NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
-        
-    }
- 
-    NSError* error = nil;
-    
-    if (![[self managedObjectContext] save:&error]) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
-    
-    
-}
 - (NSManagedObjectContext* )managedObjectContext {
     if (!_managedObjectContext) {
         _managedObjectContext = [[HMCoreDataManager sharedManager]managedObjectContext];

@@ -32,43 +32,31 @@
 
 #pragma mark - Create_Delete Objects
 
-//- (Countries*) addCountry:(NSDictionary*) countryDictionary {
-//    
-//    NSLog(@"addCountry");
-//    
-//    Countries* country =
-//    [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
-//                                  inManagedObjectContext:self.managedObjectContext];
-//    
-//    country.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
-//    country.iso = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"iso"]];;
-////    country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
-//    
-//
-//    return country;
-//}
 
-- (Continents*) addContinents:(NSDictionary*) countryDictionary {
+- (void) addContinents:(NSArray*) countryArray {
     
     NSLog(@"addContinents");
-    
-    Continents* continent =
-    [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
-                                  inManagedObjectContext:self.managedObjectContext];
-    
-    continent.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
-    continent.code = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"code"]];;
-    NSInteger intTemp = [[countryDictionary valueForKey:@"places"]integerValue];
-    //country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
-    continent.places = [NSNumber numberWithInteger:intTemp];
 
-    NSError* error;
-    
-    if (![[self managedObjectContext] save:&error]) {
-        [error localizedDescription];
+    for (NSDictionary* dict in countryArray) {
+        
+        Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
+                                                              inManagedObjectContext:[self managedObjectContext]];
+        
+        continent.code = [dict objectForKey:@"code"];
+        continent.name = [dict objectForKey:@"name"];
+        NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
+        continent.places = [NSNumber numberWithInteger:tempInteger];
+        
+        NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
+        
     }
     
-    return continent;
+    NSError* error = nil;
+    
+    if (![[self managedObjectContext] save:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+
 }
 
 
@@ -84,41 +72,28 @@
 
 #pragma mark - Print Objects
 
-- (void) printCountries {
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription* description =
-    [NSEntityDescription entityForName:@"Countries"
-                inManagedObjectContext:self.managedObjectContext];
-    
-    [request setEntity:description];
-    
-    NSError* requestError = nil;
-    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
-    //[self printArray:resultArray];
-}
+//- (void) printCountries {
+//    
+//    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+//    
+//    NSEntityDescription* description =
+//    [NSEntityDescription entityForName:@"Countries"
+//                inManagedObjectContext:self.managedObjectContext];
+//    
+//    [request setEntity:description];
+//    
+//    NSError* requestError = nil;
+//    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+//   
+//}
 
 - (void) printAllObjects {
     
     NSArray* allObjects = [self allObjects];
     
-    //[self printArray:allObjects];
 }
 
-//- (void) printArray:(NSArray*) array {
-//    for (id object in array) {
-//        if ([object isKindOfClass:[Countries class]]) {
-//            
-//            Countries* country = (Countries*) object;
-//            NSLog(@"NAME COUNTRY: %@ ISO: %@ ", country.name, country.iso );  }
-//    }
-//    
-//    NSLog(@"COUNT = %lu",(unsigned long)[array count]);
-//
-//}
 
-//создать класс и подогнать все обекты под него
 - (NSArray*) allObjects {
     
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
