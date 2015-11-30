@@ -51,7 +51,10 @@
      GET:@"?countries"
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         
+         self.countriesResponceObjects = [responseObject allValues];
+         NSLog(@"Countries get GOOD");
+         [self moveCountriesCoreData];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -141,20 +144,43 @@
 
 
 
-- (void) saveCountriesCoreData {
+- (void) moveCountriesCoreData {
     
-    for (int i=0; i<self.countriesResponceObjects.count; i++) {
+//    NSLog(@"ALL VALUES%@",self.countriesResponceObjects);
+
+    
+    for (NSDictionary* dict in self.countriesResponceObjects) {
         
-        NSDictionary* dict = self.countriesResponceObjects[i];
-        [self.delegate addCountry:dict];
+//        NSLog(@" DICT %@",dict);
+        //Countries* country = [self.delegate addCountry:dict];//не передает
         
-        NSLog(@"DICT : %@ ISO: %@ name: %@ Places: %@",dict,[dict valueForKey:@"iso"],[dict valueForKey:@"name"],[dict valueForKey:@"places"]);
         
+        Countries* country = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
+                                                           inManagedObjectContext:[self managedObjectContext]];
+        country.iso = [dict objectForKey:@"iso"];
+        country.name = [dict objectForKey:@"name"];
+//      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
+        NSLog(@"%@  AND %@ PLACES",country.name, country.iso);
+
     }
+   
+    [self.delegate printCountries];//не пашет
     
-    NSLog(@"Countries in server responce: %lu JSON: %@", (unsigned long)[self.countriesResponceObjects count],self.countriesResponceObjects);
+    
+    NSError* error = nil;
+    
+    if (![[self managedObjectContext] save:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+
+    
+}
+- (NSManagedObjectContext* )managedObjectContext {
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[HMCoreDataManager sharedManager]managedObjectContext];
+    }
+    return _managedObjectContext;
 
 }
-
 
 @end

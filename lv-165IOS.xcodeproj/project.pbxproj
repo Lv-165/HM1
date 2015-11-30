@@ -37,6 +37,9 @@
 		C014430A1C0333A6000F8F6F /* lv_165IOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C01443091C0333A6000F8F6F /* lv_165IOSUITests.m */; };
 		C0729E3C1C09BF1900ADF283 /* HMCoreDataObjects+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E391C09BF1900ADF283 /* HMCoreDataObjects+CoreDataProperties.m */; };
 		C0729E3D1C09BF1900ADF283 /* HMCoreDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E3B1C09BF1900ADF283 /* HMCoreDataObjects.m */; };
+		C0729E401C09FBF700ADF283 /* HMCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */; };
+		C0729E881C09FD9200ADF283 /* HMCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */; };
+		C09A7CF61C0A1ED300F6DEBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */; };
 		C0E7DA781C08B39F00541E5E /* Continents+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E7DA511C08B39F00541E5E /* Continents+CoreDataProperties.m */; };
 		C0E7DA791C08B39F00541E5E /* Continents.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E7DA531C08B39F00541E5E /* Continents.m */; };
 		C0E7DA7A1C08B39F00541E5E /* DescriptionInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E7DA551C08B39F00541E5E /* DescriptionInfo+CoreDataProperties.m */; };
@@ -139,6 +142,11 @@
 		C0729E391C09BF1900ADF283 /* HMCoreDataObjects+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HMCoreDataObjects+CoreDataProperties.m"; path = "Models/HMCoreDataObjects+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C0729E3A1C09BF1900ADF283 /* HMCoreDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMCoreDataObjects.h; path = Models/HMCoreDataObjects.h; sourceTree = "<group>"; };
 		C0729E3B1C09BF1900ADF283 /* HMCoreDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMCoreDataObjects.m; path = Models/HMCoreDataObjects.m; sourceTree = "<group>"; };
+		C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCountriesViewController.h; sourceTree = "<group>"; };
+		C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCountriesViewController.m; sourceTree = "<group>"; };
+		C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCoreDataViewController.h; sourceTree = "<group>"; };
+		C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCoreDataViewController.m; sourceTree = "<group>"; };
+		C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C0E7DA501C08B39F00541E5E /* Continents+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Continents+CoreDataProperties.h"; path = "Models/Continents+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C0E7DA511C08B39F00541E5E /* Continents+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Continents+CoreDataProperties.m"; path = "Models/Continents+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C0E7DA521C08B39F00541E5E /* Continents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Continents.h; path = Models/Continents.h; sourceTree = "<group>"; };
@@ -188,6 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09A7CF61C0A1ED300F6DEBC /* CoreData.framework in Frameworks */,
 				7F2F73241C0362BD001A2BFF /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +310,7 @@
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
+				C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */,
 				C0E7DA8C1C08B3AA00541E5E /* Models */,
 				302A119C1C037143002F8FF0 /* Libs */,
 				C01442E01C0333A5000F8F6F /* lv-165IOS */,
@@ -333,6 +343,14 @@
 				C01442F51C0333A5000F8F6F /* Info.plist */,
 				C01442ED1C0333A5000F8F6F /* lv_165IOS.xcdatamodeld */,
 				C01442E11C0333A5000F8F6F /* Supporting Files */,
+				3018962E1C0895DC00178A04 /* HMServerManager.h */,
+				3018962F1C0895DC00178A04 /* HMServerManager.m */,
+				C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */,
+				C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */,
+				C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */,
+				C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */,
+				C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */,
+				C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */,
 			);
 			path = "lv-165IOS";
 			sourceTree = "<group>";
@@ -548,8 +566,10 @@
 			files = (
 				C0E7DA811C08B39F00541E5E /* User.m in Sources */,
 				C0E7DA7E1C08B39F00541E5E /* Place+CoreDataProperties.m in Sources */,
+				C0729E401C09FBF700ADF283 /* HMCountriesViewController.m in Sources */,
 				C0E7DA7B1C08B39F00541E5E /* DescriptionInfo.m in Sources */,
 				302A11D61C0371C3002F8FF0 /* UIProgressView+AFNetworking.m in Sources */,
+				C0729E881C09FD9200ADF283 /* HMCoreDataViewController.m in Sources */,
 				302A11D41C0371C3002F8FF0 /* UIButton+AFNetworking.m in Sources */,
 				C0E7DA7C1C08B39F00541E5E /* Location+CoreDataProperties.m in Sources */,
 				302A11D71C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m in Sources */,

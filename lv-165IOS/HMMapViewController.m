@@ -20,10 +20,20 @@
 @property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlacesByCity;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlacesByContinent;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
 @end
 
 @implementation HMMapViewController
+
+- (NSManagedObjectContext*) managedObjectContext {
+    
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[HMCoreDataManager sharedManager] managedObjectContext];
+    }
+    return _managedObjectContext;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

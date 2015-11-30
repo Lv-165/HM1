@@ -34,6 +34,7 @@
                   onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 @property (weak, nonatomic) NSDictionary <HMCoreDataDelegate>* delegate;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
 @end
 
@@ -41,5 +42,6 @@
 
 @required
 - (Countries*) addCountry:(NSDictionary*) countryDictionary;
+- (void) printCountries;
 
 @end
