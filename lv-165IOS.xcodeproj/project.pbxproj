@@ -215,6 +215,7 @@
 		302A119C1C037143002F8FF0 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */,
 				302A11A11C0371C2002F8FF0 /* AFNetworking */,
 				302A11B51C0371C3002F8FF0 /* UIKit+AFNetworking */,
 				7F2F73231C0362BD001A2BFF /* MapKit.framework */,
@@ -300,7 +301,6 @@
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
-				C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */,
 				C0E7DA8C1C08B3AA00541E5E /* Models */,
 				302A119C1C037143002F8FF0 /* Libs */,
 				C01442E01C0333A5000F8F6F /* lv-165IOS */,

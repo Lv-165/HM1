@@ -17,14 +17,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
    
-    HMCountriesViewController* vc = [[HMCountriesViewController alloc] initWithStyle:UITableViewStylePlain];
-    
-    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:vc];
-    
-    self.window.rootViewController = nav;
-    
+//    HMCountriesViewController* vc = [[HMCountriesViewController alloc] initWithStyle:UITableViewStylePlain];
+//    
+//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:vc];
+//    
+//    self.window.rootViewController = nav;
     
     return YES;
 }
