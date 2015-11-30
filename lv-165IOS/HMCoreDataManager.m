@@ -87,7 +87,7 @@
         if ([object isKindOfClass:[Countries class]]) {
             
             Countries* country = (Countries*) object;
-            NSLog(@"NAME COUNTRY: %@ ISO: %@  PLACES: %@", country.name, country.iso, country.places);  }
+            NSLog(@"NAME COUNTRY: %@ ISO: %@ ", country.name, country.iso );  }
     }
     
     NSLog(@"COUNT = %lu",(unsigned long)[array count]);

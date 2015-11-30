@@ -96,7 +96,7 @@
     Countries *country = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = country.name;
-    cell.detailTextLabel.text = country.places;
+    cell.detailTextLabel.text = country.iso;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     

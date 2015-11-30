@@ -104,22 +104,28 @@
     for (NSDictionary* dict in self.countriesResponceObjects) {
         
 //        NSLog(@" DICT %@",dict);
-        Countries* country = [self.delegate addCountry:dict];//не передает
-        NSLog(@"%@  AND %@",country.name, country.iso);
+        //Countries* country = [self.delegate addCountry:dict];//не передает
+        
+        
+        Countries* country = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
+                                                           inManagedObjectContext:[self managedObjectContext]];
+        country.iso = [dict objectForKey:@"iso"];
+        country.name = [dict objectForKey:@"name"];
+//      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
+        NSLog(@"%@  AND %@ PLACES",country.name, country.iso);
 
     }
    
     [self.delegate printCountries];//не пашет
     
-//    NSError* error = nil;
     
-//    if (![self.managedObjectContext save:&error]) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }
+    NSError* error = nil;
+    
+    if (![[self managedObjectContext] save:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
 
     
-
-
 }
 - (NSManagedObjectContext* )managedObjectContext {
     if (!_managedObjectContext) {
