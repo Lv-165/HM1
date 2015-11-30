@@ -7,7 +7,7 @@
 //
 
 #import "HMMapViewController.h"
-
+#import "HMSettingsViewController.h"
 
 @interface HMMapViewController ()
 
@@ -103,16 +103,19 @@
 
 #pragma mark - buttons on Tool Bar
 
-- (IBAction)showYourCurrentLocation:(UIBarButtonItem *) sender {
+- (void)showYourCurrentLocation:(UIBarButtonItem *)sender {
 }
 
-- (IBAction)moveToToolsController:(UIBarButtonItem *)sender {
+- (void)moveToToolsController:(UIBarButtonItem *)sender {
+    
+    [self performSegueWithIdentifier:@"showSettingsViewController" sender:sender];
+    
 }
 
-- (IBAction)moveToFilterController:(UIBarButtonItem *)sender {
+- (void)moveToFilterController:(UIBarButtonItem *)sender {
 }
 
-- (IBAction)buttonSearch:(UIBarButtonItem *)sender {
+- (void)buttonSearch:(UIBarButtonItem *)sender {
 }
 
 #pragma mark - API
@@ -183,6 +186,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showSettingsViewController"]) {
+        
+        HMSettingsViewController *destViewController = segue.destinationViewController;
+        
+//        destViewController.recipeName = [self.myArray objectAtIndex:indexPath.row];
+    }
+
+    
 }
 
 @end
