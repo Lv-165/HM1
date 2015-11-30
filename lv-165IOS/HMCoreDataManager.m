@@ -17,9 +17,24 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
++ (HMCoreDataManager*) sharedManager {
+    
+    static HMCoreDataManager* manager = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[HMCoreDataManager alloc] init];
+    });
+    
+    return manager;
+}
+
 #pragma mark - Create_Delete Objects
 
 - (Countries*) addCountry:(NSDictionary*) countryDictionary {
+    
+    NSLog(@"addCountry");
     
     Countries* country =
     [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
@@ -27,8 +42,9 @@
     
     country.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
     country.iso = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"iso"]];;
-    country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
- 
+//    country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
+    
+
     return country;
 }
 
@@ -42,7 +58,6 @@
     [self.managedObjectContext save:nil];
 }
 
-
 #pragma mark - Print Objects
 
 - (void) printCountries {
@@ -52,8 +67,6 @@
     NSEntityDescription* description =
     [NSEntityDescription entityForName:@"Countries"
                 inManagedObjectContext:self.managedObjectContext];
-    
-    
     
     [request setEntity:description];
     
@@ -81,8 +94,6 @@
 
 }
 
-
-
 //создать класс и подогнать все обекты под него
 - (NSArray*) allObjects {
     
@@ -102,7 +113,6 @@
     
     return resultArray;
 }
-
 
 
 - (NSURL *)applicationDocumentsDirectory {
@@ -127,10 +137,11 @@
     }
     
     // Create the coordinator and store
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"lv_165IOS.sqlite"];
     NSError *error = nil;
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         // Report any error we got.

@@ -24,4 +24,6 @@
 - (void) printArray:(NSArray*) array;
 - (void) deleteAllObjects;
 
++ (HMCoreDataManager*) sharedManager;
+
 @end

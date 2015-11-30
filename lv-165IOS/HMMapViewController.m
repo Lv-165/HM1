@@ -16,10 +16,20 @@
 @property (strong, nonatomic)NSMutableArray *arrayOfContinent;
 @property (strong, nonatomic)NSMutableArray *arrayOfCountry;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
 @end
 
 @implementation HMMapViewController
+
+- (NSManagedObjectContext*) managedObjectContext {
+    
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[HMCoreDataManager sharedManager] managedObjectContext];
+    }
+    return _managedObjectContext;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,9 +42,7 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    //[self getContinentFromServer];
-    //[self getCountryFromServer:@"ua"];
-    [self getPlaceFromServerByID:@"355"];
+
     
     self.mapView.showsUserLocation = YES;
     
