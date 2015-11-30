@@ -2,7 +2,7 @@
 //  DescriptionInfo+CoreDataProperties.h
 //  lv-165IOS
 //
-//  Created by AG on 11/27/15.
+//  Created by AG on 11/30/15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *descriptionString;
 @property (nullable, nonatomic, retain) NSNumber *fk_user;
 @property (nullable, nonatomic, retain) NSNumber *versions;
-@property (nullable, nonatomic, retain) NSManagedObject *descript;
+@property (nullable, nonatomic, retain) Description *descript;
 
 @end
 

@@ -2,7 +2,7 @@
 //  Continents+CoreDataProperties.h
 //  lv-165IOS
 //
-//  Created by AG on 11/27/15.
+//  Created by AG on 11/30/15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,16 +18,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *code;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *places;
-@property (nullable, nonatomic, retain) NSSet<NSManagedObject *> *countriesOnContinent;
+@property (nullable, nonatomic, retain) NSSet<Place *> *placesOnContinent;
 
 @end
 
 @interface Continents (CoreDataGeneratedAccessors)
 
-- (void)addCountriesOnContinentObject:(NSManagedObject *)value;
-- (void)removeCountriesOnContinentObject:(NSManagedObject *)value;
-- (void)addCountriesOnContinent:(NSSet<NSManagedObject *> *)values;
-- (void)removeCountriesOnContinent:(NSSet<NSManagedObject *> *)values;
+- (void)addPlacesOnContinentObject:(Place *)value;
+- (void)removePlacesOnContinentObject:(Place *)value;
+- (void)addPlacesOnContinent:(NSSet<Place *> *)values;
+- (void)removePlacesOnContinent:(NSSet<Place *> *)values;
 
 @end
 

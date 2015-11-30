@@ -2,7 +2,7 @@
 //  Place+CoreDataProperties.m
 //  lv-165IOS
 //
-//  Created by AG on 11/27/15.
+//  Created by AG on 11/30/15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,7 +22,7 @@
 @dynamic rating;
 @dynamic rating_count;
 @dynamic comments;
-@dynamic country;
+@dynamic continent;
 @dynamic descript;
 @dynamic location;
 @dynamic user;

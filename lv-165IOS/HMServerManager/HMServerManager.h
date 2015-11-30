@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Countries.h"
 
 @protocol HMCoreDataDelegate;
+@class NSManagedObjectContext;
 
 @interface HMServerManager : NSObject
 
@@ -35,13 +35,5 @@
 
 @property (weak, nonatomic) NSDictionary <HMCoreDataDelegate>* delegate;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
-
-@end
-
-@protocol HMCoreDataDelegate <NSObject>
-
-@required
-- (Countries*) addCountry:(NSDictionary*) countryDictionary;
-- (void) printCountries;
 
 @end

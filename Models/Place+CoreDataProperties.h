@@ -2,7 +2,7 @@
 //  Place+CoreDataProperties.h
 //  lv-165IOS
 //
-//  Created by AG on 11/27/15.
+//  Created by AG on 11/30/15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -23,25 +23,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *lon;
 @property (nullable, nonatomic, retain) NSNumber *rating;
 @property (nullable, nonatomic, retain) NSNumber *rating_count;
-@property (nullable, nonatomic, retain) NSSet<NSManagedObject *> *comments;
-@property (nullable, nonatomic, retain) NSManagedObject *country;
-@property (nullable, nonatomic, retain) NSSet<NSManagedObject *> *descript;
+@property (nullable, nonatomic, retain) NSSet<Comments *> *comments;
+@property (nullable, nonatomic, retain) Continents *continent;
+@property (nullable, nonatomic, retain) NSSet<Description *> *descript;
 @property (nullable, nonatomic, retain) Location *location;
-@property (nullable, nonatomic, retain) NSManagedObject *user;
+@property (nullable, nonatomic, retain) User *user;
 
 @end
 
 @interface Place (CoreDataGeneratedAccessors)
 
-- (void)addCommentsObject:(NSManagedObject *)value;
-- (void)removeCommentsObject:(NSManagedObject *)value;
-- (void)addComments:(NSSet<NSManagedObject *> *)values;
-- (void)removeComments:(NSSet<NSManagedObject *> *)values;
+- (void)addCommentsObject:(Comments *)value;
+- (void)removeCommentsObject:(Comments *)value;
+- (void)addComments:(NSSet<Comments *> *)values;
+- (void)removeComments:(NSSet<Comments *> *)values;
 
-- (void)addDescriptObject:(NSManagedObject *)value;
-- (void)removeDescriptObject:(NSManagedObject *)value;
-- (void)addDescript:(NSSet<NSManagedObject *> *)values;
-- (void)removeDescript:(NSSet<NSManagedObject *> *)values;
+- (void)addDescriptObject:(Description *)value;
+- (void)removeDescriptObject:(Description *)value;
+- (void)addDescript:(NSSet<Description *> *)values;
+- (void)removeDescript:(NSSet<Description *> *)values;
 
 @end
 

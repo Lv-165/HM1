@@ -45,29 +45,31 @@
     return self;
 }
 
-- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
-                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
-    [self.requestOperationManager
-     GET:@"?countries"
-     parameters:nil
-     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         
-         self.countriesResponceObjects = [responseObject allValues];
-         NSLog(@"Countries get GOOD");
-         [self moveCountriesCoreData];
-         
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"Error: %@", error);
-     }];
-    
-}
+//- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
+//                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+//    [self.requestOperationManager
+//     GET:@"?countries"
+//     parameters:nil
+//     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+//         
+//         self.countriesResponceObjects = [responseObject allValues];
+//         NSLog(@"Countries get GOOD");// вызов записи в кор дату
+//         [self moveCountriesCoreData];
+//         
+//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         NSLog(@"Error: %@", error);
+//     }];
+//    
+//}
 
 - (void) getContinentsWithonSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *, NSInteger))failure {
     [self.requestOperationManager
      GET:@"?continents"
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         self.countriesResponceObjects = [responseObject allValues];
+                  NSLog(@"Countries get GOOD");// вызов записи в кор дату
+                  [self moveContinentsCoreData];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -144,35 +146,57 @@
 
 
 
-- (void) moveCountriesCoreData {
-    
-//    NSLog(@"ALL VALUES%@",self.countriesResponceObjects);
+//- (void) moveCountriesCoreData {
+//    
+////    NSLog(@"ALL VALUES%@",self.countriesResponceObjects);
+//
+//
+//    for (NSDictionary* dict in self.countriesResponceObjects) {
+//        
+////        NSLog(@" DICT %@",dict);
+//        //Countries* country = [self.delegate addCountry:dict];//не передает
+//        
+//        Countries* country = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
+//                                                           inManagedObjectContext:[self managedObjectContext]];
+//        country.iso = [dict objectForKey:@"iso"];
+//        country.name = [dict objectForKey:@"name"];
+////      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
+//        NSLog(@"%@  AND %@ PLACES",country.name, country.iso);
+//
+//    }
+//   
+//    [self.delegate printCountries];//не пашет
+//    
+//    
+//    NSError* error = nil;
+//    
+//    if (![[self managedObjectContext] save:&error]) {
+//        NSLog(@"%@", [error localizedDescription]);
+//    }
+//
+//    
+//}
 
-    
+- (void) moveContinentsCoreData {
+  
     for (NSDictionary* dict in self.countriesResponceObjects) {
-        
-//        NSLog(@" DICT %@",dict);
-        //Countries* country = [self.delegate addCountry:dict];//не передает
-        
-        
-        Countries* country = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
-                                                           inManagedObjectContext:[self managedObjectContext]];
-        country.iso = [dict objectForKey:@"iso"];
-        country.name = [dict objectForKey:@"name"];
-//      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
-        NSLog(@"%@  AND %@ PLACES",country.name, country.iso);
 
+        
+        Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
+                                                           inManagedObjectContext:[self managedObjectContext]];
+        continent.code = [dict objectForKey:@"code"];
+        continent.name = [dict objectForKey:@"name"];
+        //      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
+        NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
+        
     }
-   
-    [self.delegate printCountries];//не пашет
-    
-    
+ 
     NSError* error = nil;
     
     if (![[self managedObjectContext] save:&error]) {
         NSLog(@"%@", [error localizedDescription]);
     }
-
+    
     
 }
 - (NSManagedObjectContext* )managedObjectContext {

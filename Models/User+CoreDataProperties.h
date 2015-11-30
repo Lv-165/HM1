@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.h
 //  lv-165IOS
 //
-//  Created by AG on 11/27/15.
+//  Created by AG on 11/30/15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSNumber *id;
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSManagedObject *comments;
+@property (nullable, nonatomic, retain) Comments *comments;
 @property (nullable, nonatomic, retain) Place *place;
 
 @end

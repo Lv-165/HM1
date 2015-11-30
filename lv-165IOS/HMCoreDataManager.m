@@ -32,21 +32,45 @@
 
 #pragma mark - Create_Delete Objects
 
-- (Countries*) addCountry:(NSDictionary*) countryDictionary {
+//- (Countries*) addCountry:(NSDictionary*) countryDictionary {
+//    
+//    NSLog(@"addCountry");
+//    
+//    Countries* country =
+//    [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
+//                                  inManagedObjectContext:self.managedObjectContext];
+//    
+//    country.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
+//    country.iso = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"iso"]];;
+////    country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
+//    
+//
+//    return country;
+//}
+
+- (Continents*) addContinents:(NSDictionary*) countryDictionary {
     
-    NSLog(@"addCountry");
+    NSLog(@"addContinents");
     
-    Countries* country =
-    [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
+    Continents* continent =
+    [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
                                   inManagedObjectContext:self.managedObjectContext];
     
-    country.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
-    country.iso = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"iso"]];;
-//    country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
-    
+    continent.name = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"name"]];
+    continent.code = [NSString stringWithFormat:@"%@",[countryDictionary valueForKey:@"code"]];;
+    NSInteger intTemp = [[countryDictionary valueForKey:@"places"]integerValue];
+    //country.places = [NSString stringWithFormat:@"%ld",[[countryDictionary valueForKey:@"places"]integerValue]];
+    continent.places = [NSNumber numberWithInteger:intTemp];
 
-    return country;
+    NSError* error;
+    
+    if (![[self managedObjectContext] save:&error]) {
+        [error localizedDescription];
+    }
+    
+    return continent;
 }
+
 
 - (void) deleteAllObjects {
     
@@ -72,27 +96,27 @@
     
     NSError* requestError = nil;
     NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
-    [self printArray:resultArray];
+    //[self printArray:resultArray];
 }
 
 - (void) printAllObjects {
     
     NSArray* allObjects = [self allObjects];
     
-    [self printArray:allObjects];
+    //[self printArray:allObjects];
 }
 
-- (void) printArray:(NSArray*) array {
-    for (id object in array) {
-        if ([object isKindOfClass:[Countries class]]) {
-            
-            Countries* country = (Countries*) object;
-            NSLog(@"NAME COUNTRY: %@ ISO: %@ ", country.name, country.iso );  }
-    }
-    
-    NSLog(@"COUNT = %lu",(unsigned long)[array count]);
-
-}
+//- (void) printArray:(NSArray*) array {
+//    for (id object in array) {
+//        if ([object isKindOfClass:[Countries class]]) {
+//            
+//            Countries* country = (Countries*) object;
+//            NSLog(@"NAME COUNTRY: %@ ISO: %@ ", country.name, country.iso );  }
+//    }
+//    
+//    NSLog(@"COUNT = %lu",(unsigned long)[array count]);
+//
+//}
 
 //создать класс и подогнать все обекты под него
 - (NSArray*) allObjects {

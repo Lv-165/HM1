@@ -8,11 +8,11 @@
 
 #import <CoreData/CoreData.h>
 #import "HMServerManager.h"
-#import "Countries.h"
+#import "Continents.h"
 #import "HMCoreDataObjects.h"
 #import "Place.h"
 
-@interface HMCoreDataManager : NSManagedObject <HMCoreDataDelegate>
+@interface HMCoreDataManager : NSManagedObject 
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -20,8 +20,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (Countries*) addCountry:(NSDictionary*) countryDictionary;
-- (void) printArray:(NSArray*) array;
+//- (void) printArray:(NSArray*) array;
 - (void) deleteAllObjects;
 
 + (HMCoreDataManager*) sharedManager;

@@ -8,7 +8,6 @@
 
 #import "HMCountriesViewController.h"
 #import "HMCoreDataManager.h"
-#import "Countries.h"
 #import "HMServerManager.h"
 
 @interface HMCountriesViewController ()
@@ -22,9 +21,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Countries";
+    self.navigationItem.title = @"Continents";
     
-    [self getContinentFromServer];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Continents" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+
+    
+    NSError* error;
+    
+    NSUInteger count = [[self managedObjectContext] countForFetchRequest:fetchRequest
+                                                            error:&error];
+    if (!count) {
+        [self getContinentFromServer];
+    }
+    
+//    [self getContinentFromServer];
     //[self getCountryFromServer:@"ua"];
     // [self getPlaceFromServerByID:@"355"];
 
@@ -43,8 +56,6 @@
 }
 
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -58,7 +69,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Countries" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Continents" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     
@@ -93,10 +104,10 @@
 }    
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    Countries *country = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    cell.textLabel.text = country.name;
-    cell.detailTextLabel.text = country.iso;
+    Continents *continent = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    cell.textLabel.text = continent.name;
+    cell.detailTextLabel.text = continent.code;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     
