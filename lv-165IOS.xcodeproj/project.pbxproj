@@ -26,6 +26,8 @@
 		302A11D71C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11C51C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m */; };
 		302A11D81C0371C3002F8FF0 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11C71C0371C3002F8FF0 /* UIWebView+AFNetworking.m */; };
 		7F2F73241C0362BD001A2BFF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2F73231C0362BD001A2BFF /* MapKit.framework */; };
+		A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */; };
+		A1C5EDE51C0CA7C900F94400 /* HMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C5EDE31C0CA7C900F94400 /* HMSettingsViewController.xib */; };
 		C01442E31C0333A5000F8F6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C01442E21C0333A5000F8F6F /* main.m */; };
 		C01442E61C0333A5000F8F6F /* HMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C01442E51C0333A5000F8F6F /* HMAppDelegate.m */; };
 		C01442E91C0333A5000F8F6F /* HMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01442E81C0333A5000F8F6F /* HMMapViewController.m */; };
@@ -119,6 +121,9 @@
 		302A11C61C0371C3002F8FF0 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		302A11C71C0371C3002F8FF0 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		7F2F73231C0362BD001A2BFF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSettingsViewController.h; sourceTree = "<group>"; };
+		A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSettingsViewController.m; sourceTree = "<group>"; };
+		A1C5EDE31C0CA7C900F94400 /* HMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HMSettingsViewController.xib; sourceTree = "<group>"; };
 		C01442DE1C0333A5000F8F6F /* lv-165IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lv-165IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C01442E21C0333A5000F8F6F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C01442E41C0333A5000F8F6F /* HMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMAppDelegate.h; sourceTree = "<group>"; };
@@ -341,6 +346,9 @@
 				C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */,
 				C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */,
 				C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */,
+				A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */,
+				A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */,
+				A1C5EDE31C0CA7C900F94400 /* HMSettingsViewController.xib */,
 			);
 			path = "lv-165IOS";
 			sourceTree = "<group>";
@@ -525,6 +533,7 @@
 			files = (
 				C01442F41C0333A5000F8F6F /* LaunchScreen.storyboard in Resources */,
 				C01442F11C0333A5000F8F6F /* Assets.xcassets in Resources */,
+				A1C5EDE51C0CA7C900F94400 /* HMSettingsViewController.xib in Resources */,
 				C01442EC1C0333A5000F8F6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +575,7 @@
 				302A11D31C0371C3002F8FF0 /* UIAlertView+AFNetworking.m in Sources */,
 				C0B0B7151C0C7D27007A91A7 /* Continents+CoreDataProperties.m in Sources */,
 				C0B0B7161C0C7D27007A91A7 /* Continents.m in Sources */,
+				A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */,
 				C01442E91C0333A5000F8F6F /* HMMapViewController.m in Sources */,
 				302A11CC1C0371C3002F8FF0 /* AFSecurityPolicy.m in Sources */,
 				C01442E61C0333A5000F8F6F /* HMAppDelegate.m in Sources */,
