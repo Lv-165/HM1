@@ -24,22 +24,36 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="doc-Ae-qTV"/>
                                 </connections>
                             </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-J0-Ekk">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="50q-6c-3AL"/>
+                                </constraints>
+                                <items/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Dyc-vN-hgM"/>
+                                </connections>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eIw-hm-dci" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DKP-tp-O4n"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eIw-hm-dci" secondAttribute="bottom" id="EvY-Ev-fma"/>
+                            <constraint firstItem="cpQ-J0-Ekk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="XYO-9o-JWI"/>
                             <constraint firstItem="eIw-hm-dci" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="abJ-Ar-48b"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cpQ-J0-Ekk" secondAttribute="bottom" id="eDt-Up-V1H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eIw-hm-dci" secondAttribute="trailing" constant="-20" id="faf-ly-Iqn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cpQ-J0-Ekk" secondAttribute="trailing" constant="-20" id="jv7-6l-e90"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downToolBar" destination="cpQ-J0-Ekk" id="A7d-TE-jMF"/>
                         <outlet property="mapView" destination="eIw-hm-dci" id="YBP-2t-6ao"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="403" y="-231"/>
+            <point key="canvasLocation" x="429" y="-265"/>
         </scene>
     </scenes>
 </document>

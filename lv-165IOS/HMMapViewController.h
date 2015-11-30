@@ -13,6 +13,7 @@
 
 @interface HMMapViewController : UIViewController <MKMapViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIToolbar *downToolBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
