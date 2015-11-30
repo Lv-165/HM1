@@ -186,7 +186,9 @@
                                                            inManagedObjectContext:[self managedObjectContext]];
         continent.code = [dict objectForKey:@"code"];
         continent.name = [dict objectForKey:@"name"];
-        //      country.places = [NSNumber numberWithInteger:[dict objectForKey:@"places"]];
+        NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
+        continent.places = [NSNumber numberWithInteger:tempInteger];
+        
         NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
         
     }

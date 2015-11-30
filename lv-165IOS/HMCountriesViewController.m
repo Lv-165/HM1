@@ -107,7 +107,7 @@
     Continents *continent = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     cell.textLabel.text = continent.name;
-    cell.detailTextLabel.text = continent.code;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", continent.places];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     
