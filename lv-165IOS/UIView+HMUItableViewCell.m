@@ -10,16 +10,16 @@
 
 @implementation UIView (HMUItableViewCell)
 
-- (UITableViewCell*) superCell {
+- (HMDownloadCellTableViewCell*) superCell {
     
     if (!self.superview) {
         return nil;
     }
-    
-    if ([self.superview isKindOfClass:[UITableViewCell class]]) {
-        return (UITableViewCell*)self.superview;
+
+    if ([self.superview isKindOfClass:[HMDownloadCellTableViewCell class]]) {
+        return (HMDownloadCellTableViewCell*)self.superview;
     }
-    
+
     return [self.superview superCell];
 }
 

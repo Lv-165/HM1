@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *continentsImage;
 @property (weak, nonatomic) IBOutlet UILabel *continentLable;
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
-@property (weak, nonatomic) IBOutlet UIImageView *downloadImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *downloadImage;
+@property (weak, nonatomic) IBOutlet UISwitch *downloadSwitch;
 
 @end

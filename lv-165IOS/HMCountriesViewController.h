@@ -11,6 +11,7 @@
 
 @interface HMCountriesViewController : HMCoreDataViewController
 
-
+//@property (weak, nonatomic) IBOutlet UISwitch *downloadSwitch;
+- (IBAction)actionDwnloadSwitch:(id)sender;
 
 @end

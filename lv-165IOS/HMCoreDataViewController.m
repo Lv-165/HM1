@@ -67,7 +67,10 @@
     }
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //UITableViewCell* cell = [self superCell];
+}
 
 #pragma mark - Fetched results controller
 

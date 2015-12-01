@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMDownloadCellTableViewCell.h"
 
 @interface UIView (HMUItableViewCell)
 
-- (UITableViewCell*) superCell;
+- (HMDownloadCellTableViewCell*) superCell;
 
 @end
