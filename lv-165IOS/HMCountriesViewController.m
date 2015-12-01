@@ -11,10 +11,12 @@
 #import "HMServerManager.h"
 #import "HMDownloadCellTableViewCell.h"
 #import "UIView+HMUItableViewCell.h"
+#import "Continents.h"
 
 @interface HMCountriesViewController ()
 
 @property (strong, nonatomic)NSMutableArray *arrayOfContinent;
+
 @end
 
 @implementation HMCountriesViewController
@@ -45,22 +47,26 @@
 //        [self presentViewController:vc animated:YES completion:nil];
     }
     
-    //[self getContinentFromServer];
+//    [self getContinentFromServer];
     //[self getCountryFromServer:@"ua"];
     // [self getPlaceFromServerByID:@"355"];
 
+    self.arrayOfContinent = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view.
 }
 - (void)getContinentFromServer {
+
     [[HMServerManager sharedManager]
      
      getContinentsWithonSuccess:^(NSArray *continents) {
-         [self.arrayOfContinent addObjectsFromArray:continents];
+         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
+    
+    
 }
 
 
@@ -119,6 +125,8 @@
     
     //HMDownloadCellTableViewCell* cell1 = [self.tableView dequeueReusableCellWithIdentifier:identifier];
     
+    [self.arrayOfContinent addObject:continent];
+    
     cell.continentsImage = nil;
     cell.continentLable.text = continent.name;
     cell.countLable.text = [NSString stringWithFormat:@"%@", continent.places];
@@ -126,13 +134,45 @@
     
 }
 
-
 - (IBAction)actionDwnloadSwitch:(id)sender {
     
     HMDownloadCellTableViewCell* cell = [sender superCell];
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
+//    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
+//        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
+//        NSLog(@"%@",continent);
+//    }
+    
+    for (Continents* continent in self.arrayOfContinent ) {
+        if ([cell.continentLable.text isEqualToString:continent.name]) {
+            //getPlacesByContinentName
+            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places) {
+                NSLog(@"%@/n", places);
+                
+                for (NSDictionary* dict in places) {
+                    
+                    NSLog(@"%@", [dict objectForKey:@"id"]);
+                    
+                    [[HMServerManager sharedManager] getPlaceWithID:[dict valueForKey:@"id"] onSuccess:^(NSArray *places) {
+                        
+                        NSLog(@"%@", places);
+                        
+                        //Write to CoreData Place
+                        
+                    } onFailure:^(NSError *error, NSInteger statusCode) {
+                        
+                    }];
+                }
+                
+            } onFailure:^(NSError *error, NSInteger statusCode) {
+                NSLog(@"err");
+            }];
+            
+            return;
+        }
+    }
     
 }
 

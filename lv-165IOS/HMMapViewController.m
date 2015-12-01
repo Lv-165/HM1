@@ -97,9 +97,6 @@
     
     [self.downToolBar setItems:buttons animated:NO];
     
-
-    
-    //[self getContinentsFromServer];
     self.mapView.showsUserLocation = YES;
     
 }
@@ -150,7 +147,8 @@
     [[HMServerManager sharedManager]
      
      getContinentsWithonSuccess:^(NSArray *continents) {
-         [self.araryOfContinents addObjectsFromArray:continents];
+         //[self.araryOfContinents addObjectsFromArray:continents];
+         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
@@ -189,8 +187,8 @@
 - (void)getPlacesFromServerByContinent:(NSString *)continentCode {
     [[HMServerManager sharedManager]
      getPlacesByContinentName:continentCode
-     onSuccess:^(NSArray* places) {
-         [self.arrayOfPlacesByContinent addObjectsFromArray:places];
+     onSuccess:^(NSDictionary* places) {
+         //[self.arrayOfPlacesByContinent addObjectsFromArray:places];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);

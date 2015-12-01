@@ -33,9 +33,9 @@
 #pragma mark - Create_Delete Objects
 
 
-- (void) addContinents:(NSArray*) countryArray {
+- (void) saveContinentsToCoreDataWithNSArray:(NSArray*) countryArray {
     
-    NSLog(@"addContinents");
+    NSLog(@"saveContinentsToCoreDataWithNSArray");
 
     for (NSDictionary* dict in countryArray) {
         

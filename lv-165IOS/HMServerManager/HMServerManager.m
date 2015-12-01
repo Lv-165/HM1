@@ -67,7 +67,7 @@
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
                   NSLog(@"Countries get GOOD");// вызов записи в кор дату
-         [[HMCoreDataManager sharedManager] addContinents:[responseObject allValues]];
+         success(responseObject.allValues);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -93,7 +93,7 @@
 }
 
 - (void)getPlaceWithID:(NSString *)placeID
-             onSuccess:(void(^)(NSArray* places)) success
+             onSuccess:(void(^)(NSArray* cities)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
     NSString* IDplace = [NSString stringWithFormat:@"?place=%@",placeID];
@@ -103,6 +103,8 @@
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
          NSLog(@"JSON: %@", responseObject);
+         
+         success(responseObject.allValues);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -127,7 +129,7 @@
 }
 
 - (void)getPlacesByContinentName:(NSString *)continentName
-                  onSuccess:(void (^)(NSArray *))success
+                  onSuccess:(void (^)(NSDictionary *))success
                   onFailure:(void (^)(NSError *, NSInteger))failure {
     NSString* continent = [NSString stringWithFormat:@"?continent=%@",continentName];
     
@@ -136,6 +138,29 @@
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
          NSLog(@"JSON: %@", responseObject);
+         
+         success(responseObject);
+         
+         //for (NSDictionary* dict in responseObject) {
+             
+             //NSLog(@"id = %@", [dict objectForKey:@"id"]);
+             
+//             [self getPlaceWithID:[dict objectForKey:@"id"] onSuccess:^(NSArray *places) {
+//                 
+//                 NSLog(@"LOL");
+//                 
+//             } onFailure:^(NSError *error, NSInteger statusCode) {
+//                 
+//                 NSLog(@"LOL");
+//                 
+//             }];
+             
+             
+             
+             //NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[self getPlaceWithID:[dict objectForKey:@"id"]]];
+             
+             //NSLog(@"%@", dic);
+         //}
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
