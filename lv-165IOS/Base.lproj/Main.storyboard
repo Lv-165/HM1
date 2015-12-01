@@ -220,8 +220,19 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="cOP-eT-6Gh" id="oLg-pv-WIG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZC-Ne-3bg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="cOP-eT-6Gh">
+                    <connections>
+                        <outlet property="delegate" destination="uvx-qM-1UM" id="SnG-Hk-XZz"/>
+                        <outlet property="searchContentsController" destination="uvx-qM-1UM" id="AHg-4A-NM6"/>
+                        <outlet property="searchResultsDataSource" destination="uvx-qM-1UM" id="uuw-XC-8f0"/>
+                        <outlet property="searchResultsDelegate" destination="uvx-qM-1UM" id="fEI-XG-Ug2"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1055" y="297"/>
         </scene>
