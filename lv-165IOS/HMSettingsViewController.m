@@ -18,12 +18,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.segmentedControlForMapType.selectedSegmentIndex = [self.mapType intValue];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Segmented Control For Map Type
+
+- (IBAction)segmentedControlForMapTypeValueChanged:(id)sender {
+
+    self.mapType = [NSNumber numberWithLong:self.segmentedControlForMapType.selectedSegmentIndex];
+    
+    NSDictionary *dictionary = @{@"value" : self.mapType};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeMapTypeNotification"
+                                                        object:self
+                                                      userInfo:dictionary];
+    
 }
 
 /*
@@ -35,5 +56,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

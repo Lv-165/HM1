@@ -99,6 +99,11 @@
     
     self.mapView.showsUserLocation = YES;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                              selector:@selector(receiveChangeMapTypeNotification:)
+                                                  name:@"ChangeMapTypeNotification"
+                                                object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -203,11 +208,35 @@
 
 #pragma mark - Segues
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender segueName:(NSString*)name {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showSettingsViewController"]) {
         
         HMSettingsViewController *destViewController = segue.destinationViewController;
+        
+        switch (self.mapView.mapType) {
+            case MKMapTypeStandard:
+
+                destViewController.mapType = [NSNumber numberWithInt:MKMapTypeStandard];
+                
+                break;
+                
+            case MKMapTypeSatellite:
+                
+                destViewController.mapType = [NSNumber numberWithInt:MKMapTypeSatellite];
+                
+                break;
+            
+            case MKMapTypeHybrid:
+                
+                destViewController.mapType = [NSNumber numberWithInt:MKMapTypeHybrid];
+                
+                break;
+                
+            default:
+                break;
+        }
+        
         
     } else
         if ([segue.identifier isEqualToString:@"showFilterViewController"]) {
@@ -223,6 +252,30 @@
         }
 
     
+}
+
+#pragma mark - Notifications
+
+- (void) receiveChangeMapTypeNotification:(NSNotification *) notification
+{
+    
+    if ([[notification name] isEqualToString:@"ChangeMapTypeNotification"])  {
+        
+        NSLog(@"Successfully received ChangeMapTypeNotification notification!");
+        
+        self.mapView.mapType = [[notification.userInfo objectForKey:@"value"] intValue];
+        
+        
+    }
+    
+}
+
+#pragma mark - Deallocation
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 @end
