@@ -9,6 +9,7 @@
 #import "HMCountriesViewController.h"
 #import "HMCoreDataManager.h"
 #import "HMServerManager.h"
+#import "HMDownloadCellTableViewCell.h"
 
 @interface HMCountriesViewController ()
 
@@ -101,14 +102,24 @@
     }
     
     return _fetchedResultsController;
-}    
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (void)configureCell:(HMDownloadCellTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Continents *continent = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    cell.textLabel.text = continent.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", continent.places];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //static NSString* identifier = @"downloadContinent";
+    
+    //HMDownloadCellTableViewCell* cell1 = [self.tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    cell.continentsImage = nil;
+    cell.continentLable.text = continent.name;
+    cell.countLable.text = [NSString stringWithFormat:@"%@", continent.places];
+    cell.downloadImage = nil;
+    
+//    cell.textLabel.text = continent.name;
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", continent.places];
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     
 }

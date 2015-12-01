@@ -8,6 +8,7 @@
 
 #import "HMCoreDataViewController.h"
 #import "HMCoreDataManager.h"
+#import "HMDownloadCellTableViewCell.h"
 
 @interface HMCoreDataViewController () <NSFetchedResultsControllerDelegate>
 
@@ -37,14 +38,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    static NSString* identifier = @"Cell";
+    static NSString* identifier = @"downloadContinent";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    HMDownloadCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-    }
     [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
 }
 

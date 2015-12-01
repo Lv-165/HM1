@@ -26,6 +26,8 @@
 		302A11D71C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11C51C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m */; };
 		302A11D81C0371C3002F8FF0 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11C71C0371C3002F8FF0 /* UIWebView+AFNetworking.m */; };
 		7F2F73241C0362BD001A2BFF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2F73231C0362BD001A2BFF /* MapKit.framework */; };
+		7FA55BE11C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE01C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m */; };
+		7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */; };
 		A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */; };
 		A1C5EDE81C0CBD1400F94400 /* HMFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE71C0CBD1400F94400 /* HMFilterViewController.m */; };
 		A1C5EDEB1C0CC4D500F94400 /* HMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDEA1C0CC4D500F94400 /* HMSearchViewController.m */; };
@@ -122,6 +124,10 @@
 		302A11C61C0371C3002F8FF0 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		302A11C71C0371C3002F8FF0 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		7F2F73231C0362BD001A2BFF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7FA55BDF1C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMDownloadCellTableViewCell.h; sourceTree = "<group>"; };
+		7FA55BE01C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMDownloadCellTableViewCell.m; sourceTree = "<group>"; };
+		7FA55BE61C0DB08200B99CC1 /* UIView+HMUItableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HMUItableViewCell.h"; sourceTree = "<group>"; };
+		7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HMUItableViewCell.m"; sourceTree = "<group>"; };
 		A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSettingsViewController.h; sourceTree = "<group>"; };
 		A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSettingsViewController.m; sourceTree = "<group>"; };
 		A1C5EDE61C0CBD1400F94400 /* HMFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMFilterViewController.h; sourceTree = "<group>"; };
@@ -307,6 +313,21 @@
 			name = "HMCoreDate Manager";
 			sourceTree = "<group>";
 		};
+		7FA55BE21C0DAFCD00B99CC1 /* Download Continents */ = {
+			isa = PBXGroup;
+			children = (
+				C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */,
+				C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */,
+				C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */,
+				C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */,
+				7FA55BDF1C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.h */,
+				7FA55BE01C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m */,
+				7FA55BE61C0DB08200B99CC1 /* UIView+HMUItableViewCell.h */,
+				7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */,
+			);
+			name = "Download Continents";
+			sourceTree = "<group>";
+		};
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +353,7 @@
 		C01442E01C0333A5000F8F6F /* lv-165IOS */ = {
 			isa = PBXGroup;
 			children = (
+				7FA55BE21C0DAFCD00B99CC1 /* Download Continents */,
 				C01442E41C0333A5000F8F6F /* HMAppDelegate.h */,
 				C01442E51C0333A5000F8F6F /* HMAppDelegate.m */,
 				C01442E71C0333A5000F8F6F /* HMMapViewController.h */,
@@ -346,10 +368,6 @@
 				3018962F1C0895DC00178A04 /* HMServerManager.m */,
 				C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */,
 				C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */,
-				C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */,
-				C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */,
-				C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */,
-				C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */,
 				A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */,
 				A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */,
 				A1C5EDE61C0CBD1400F94400 /* HMFilterViewController.h */,
@@ -591,6 +609,7 @@
 				302A11D51C0371C3002F8FF0 /* UIImageView+AFNetworking.m in Sources */,
 				302A11C81C0371C3002F8FF0 /* AFHTTPRequestOperation.m in Sources */,
 				301896301C0895DC00178A04 /* HMServerManager.m in Sources */,
+				7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */,
 				C0B0B7171C0C7D27007A91A7 /* Description+CoreDataProperties.m in Sources */,
 				C0E7DA8F1C08B4DB00541E5E /* HMCoreDataManager.m in Sources */,
 				A1C5EDE81C0CBD1400F94400 /* HMFilterViewController.m in Sources */,
@@ -608,6 +627,7 @@
 				C0B0B71F1C0C7D27007A91A7 /* User+CoreDataProperties.m in Sources */,
 				302A11D81C0371C3002F8FF0 /* UIWebView+AFNetworking.m in Sources */,
 				C0B0B7281C0C7D27007A91A7 /* DescriptionInfo.m in Sources */,
+				7FA55BE11C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m in Sources */,
 				302A11D01C0371C3002F8FF0 /* AFURLSessionManager.m in Sources */,
 				C0B0B7191C0C7D27007A91A7 /* Place+CoreDataProperties.m in Sources */,
 				302A11D11C0371C3002F8FF0 /* AFNetworkActivityIndicatorManager.m in Sources */,
