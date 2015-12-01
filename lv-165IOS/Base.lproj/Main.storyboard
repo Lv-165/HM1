@@ -90,9 +90,41 @@
                     <view key="view" contentMode="scaleToFill" id="Ku3-fD-B6K">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tD-la-Xi4">
+                                <rect key="frame" x="20" y="72" width="560" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="PNs-sP-vwo">
+                                <rect key="frame" x="20" y="101" width="560" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlForMapTypeValueChanged:" destination="FcZ-ur-xTB" eventType="valueChanged" id="ti1-Wt-a2W"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8tD-la-Xi4" firstAttribute="leading" secondItem="Ku3-fD-B6K" secondAttribute="leadingMargin" id="5eq-iP-mhx"/>
+                            <constraint firstItem="PNs-sP-vwo" firstAttribute="trailing" secondItem="8tD-la-Xi4" secondAttribute="trailing" id="8ib-hv-rbB"/>
+                            <constraint firstItem="PNs-sP-vwo" firstAttribute="leading" secondItem="8tD-la-Xi4" secondAttribute="leading" id="MfO-bW-9a3"/>
+                            <constraint firstItem="PNs-sP-vwo" firstAttribute="top" secondItem="8tD-la-Xi4" secondAttribute="bottom" constant="8" id="n5N-2L-Y8A"/>
+                            <constraint firstItem="8tD-la-Xi4" firstAttribute="trailing" secondItem="Ku3-fD-B6K" secondAttribute="trailingMargin" id="tog-5j-0Cq"/>
+                            <constraint firstItem="8tD-la-Xi4" firstAttribute="top" secondItem="ka4-Ix-m3a" secondAttribute="bottom" constant="8" id="uxA-Lw-ID0"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControlForMapType" destination="PNs-sP-vwo" id="ySQ-BT-WUq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vbb-aU-HDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -134,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZC-Ne-3bg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="297"/>
+            <point key="canvasLocation" x="1055" y="300"/>
         </scene>
     </scenes>
 </document>

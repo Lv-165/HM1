@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HMSettingsViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlForMapType;
+@property (nonatomic, strong) NSNumber *mapType;
+
+- (IBAction)segmentedControlForMapTypeValueChanged:(id)sender;
 
 @end
