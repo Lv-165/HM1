@@ -7,7 +7,9 @@
 //
 
 #import "HMMapViewController.h"
-
+#import "HMSettingsViewController.h"
+#import "HMFilterViewController.h"
+#import "HMSearchViewController.h"
 
 @interface HMMapViewController ()
 
@@ -46,6 +48,7 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    flexibleItem.
     
     UIButton *yourCurrentLocation = [UIButton buttonWithType:UIButtonTypeCustom];
     [yourCurrentLocation setBackgroundImage:[UIImage imageNamed:@"compass"]
@@ -88,11 +91,11 @@
     UIView *viewForMoveToFilterController = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 30, 30)];
     [viewForMoveToFilterController addSubview:moveToFilterController];
     UIBarButtonItem *buttonForMoveToFilterController = [[UIBarButtonItem alloc] initWithCustomView:viewForMoveToFilterController];
-    
+
     
     NSArray *buttons = @[ buttonForShowCurrentLocation ,flexibleItem , buttonSearchButton , flexibleItem , buttonForMoveToFilterController , flexibleItem, buttonForMoveToSettingsController ];
     
-    [self.downToolBar setItems:buttons animated:YES];
+    [self.downToolBar setItems:buttons animated:NO];
     
 
     
@@ -103,16 +106,25 @@
 
 #pragma mark - buttons on Tool Bar
 
-- (IBAction)showYourCurrentLocation:(UIBarButtonItem *) sender {
+- (void)showYourCurrentLocation:(UIBarButtonItem *)sender {
 }
 
-- (IBAction)moveToToolsController:(UIBarButtonItem *)sender {
+- (void)moveToToolsController:(UIBarButtonItem *)sender {
+    
+    [self performSegueWithIdentifier:@"showSettingsViewController" sender:sender];
+    
 }
 
-- (IBAction)moveToFilterController:(UIBarButtonItem *)sender {
+- (void)moveToFilterController:(UIBarButtonItem *)sender {
+    
+    [self performSegueWithIdentifier:@"showFilterViewController" sender:sender];
+    
 }
 
-- (IBAction)buttonSearch:(UIBarButtonItem *)sender {
+- (void)buttonSearch:(UIBarButtonItem *)sender {
+    
+    [self performSegueWithIdentifier:@"showSearchViewController" sender:sender];
+    
 }
 
 #pragma mark - API
@@ -183,6 +195,30 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender segueName:(NSString*)name {
+    
+    if ([segue.identifier isEqualToString:@"showSettingsViewController"]) {
+        
+        HMSettingsViewController *destViewController = segue.destinationViewController;
+        
+    } else
+        if ([segue.identifier isEqualToString:@"showFilterViewController"]) {
+            
+            HMFilterViewController *destViewController = segue.destinationViewController;
+            
+        }
+    else
+        if ([segue.identifier isEqualToString:@"showSearchViewController"]) {
+            
+            HMSearchViewController *destViewController = segue.destinationViewController;
+            
+        }
+
+    
 }
 
 @end
