@@ -99,7 +99,7 @@
     
 
     
-    [self getContinentsFromServer];
+    //[self getContinentsFromServer];
     self.mapView.showsUserLocation = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -107,6 +107,12 @@
                                                   name:@"ChangeMapTypeNotification"
                                                 object:nil];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - buttons on Tool Bar

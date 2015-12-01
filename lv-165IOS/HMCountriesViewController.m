@@ -9,6 +9,8 @@
 #import "HMCountriesViewController.h"
 #import "HMCoreDataManager.h"
 #import "HMServerManager.h"
+#import "HMDownloadCellTableViewCell.h"
+#import "UIView+HMUItableViewCell.h"
 
 @interface HMCountriesViewController ()
 
@@ -36,8 +38,14 @@
     if (!count) {
         [self getContinentFromServer];
     }
+    else {
+//        NSString * storyboardName = @"Main";
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+//        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
+//        [self presentViewController:vc animated:YES completion:nil];
+    }
     
-//    [self getContinentFromServer];
+    //[self getContinentFromServer];
     //[self getCountryFromServer:@"ua"];
     // [self getPlaceFromServerByID:@"355"];
 
@@ -101,17 +109,31 @@
     }
     
     return _fetchedResultsController;
-}    
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (void)configureCell:(HMDownloadCellTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Continents *continent = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    cell.textLabel.text = continent.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", continent.places];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //static NSString* identifier = @"downloadContinent";
     
+    //HMDownloadCellTableViewCell* cell1 = [self.tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    cell.continentsImage = nil;
+    cell.continentLable.text = continent.name;
+    cell.countLable.text = [NSString stringWithFormat:@"%@", continent.places];
+
     
 }
 
+
+- (IBAction)actionDwnloadSwitch:(id)sender {
+    
+    HMDownloadCellTableViewCell* cell = [sender superCell];
+    
+    NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
+    
+    
+}
 
 @end
