@@ -137,16 +137,16 @@
 
 #pragma mark - API
 
-- (void)getCountriesFromServer {
-    [[HMServerManager sharedManager]
-     
-     getCountriesWithonSuccess:^(NSArray *countries) {
-         [self.arrayOfCountries addObjectsFromArray:countries];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-}
+//- (void)getCountriesFromServer {
+//    [[HMServerManager sharedManager]
+//     
+//     getCountriesWithonSuccess:^(NSArray *countries) {
+//         [self.arrayOfCountries addObjectsFromArray:countries];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//}
 
 - (void)getContinentsFromServer {
     [[HMServerManager sharedManager]

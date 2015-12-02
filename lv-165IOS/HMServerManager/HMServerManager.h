@@ -18,8 +18,8 @@
 - (void)getContinentsWithonSuccess:(void(^)(NSArray* countries)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
-- (void)getCountriesWithonSuccess:(void(^)(NSArray* continents)) success
-                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+//- (void)getCountriesWithonSuccess:(void(^)(NSArray* continents)) success
+//                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlacesByCountryWithISO:(NSString *)iso
                  onSuccess:(void(^)(NSArray* places)) success
