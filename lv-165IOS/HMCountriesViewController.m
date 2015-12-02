@@ -16,6 +16,7 @@
 @interface HMCountriesViewController ()
 
 @property (strong, nonatomic)NSMutableArray *arrayOfContinent;
+@property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
 
 @end
 
@@ -52,6 +53,7 @@
     // [self getPlaceFromServerByID:@"355"];
 
     self.arrayOfContinent = [[NSMutableArray alloc] init];
+    self.arrayOfPlaces = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view.
 }
@@ -61,12 +63,11 @@
      
      getContinentsWithonSuccess:^(NSArray *continents) {
          [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
+         //[self.tableView reloadData];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
-    
-    
 }
 
 
@@ -148,32 +149,42 @@
     for (Continents* continent in self.arrayOfContinent ) {
         if ([cell.continentLable.text isEqualToString:continent.name]) {
             //getPlacesByContinentName
-            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places) {
-                NSLog(@"%@/n", places);
+            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
+                //NSLog(@"%@/n", places);
                 
                 for (NSDictionary* dict in places) {
                     
-                    NSLog(@"%@", [dict objectForKey:@"id"]);
+                    //NSLog(@"%@", [dict objectForKey:@"id"]);
                     
-                    [[HMServerManager sharedManager] getPlaceWithID:[dict valueForKey:@"id"] onSuccess:^(NSArray *places) {
+                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
                         
-                        NSLog(@"%@", places);
-                        
+                }
+                [self downloadPlaces];
+#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
                         //Write to CoreData Place
+                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
                         
                     } onFailure:^(NSError *error, NSInteger statusCode) {
                         
                     }];
                 }
-                
-            } onFailure:^(NSError *error, NSInteger statusCode) {
-                NSLog(@"err");
-            }];
-            
-            return;
         }
-    }
+}
+
+- (void) downloadPlaces {
     
+    __block int i = 0;
+    
+    for (NSString* idPlaces in self.arrayOfPlaces) {
+        
+        dispatch_after(DISPATCH_TIME_NOW+1, dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^{
+            [[HMServerManager sharedManager] getPlaceWithID:idPlaces onSuccess:^(NSDictionary *places) {
+                NSLog(@"\n\ni = %d\tPLACE%@\n",i++, places);
+            } onFailure:^(NSError *error, NSInteger statusCode) {
+                    NSLog(@"err");
+            }];
+        });
+    }
 }
 
 @end

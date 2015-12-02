@@ -26,7 +26,7 @@
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlaceWithID:(NSString *)placeID
-             onSuccess:(void(^)(NSArray* places)) success
+             onSuccess:(void(^)(NSDictionary* places)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlacesByContinentName:(NSString *)continentName

@@ -175,7 +175,7 @@
 - (void)getPlaceFromServerByID:(NSString *)placeID {
     [[HMServerManager sharedManager]
      getPlaceWithID:placeID
-     onSuccess:^(NSArray* places) {
+     onSuccess:^(NSDictionary* places) {
          [self.arrayOfPlaces addObjectsFromArray:places];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {

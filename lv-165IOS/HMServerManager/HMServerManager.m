@@ -84,7 +84,7 @@
      GET:countriesForGet
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -93,18 +93,28 @@
 }
 
 - (void)getPlaceWithID:(NSString *)placeID
-             onSuccess:(void(^)(NSArray* cities)) success
+             onSuccess:(void(^)(NSDictionary* cities)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
     NSString* IDplace = [NSString stringWithFormat:@"?place=%@",placeID];
+    
+//    + (NSArray *)batchOfRequestOperations:(nullable NSArray *)operations
+//progressBlock:(nullable void (^)(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations))progressBlock
+//completionBlock:(nullable void (^)(NSArray *operations))completionBlock;
+//    for (NSString *ident in places) {
+//            AFHTTPRequestOperation *operation = [self.requestOperationManager HTTPRequestOperationWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
+//        [arra add:operation];
+//        
+//    }
+    
     
     [self.requestOperationManager
      GET:IDplace
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
-         success(responseObject.allValues);
+         success(responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -137,7 +147,7 @@
      GET:continent
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
          success(responseObject);
          
@@ -165,7 +175,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
          
-         
+         failure(error, error.code);
          
      }];
 }
