@@ -7,7 +7,7 @@
 //
 
 #import "HMCoreDataManager.h"
-
+#import "NSNumber+HMNumber.h"
 
 @implementation HMCoreDataManager
 
@@ -33,9 +33,9 @@
 #pragma mark - Create_Delete Objects
 
 
-- (void) addContinents:(NSArray*) countryArray {
+- (void) saveContinentsToCoreDataWithNSArray:(NSArray*) countryArray {
     
-    NSLog(@"addContinents");
+    NSLog(@"saveContinentsToCoreDataWithNSArray");
 
     for (NSDictionary* dict in countryArray) {
         
@@ -57,6 +57,45 @@
         NSLog(@"%@", [error localizedDescription]);
     }
 
+}
+
+- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Continents*)continent {
+    
+    NSLog(@"savePlaceToCoreDataWithNSArray");
+    
+    Place* place = [NSEntityDescription insertNewObjectForEntityForName:@"Place"                                                              inManagedObjectContext:[self managedObjectContext]];
+        
+    NSInteger tempInteger = [[placeNSDictionary valueForKey:@"id"] integerValue];
+     place.id = [NSNumber numberWithInteger:tempInteger];
+    
+    NSInteger ratInteger = [[placeNSDictionary valueForKey:@"rating"] integerValue];
+    place.rating = [NSNumber numberWithInteger:ratInteger];
+    
+    NSInteger ratCountInteger = [[placeNSDictionary valueForKey:@"rating_count"] integerValue];
+    place.rating_count = [NSNumber numberWithInteger:ratCountInteger];
+
+    //place.elevation = [NSNumber numberFromValue:placeNSDictionary[@"elevation"]];
+    
+    double lonDounble = [[placeNSDictionary valueForKey:@"lon"] doubleValue];
+     place.lon = [NSNumber numberWithDouble:lonDounble];
+    
+    double latDounble = [[placeNSDictionary valueForKey:@"lat"] doubleValue];
+    place.lat = [NSNumber numberWithDouble:latDounble];
+    
+    //NSLog(@"\n\nID - %@\n LON - %@\n LAT - %@\n RATING - %@\n  RATCOUNT - %@\n ELEVATION -%@",
+       //   place.id, place.lon,place.lat, place.rating, place.rating_count, place.elevation);
+    
+//    Continents* continents = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"                                                              inManagedObjectContext:[self managedObjectContext]];
+    
+    //place.continent = continent;
+    
+    [continent addPlacesOnContinentObject:place];
+    
+    NSError* error = nil;
+    if (![[self managedObjectContext] save:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    
 }
 
 

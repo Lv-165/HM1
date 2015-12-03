@@ -30,6 +30,8 @@
 		7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */; };
 		A10299261C0F153E00BA5896 /* HMMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A10299251C0F153E00BA5896 /* HMMapAnnotation.m */; };
 		A10299291C0F1A7800BA5896 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10299281C0F1A7800BA5896 /* UIView+MKAnnotationView.m */; };
+		7FE4EC611C0F12160075C9AC /* NSNumber+HMNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */; };
+		7FE6FF3F1C105F43005C6CB0 /* HMMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */; };
 		A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */; };
 		A1C5EDE81C0CBD1400F94400 /* HMFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE71C0CBD1400F94400 /* HMFilterViewController.m */; };
 		A1C5EDEB1C0CC4D500F94400 /* HMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDEA1C0CC4D500F94400 /* HMSearchViewController.m */; };
@@ -134,6 +136,10 @@
 		A10299251C0F153E00BA5896 /* HMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotation.m; sourceTree = "<group>"; };
 		A10299271C0F1A7800BA5896 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
 		A10299281C0F1A7800BA5896 /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
+		7FE4EC5F1C0F12160075C9AC /* NSNumber+HMNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+HMNumber.h"; path = "Extensions/NSNumber+HMNumber.h"; sourceTree = "<group>"; };
+		7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+HMNumber.m"; path = "Extensions/NSNumber+HMNumber.m"; sourceTree = "<group>"; };
+		7FE6FF3D1C105F43005C6CB0 /* HMMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMapAnnotation.h; sourceTree = "<group>"; };
+		7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotation.m; sourceTree = "<group>"; };
 		A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSettingsViewController.h; sourceTree = "<group>"; };
 		A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSettingsViewController.m; sourceTree = "<group>"; };
 		A1C5EDE61C0CBD1400F94400 /* HMFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMFilterViewController.h; sourceTree = "<group>"; };
@@ -334,9 +340,19 @@
 			name = "Download Continents";
 			sourceTree = "<group>";
 		};
+		7FE4EC5E1C0F11AD0075C9AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7FE4EC5F1C0F12160075C9AC /* NSNumber+HMNumber.h */,
+				7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
+				7FE4EC5E1C0F11AD0075C9AC /* Extensions */,
 				C0E7DA8C1C08B3AA00541E5E /* Models */,
 				302A119C1C037143002F8FF0 /* Libs */,
 				C01442E01C0333A5000F8F6F /* lv-165IOS */,
@@ -364,6 +380,8 @@
 				C01442E51C0333A5000F8F6F /* HMAppDelegate.m */,
 				C01442E71C0333A5000F8F6F /* HMMapViewController.h */,
 				C01442E81C0333A5000F8F6F /* HMMapViewController.m */,
+				7FE6FF3D1C105F43005C6CB0 /* HMMapAnnotation.h */,
+				7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */,
 				C01442EA1C0333A5000F8F6F /* Main.storyboard */,
 				C01442F01C0333A5000F8F6F /* Assets.xcassets */,
 				C01442F21C0333A5000F8F6F /* LaunchScreen.storyboard */,
@@ -595,6 +613,7 @@
 			files = (
 				C0B0B7201C0C7D27007A91A7 /* User.m in Sources */,
 				C0B0B7221C0C7D27007A91A7 /* Location.m in Sources */,
+				7FE4EC611C0F12160075C9AC /* NSNumber+HMNumber.m in Sources */,
 				C0B0B71D1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m in Sources */,
 				C0B0B71A1C0C7D27007A91A7 /* Place.m in Sources */,
 				A10299291C0F1A7800BA5896 /* UIView+MKAnnotationView.m in Sources */,
