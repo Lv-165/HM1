@@ -59,7 +59,7 @@
 
 }
 
-- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary {
+- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Continents*)continent {
     
     NSLog(@"savePlaceToCoreDataWithNSArray");
     
@@ -84,6 +84,12 @@
     
     //NSLog(@"\n\nID - %@\n LON - %@\n LAT - %@\n RATING - %@\n  RATCOUNT - %@\n ELEVATION -%@",
        //   place.id, place.lon,place.lat, place.rating, place.rating_count, place.elevation);
+    
+//    Continents* continents = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"                                                              inManagedObjectContext:[self managedObjectContext]];
+    
+    //place.continent = continent;
+    
+    [continent addPlacesOnContinentObject:place];
     
     NSError* error = nil;
     if (![[self managedObjectContext] save:&error]) {

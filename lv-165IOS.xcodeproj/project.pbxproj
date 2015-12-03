@@ -29,6 +29,7 @@
 		7FA55BE11C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE01C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m */; };
 		7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */; };
 		7FE4EC611C0F12160075C9AC /* NSNumber+HMNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */; };
+		7FE6FF3F1C105F43005C6CB0 /* HMMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */; };
 		A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */; };
 		A1C5EDE81C0CBD1400F94400 /* HMFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE71C0CBD1400F94400 /* HMFilterViewController.m */; };
 		A1C5EDEB1C0CC4D500F94400 /* HMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDEA1C0CC4D500F94400 /* HMSearchViewController.m */; };
@@ -131,6 +132,8 @@
 		7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HMUItableViewCell.m"; sourceTree = "<group>"; };
 		7FE4EC5F1C0F12160075C9AC /* NSNumber+HMNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+HMNumber.h"; path = "Extensions/NSNumber+HMNumber.h"; sourceTree = "<group>"; };
 		7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+HMNumber.m"; path = "Extensions/NSNumber+HMNumber.m"; sourceTree = "<group>"; };
+		7FE6FF3D1C105F43005C6CB0 /* HMMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMapAnnotation.h; sourceTree = "<group>"; };
+		7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotation.m; sourceTree = "<group>"; };
 		A1C5EDE11C0CA7C900F94400 /* HMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSettingsViewController.h; sourceTree = "<group>"; };
 		A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSettingsViewController.m; sourceTree = "<group>"; };
 		A1C5EDE61C0CBD1400F94400 /* HMFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMFilterViewController.h; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 				C01442E51C0333A5000F8F6F /* HMAppDelegate.m */,
 				C01442E71C0333A5000F8F6F /* HMMapViewController.h */,
 				C01442E81C0333A5000F8F6F /* HMMapViewController.m */,
+				7FE6FF3D1C105F43005C6CB0 /* HMMapAnnotation.h */,
+				7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */,
 				C01442EA1C0333A5000F8F6F /* Main.storyboard */,
 				C01442F01C0333A5000F8F6F /* Assets.xcassets */,
 				C01442F21C0333A5000F8F6F /* LaunchScreen.storyboard */,
@@ -622,6 +627,7 @@
 				302A11CD1C0371C3002F8FF0 /* AFURLConnectionOperation.m in Sources */,
 				302A11D51C0371C3002F8FF0 /* UIImageView+AFNetworking.m in Sources */,
 				302A11C81C0371C3002F8FF0 /* AFHTTPRequestOperation.m in Sources */,
+				7FE6FF3F1C105F43005C6CB0 /* HMMapAnnotation.m in Sources */,
 				301896301C0895DC00178A04 /* HMServerManager.m in Sources */,
 				7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */,
 				C0B0B7171C0C7D27007A91A7 /* Description+CoreDataProperties.m in Sources */,
