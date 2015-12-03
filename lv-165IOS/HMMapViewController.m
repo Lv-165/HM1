@@ -10,6 +10,9 @@
 #import "HMSettingsViewController.h"
 #import "HMFilterViewController.h"
 #import "HMSearchViewController.h"
+#import <MapKit/MapKit.h>
+#import "HMMapAnnotation.h"
+#import "UIView+MKAnnotationView.h"
 
 @interface HMMapViewController ()
 
@@ -106,6 +109,22 @@
                                               selector:@selector(receiveChangeMapTypeNotification:)
                                                   name:@"ChangeMapTypeNotification"
                                                 object:nil];
+    
+    // Experiment
+    
+//    HMMapAnnotation* annotation = [[HMMapAnnotation alloc] init];
+//    
+//    CLLocationCoordinate2D coord;
+//    
+//    coord.latitude = 49;
+//    coord.longitude = 24;
+//    
+//    annotation.title = @"Some title";
+//    annotation.subtitle = @"Yes, it's me";
+//    annotation.coordinate = coord;
+//    
+//    [self.mapView addAnnotation:annotation];
+    
     
 }
 
@@ -274,10 +293,80 @@
 
 #pragma mark - Deallocation
 
-- (void) dealloc
-{
+- (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
 }
+
+#pragma mark - Annotation View
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    static NSString* identifier = @"Annotation";
+    
+    MKPinAnnotationView* pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if (!pin) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        pin.pinColor = MKPinAnnotationColorRed;
+        pin.animatesDrop = YES;
+        pin.canShowCallout = YES;
+        pin.draggable = YES;
+        
+        
+        UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        [descriptionButton addTarget:self
+                              action:@selector(actionDescription:)
+                    forControlEvents:UIControlEventTouchUpInside];
+        
+        pin.rightCalloutAccessoryView = descriptionButton;
+        
+        
+        UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        
+        [directionButton addTarget:self
+                            action:@selector(actionDirection:)
+                  forControlEvents:UIControlEventTouchUpInside];
+        pin.leftCalloutAccessoryView = directionButton;
+        
+    } else {
+        pin.annotation = annotation;
+    }
+    
+    return pin;
+}
+
+- (void)actionDescription:(id)sender {
+    
+    MKAnnotationView* annotationView = [sender superAnnotationView];
+    
+    if (!annotationView) {
+        return;
+    }
+    
+//    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+//    
+//    CLLocation* location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+//                                                      longitude:coordinate.longitude];
+    
+    [self showAlertWithTitle:@"Alert"
+                  andMessage:@"some message"];
+}
+
+- (void) showAlertWithTitle:(NSString*)title
+                 andMessage:(NSString*)message {
+    
+    [[[UIAlertView alloc]
+      initWithTitle:title
+      message:message
+      delegate:nil
+      cancelButtonTitle:@"OK"
+      otherButtonTitles:nil] show];
+}
+
 
 @end
