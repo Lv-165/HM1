@@ -18,15 +18,15 @@
 - (void)getContinentsWithonSuccess:(void(^)(NSArray* countries)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
-- (void)getCountriesWithonSuccess:(void(^)(NSArray* continents)) success
-                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+//- (void)getCountriesWithonSuccess:(void(^)(NSArray* continents)) success
+//                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlacesByCountryWithISO:(NSString *)iso
                  onSuccess:(void(^)(NSArray* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlaceWithID:(NSString *)placeID
-             onSuccess:(void(^)(NSArray* places)) success
+             onSuccess:(void(^)(NSDictionary* places)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void)getPlacesByContinentName:(NSString *)continentName

@@ -37,7 +37,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     static NSString* identifier = @"downloadContinent";
     
     HMDownloadCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];

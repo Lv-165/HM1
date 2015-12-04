@@ -8,6 +8,7 @@
 
 #import "HMAppDelegate.h"
 #import "HMCountriesViewController.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface HMAppDelegate ()
 
@@ -23,6 +24,8 @@
 //    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:vc];
 //    
 //    self.window.rootViewController = nav;
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;
 }

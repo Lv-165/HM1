@@ -10,6 +10,12 @@
 #import "HMSettingsViewController.h"
 #import "HMFilterViewController.h"
 #import "HMSearchViewController.h"
+#import <MapKit/MapKit.h>
+#import "HMMapAnnotation.h"
+#import "UIView+MKAnnotationView.h"
+#import "Comments.h"
+#import "Place.h"
+#import "HMMapAnnotation.h"
 
 @interface HMMapViewController ()
 
@@ -25,9 +31,13 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
+@property (strong, nonatomic) NSMutableArray* mapPointArray;
+
 @end
 
 @implementation HMMapViewController
+
+static NSMutableArray* nameContinents;
 
 - (NSManagedObjectContext*) managedObjectContext {
     
@@ -104,6 +114,23 @@
                                                   name:@"ChangeMapTypeNotification"
                                                 object:nil];
     
+    // Experiment
+    
+//    HMMapAnnotation* annotation = [[HMMapAnnotation alloc] init];
+//    
+//    CLLocationCoordinate2D coord;
+//    
+//    coord.latitude = 49;
+//    coord.longitude = 24;
+//    
+//    annotation.title = @"Some title";
+//    annotation.subtitle = @"Yes, it's me";
+//    annotation.coordinate = coord;
+//    
+//    [self.mapView addAnnotation:annotation];
+    
+    [self printPointWithContinent];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -137,69 +164,69 @@
 
 #pragma mark - API
 
-- (void)getCountriesFromServer {
-    [[HMServerManager sharedManager]
-     
-     getCountriesWithonSuccess:^(NSArray *countries) {
-         [self.arrayOfCountries addObjectsFromArray:countries];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-}
+//- (void)getCountriesFromServer {
+//    [[HMServerManager sharedManager]
+//     
+//     getCountriesWithonSuccess:^(NSArray *countries) {
+//         [self.arrayOfCountries addObjectsFromArray:countries];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//}
 
-- (void)getContinentsFromServer {
-    [[HMServerManager sharedManager]
-     
-     getContinentsWithonSuccess:^(NSArray *continents) {
-         //[self.araryOfContinents addObjectsFromArray:continents];
-         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-}
-
-- (void)getPlacesFromServerByISOCountryName:(NSString *)iso {
-    [[HMServerManager sharedManager]
-     getPlacesByCountryWithISO:iso
-     onSuccess:^(NSArray *countriesWithISO) {
-         [self.arrayOfCountriesByISO addObjectsFromArray:countriesWithISO];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-    
-}
-
-- (void)getPlaceFromServerByID:(NSString *)placeID {
-    [[HMServerManager sharedManager]
-     getPlaceWithID:placeID
-     onSuccess:^(NSArray* places) {
-         [self.arrayOfPlaces addObjectsFromArray:places];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-    
-}
-
-- (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
-    NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
-    [self getPlaceFromServerByID:stringForRequest];
-}
-
-- (void)getPlacesFromServerByContinent:(NSString *)continentCode {
-    [[HMServerManager sharedManager]
-     getPlacesByContinentName:continentCode
-     onSuccess:^(NSDictionary* places) {
-         //[self.arrayOfPlacesByContinent addObjectsFromArray:places];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
-
-}
+//- (void)getContinentsFromServer {
+//    [[HMServerManager sharedManager]
+//     
+//     getContinentsWithonSuccess:^(NSArray *continents) {
+//         //[self.araryOfContinents addObjectsFromArray:continents];
+//         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//}
+//
+//- (void)getPlacesFromServerByISOCountryName:(NSString *)iso {
+//    [[HMServerManager sharedManager]
+//     getPlacesByCountryWithISO:iso
+//     onSuccess:^(NSArray *countriesWithISO) {
+//         [self.arrayOfCountriesByISO addObjectsFromArray:countriesWithISO];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//    
+//}
+//
+//- (void)getPlaceFromServerByID:(NSString *)placeID {
+//    [[HMServerManager sharedManager]
+//     getPlaceWithID:placeID
+//     onSuccess:^(NSDictionary* places) {
+//         [self.arrayOfPlaces addObjectsFromArray:places];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//    
+//}
+//
+//- (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
+//    NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
+//    [self getPlaceFromServerByID:stringForRequest];
+//}
+//
+//- (void)getPlacesFromServerByContinent:(NSString *)continentCode {
+//    [[HMServerManager sharedManager]
+//     getPlacesByContinentName:continentCode
+//     onSuccess:^(NSDictionary* places) {
+//         //[self.arrayOfPlacesByContinent addObjectsFromArray:places];
+//     }
+//     onFailure:^(NSError *error, NSInteger statusCode) {
+//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+//     }];
+//
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -256,8 +283,7 @@
 
 #pragma mark - Notifications
 
-- (void) receiveChangeMapTypeNotification:(NSNotification *) notification
-{
+- (void) receiveChangeMapTypeNotification:(NSNotification *) notification {
     
     if ([[notification name] isEqualToString:@"ChangeMapTypeNotification"])  {
         
@@ -272,10 +298,146 @@
 
 #pragma mark - Deallocation
 
-- (void) dealloc
-{
+- (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
 }
+
+#pragma mark - Annotation View
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    static NSString* identifier = @"Annotation";
+    
+    MKPinAnnotationView* pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if (!pin) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        pin.pinColor = MKPinAnnotationColorRed;
+        pin.animatesDrop = YES;
+        pin.canShowCallout = YES;
+        pin.draggable = YES;
+        
+        
+        UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        [descriptionButton addTarget:self
+                              action:@selector(actionDescription:)
+                    forControlEvents:UIControlEventTouchUpInside];
+        
+        pin.rightCalloutAccessoryView = descriptionButton;
+        
+        
+        UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        
+        [directionButton addTarget:self
+                            action:@selector(actionDirection:)
+                  forControlEvents:UIControlEventTouchUpInside];
+        pin.leftCalloutAccessoryView = directionButton;
+        
+    } else {
+        pin.annotation = annotation;
+    }
+    
+    return pin;
+}
+
+- (void)actionDescription:(id)sender {
+    
+    MKAnnotationView* annotationView = [sender superAnnotationView];
+    
+    if (!annotationView) {
+        return;
+    }
+    
+//    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+//    
+//    CLLocation* location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+//                                                      longitude:coordinate.longitude];
+    
+    [self showAlertWithTitle:@"Alert"
+                  andMessage:@"some message"];
+}
+
+- (void) showAlertWithTitle:(NSString*)title
+                 andMessage:(NSString*)message {
+    
+    [[[UIAlertView alloc]
+      initWithTitle:title
+      message:message
+      delegate:nil
+      cancelButtonTitle:@"OK"
+      otherButtonTitles:nil] show];
+}
+
++ (void)addNameContinent:(NSString*)continent {
+    
+    if (!nameContinents) {
+        nameContinents = [[NSMutableArray alloc] init];
+    }
+    
+    [nameContinents addObject:continent];
+}
+
+- (void)printPointWithContinent {
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Continents"];
+    self.mapPointArray = [[managedObjectContext executeFetchRequest:fetchRequest
+                                                              error:nil] mutableCopy];
+    
+    for (Continents* continentTemp in self.mapPointArray) {
+        for (NSString *nameContinent in nameContinents) {
+            if ([continentTemp.name isEqualToString:nameContinent]) {
+                //NSLog(@"%@",continentTemp.placesOnContinent);
+                
+                NSSet* set = [[NSSet alloc] initWithSet:continentTemp.placesOnContinent];
+                NSArray* array = [set allObjects];
+                for (NSInteger i=0; i<[array count]; i++) {
+                    Place* place = [array objectAtIndex:i];
+                    NSLog(@"\nid = %@, lat = %@, lon = %@",place.id, place.lat, place.lon);
+                    
+                    HMMapAnnotation *annotation = [[HMMapAnnotation alloc] init];
+                    
+                    CLLocationCoordinate2D coordinate;
+                    coordinate.latitude = [place.lat doubleValue];
+                    coordinate.longitude = [place.lon doubleValue];
+                    
+                    annotation.coordinate = coordinate;
+                    annotation.title = [NSString stringWithFormat:@"%@", place.id];
+                    annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
+                                           annotation.coordinate.latitude,
+                                           annotation.coordinate.longitude];
+                    
+                    [self.mapView addAnnotation:annotation];
+                }
+            }
+        }
+    }
+    
+    
+    
+//    for (NSInteger i=0; i<[self.mapPointArray count]; i++) {
+//
+//        MapPoints *mapPoint = [self.mapPointArray objectAtIndex:i];
+//        MapAnnotation *annotation = [[MapAnnotation alloc] init];
+//        
+//        CLLocationCoordinate2D coordinate;
+//        coordinate.latitude = [mapPoint.latitude doubleValue];
+//        coordinate.longitude = [mapPoint.longitude doubleValue];
+//        
+//        annotation.coordinate = coordinate;
+//        annotation.title = mapPoint.namePoint;
+//        annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
+//                               annotation.coordinate.latitude,
+//                               annotation.coordinate.longitude];
+//        
+//        [self.mapView addAnnotation:annotation];
+//    }
+}
+
 
 @end

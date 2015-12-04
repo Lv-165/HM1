@@ -15,8 +15,8 @@
 
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-
 
 @end

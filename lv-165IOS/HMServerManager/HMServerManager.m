@@ -9,7 +9,7 @@
 #import "HMServerManager.h"
 #import "AFNetworking.h"
 #import "HMCoreDataManager.h"
-
+#import "AFURLConnectionOperation.h"
 
 @interface HMServerManager ()
 
@@ -84,7 +84,7 @@
      GET:countriesForGet
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -93,18 +93,47 @@
 }
 
 - (void)getPlaceWithID:(NSString *)placeID
-             onSuccess:(void(^)(NSArray* cities)) success
+             onSuccess:(void(^)(NSDictionary* cities)) success
              onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
+    //NSString* IDplace = [NSString stringWithFormat:@"http://hitchwiki.org/maps/api/?place=%@",placeID];
     NSString* IDplace = [NSString stringWithFormat:@"?place=%@",placeID];
+    
+//    + (NSArray *)batchOfRequestOperations:(nullable NSArray *)operations
+//progressBlock:(nullable void (^)(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations))progressBlock
+//completionBlock:(nullable void (^)(NSArray *operations))completionBlock;
+//    for (NSString *ident in places) {
+//            AFHTTPRequestOperation *operation = [self.requestOperationManager HTTPRequestOperationWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
+//        [arra add:operation];
+//        
+//    }
+    
+//    NSOperationQueue *networkQueue = [[NSOperationQueue alloc] init];
+//    networkQueue.maxConcurrentOperationCount = 25;
+//    
+//    NSURL *url = [NSURL URLWithString:IDplace];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        // do whatever you'd like here; for example, if you want to convert
+//        // it to a string and log it, you might do something like:
+//        
+//        NSLog(@"JSON: %@", responseObject);
+//        
+//        success(responseObject);
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%s: AFHTTPRequestOperation error: %@", __FUNCTION__, error);
+//    }];
+//    [networkQueue addOperation:operation];
     
     [self.requestOperationManager
      GET:IDplace
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
-         success(responseObject.allValues);
+         success(responseObject);
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
@@ -137,7 +166,7 @@
      GET:continent
      parameters:nil
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-         NSLog(@"JSON: %@", responseObject);
+         //NSLog(@"JSON: %@", responseObject);
          
          success(responseObject);
          
@@ -165,7 +194,7 @@
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
          
-         
+         failure(error, error.code);
          
      }];
 }

@@ -12,15 +12,19 @@
 #import "HMDownloadCellTableViewCell.h"
 #import "UIView+HMUItableViewCell.h"
 #import "Continents.h"
+#import "HMMapViewController.h"
 
 @interface HMCountriesViewController ()
 
 @property (strong, nonatomic)NSMutableArray *arrayOfContinent;
+@property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
+@property (strong, nonatomic)NSMutableArray *arrayOfDownloadedContinents;
 
 @end
 
 @implementation HMCountriesViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize managedObjectModel = _managedObjectModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +56,7 @@
     // [self getPlaceFromServerByID:@"355"];
 
     self.arrayOfContinent = [[NSMutableArray alloc] init];
+    self.arrayOfPlaces = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view.
 }
@@ -60,13 +65,16 @@
     [[HMServerManager sharedManager]
      
      getContinentsWithonSuccess:^(NSArray *continents) {
+         
+//         Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"                                                              inManagedObjectContext:[self managedObjectContext]];
+//         NSLog(@"%@",continent.placesOnContinent);
+         
          [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
+         //[self.tableView reloadData];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
-    
-    
 }
 
 
@@ -140,40 +148,72 @@
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
+    [HMMapViewController addNameContinent:cell.continentLable.text];
+    
+    
 //    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
 //        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
 //        NSLog(@"%@",continent);
 //    }
     
-    for (Continents* continent in self.arrayOfContinent ) {
-        if ([cell.continentLable.text isEqualToString:continent.name]) {
-            //getPlacesByContinentName
-            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places) {
-                NSLog(@"%@/n", places);
+#warning коментувати коли скачали
+//    for (Continents* continent in self.arrayOfContinent ) {
+//        if ([cell.continentLable.text isEqualToString:continent.name]) {
+//            //getPlacesByContinentName
+//            
+//            
+//            
+//            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
+//                //NSLog(@"%@/n", places);
+//                
+//                for (NSDictionary* dict in places) {
+//                    
+//                    //NSLog(@"%@", [dict objectForKey:@"id"]);
+//                    
+//                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
+//                }
+//                [self downloadPlaces:continent];
+//#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
+//                        //Write to CoreData Place
+//                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
+//                        
+//                    } onFailure:^(NSError *error, NSInteger statusCode) {
+//                        
+//                    }];
+//            return;
+//        }
+//    }
+}
+
+- (void) downloadPlaces:(Continents*)continents {
+    
+    __block int i = 0;
+    
+    for (NSString* idPlaces in self.arrayOfPlaces) {
+        
+        dispatch_after(DISPATCH_TIME_NOW+1, dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^{
+            [[HMServerManager sharedManager] getPlaceWithID:idPlaces onSuccess:^(NSDictionary *places) {
+                NSLog(@"\n\ni = %d\tPLACE%@\n",i++, places);
                 
-                for (NSDictionary* dict in places) {
-                    
-                    NSLog(@"%@", [dict objectForKey:@"id"]);
-                    
-                    [[HMServerManager sharedManager] getPlaceWithID:[dict valueForKey:@"id"] onSuccess:^(NSArray *places) {
-                        
-                        NSLog(@"%@", places);
-                        
-                        //Write to CoreData Place
-                        
-                    } onFailure:^(NSError *error, NSInteger statusCode) {
-                        
-                    }];
-                }
+//                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//                NSEntityDescription *entity = [NSEntityDescription entityForName:@"Continents" inManagedObjectContext:self.managedObjectContext];
+//                NSPredicate *predicate = [NSPredicate
+//                                          predicateWithFormat:@"placeOnContinent.@count == 0"];
+//                [fetchRequest setPredicate:predicate];
+//                
+//                NSLog(@"%@",fetchRequest);
+                
+//                NSFetchRequest* request = [[self.managedObjectModel fetchRequestTemplateForName:@"FetchContinent"] copy];
+//                NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:nil];
+//                NSLog(@"%@",resultArray);
+                
+                [[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places continent:continents];
                 
             } onFailure:^(NSError *error, NSInteger statusCode) {
-                NSLog(@"err");
+                    NSLog(@"err");
             }];
-            
-            return;
-        }
+        });
     }
-    
 }
 
 @end
