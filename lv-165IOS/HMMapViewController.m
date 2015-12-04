@@ -22,13 +22,13 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (strong, nonatomic)NSMutableArray *arrayOfCountries;
-@property (strong, nonatomic)NSMutableArray *araryOfContinents;
-@property (strong, nonatomic)NSMutableArray *arrayOfCountriesByISO;
-@property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
-@property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
-@property (strong, nonatomic)NSMutableArray *arrayOfPlacesByCity;
-@property (strong, nonatomic)NSMutableArray *arrayOfPlacesByContinent;
+//@property (strong, nonatomic)NSMutableArray *arrayOfCountries;
+//@property (strong, nonatomic)NSMutableArray *araryOfContinents;
+//@property (strong, nonatomic)NSMutableArray *arrayOfCountriesByISO;
+//@property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
+//@property (strong, nonatomic)NSMutableArray *arrayOfPlacesAndDot;
+//@property (strong, nonatomic)NSMutableArray *arrayOfPlacesByCity;
+//@property (strong, nonatomic)NSMutableArray *arrayOfPlacesByContinent;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
@@ -42,6 +42,7 @@
 @implementation HMMapViewController
 
 static NSMutableArray* nameContinents;
+static bool isMainRoute;
 
 - (NSManagedObjectContext*) managedObjectContext {
     
@@ -157,6 +158,25 @@ static NSMutableArray* nameContinents;
 #pragma mark - buttons on Tool Bar
 
 - (void)showYourCurrentLocation:(UIBarButtonItem *)sender {
+    
+    MKMapRect zoomRect = MKMapRectNull;
+    
+    CLLocationCoordinate2D location = self.mapView.userLocation.coordinate;
+    
+    MKMapPoint center = MKMapPointForCoordinate(location);
+    
+    static double delta = 40000;
+    
+    MKMapRect rect = MKMapRectMake(center.x - delta, center.y - delta, delta * 2, delta * 2);
+    
+    zoomRect = MKMapRectUnion(zoomRect, rect);
+    
+    zoomRect = [self.mapView mapRectThatFits:zoomRect];
+    
+    [self.mapView setVisibleMapRect:zoomRect
+                        edgePadding:UIEdgeInsetsMake(50, 50, 50, 50)
+                           animated:YES];
+    
 }
 
 - (void)moveToToolsController:(UIBarButtonItem *)sender {
@@ -176,72 +196,6 @@ static NSMutableArray* nameContinents;
     [self performSegueWithIdentifier:@"showSearchViewController" sender:sender];
     
 }
-
-#pragma mark - API
-
-//- (void)getCountriesFromServer {
-//    [[HMServerManager sharedManager]
-//     
-//     getCountriesWithonSuccess:^(NSArray *countries) {
-//         [self.arrayOfCountries addObjectsFromArray:countries];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//}
-
-//- (void)getContinentsFromServer {
-//    [[HMServerManager sharedManager]
-//     
-//     getContinentsWithonSuccess:^(NSArray *continents) {
-//         //[self.araryOfContinents addObjectsFromArray:continents];
-//         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//}
-//
-//- (void)getPlacesFromServerByISOCountryName:(NSString *)iso {
-//    [[HMServerManager sharedManager]
-//     getPlacesByCountryWithISO:iso
-//     onSuccess:^(NSArray *countriesWithISO) {
-//         [self.arrayOfCountriesByISO addObjectsFromArray:countriesWithISO];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//    
-//}
-//
-//- (void)getPlaceFromServerByID:(NSString *)placeID {
-//    [[HMServerManager sharedManager]
-//     getPlaceWithID:placeID
-//     onSuccess:^(NSDictionary* places) {
-//         [self.arrayOfPlaces addObjectsFromArray:places];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//    
-//}
-//
-//- (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
-//    NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
-//    [self getPlaceFromServerByID:stringForRequest];
-//}
-//
-//- (void)getPlacesFromServerByContinent:(NSString *)continentCode {
-//    [[HMServerManager sharedManager]
-//     getPlacesByContinentName:continentCode
-//     onSuccess:^(NSDictionary* places) {
-//         //[self.arrayOfPlacesByContinent addObjectsFromArray:places];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -337,9 +291,9 @@ static NSMutableArray* nameContinents;
     if (!pin) {
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         pin.pinColor = MKPinAnnotationColorRed;
-        pin.animatesDrop = YES;
+        //pin.animatesDrop = YES;
         pin.canShowCallout = YES;
-        pin.draggable = YES;
+        //pin.draggable = YES;
         
         
         UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -375,8 +329,125 @@ static NSMutableArray* nameContinents;
     }];
 }
 
+#pragma mark - MKMapViewDelegate -
 
-- (void)actionDescription:(id)sender {
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay {
+    
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        
+        MKPolylineRenderer* renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
+        
+        if (!isMainRoute) {
+            
+            renderer.lineWidth = 3.f;
+            renderer.strokeColor = [UIColor colorWithRed:0.f green:0.1f blue:1.f alpha:0.9f];
+            return renderer;
+        }
+        else {
+            
+            renderer.lineWidth = 1.8f;
+            renderer.strokeColor = [UIColor colorWithRed:0.f green:0.5f blue:1.f alpha:0.6f];
+            return renderer;
+        }
+    }
+    else if ([overlay isKindOfClass:[MKPolygon class]]) {
+        
+        MKPolygonRenderer *polygonView = [[MKPolygonRenderer alloc] initWithOverlay:overlay];
+        polygonView.lineWidth = 2.f;
+        polygonView.strokeColor = [UIColor magentaColor];
+        
+        return polygonView;
+    }
+    
+    return nil;
+}
+
+#pragma mark - Alert -
+
+- (UIAlertController *)createAlertControllerWithTitle:(NSString *)title message:(NSString *)message {
+    
+    UIAlertController * alert =   [UIAlertController
+                                   alertControllerWithTitle:title
+                                   message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    return alert;
+}
+
+- (void)actionWithTitle:(NSString *)title alertTitle:(NSString *)alertTitle alertMessage:(NSString *)alertMessage {
+    
+    UIAlertController * alert = [self createAlertControllerWithTitle:alertTitle message:alertMessage];
+    
+    UIAlertAction* alertAction = [UIAlertAction
+                                  actionWithTitle:title
+                                  style:UIAlertActionStyleCancel
+                                  handler:^(UIAlertAction * action) {
+                                  }];
+    
+    [alert addAction:alertAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+//Build routes
+- (void) createRouteForAnotationCoordinate:(CLLocationCoordinate2D)endCoordinate
+                           startCoordinate:(CLLocationCoordinate2D)startCoordinate {
+    
+    MKDirections* directions;
+    
+    MKDirectionsRequest* request = [[MKDirectionsRequest alloc] init];
+    MKPlacemark* startPlacemark = [[MKPlacemark alloc] initWithCoordinate:startCoordinate
+                                                        addressDictionary:nil];
+    
+    MKMapItem* startDestination = [[MKMapItem alloc] initWithPlacemark:startPlacemark];
+    
+    request.source = startDestination;
+    
+    MKPlacemark* endPlacemark = [[MKPlacemark alloc] initWithCoordinate:endCoordinate
+                                                      addressDictionary:nil];
+    
+    MKMapItem* endDestination = [[MKMapItem alloc] initWithPlacemark:endPlacemark];
+    
+    request.destination = endDestination;
+    request.transportType = MKDirectionsTransportTypeAutomobile;
+    request.requestsAlternateRoutes = isMainRoute;
+    
+    BOOL temp = isMainRoute;
+    
+    directions = [[MKDirections alloc] initWithRequest:request];
+    
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+        
+        if (error) {
+            
+            NSLog(@"%@", error);
+            
+        } else if ([response.routes count] == 0) {
+            
+            NSLog(@"routes = 0");
+            
+        } else {
+            
+            NSMutableArray *array  = [NSMutableArray array];
+            for (MKRoute *route in response.routes) {
+                [array addObject:route.polyline];
+            }
+            
+            isMainRoute = temp;
+            
+            [self.mapView addOverlays:array level:MKOverlayLevelAboveRoads];
+        }
+        
+    }];
+}
+
+- (void)removeRoutes {
+    
+    [self.mapView removeOverlays:self.mapView.overlays];
+}
+
+#pragma mark Action to pin button
+
+- (void) actionDescription:(UIButton*) sender {
     
     MKAnnotationView* annotationView = [sender superAnnotationView];
     
@@ -384,24 +455,93 @@ static NSMutableArray* nameContinents;
         return;
     }
     
-//    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
-//    
-//    CLLocation* location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
-//                                                      longitude:coordinate.longitude];
+    CLGeocoder* geoCoder = [[CLGeocoder alloc] init];
+    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
     
-    [self showAlertWithTitle:@"Alert"
-                  andMessage:@"some message"];
+    CLLocation* location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+                                                      longitude:coordinate.longitude];
+    
+    if ([geoCoder isGeocoding]) {
+        [geoCoder cancelGeocode];
+    }
+    
+    [geoCoder
+     reverseGeocodeLocation:location
+     completionHandler:^(NSArray *placemarks, NSError *error) {
+         
+         NSString* message = nil;
+         
+         if (error) {
+             message = [error localizedDescription];
+             
+         } else {
+             
+             if ([placemarks count] > 0) {
+                 
+                 MKPlacemark* placeMark = [placemarks firstObject];
+                 message = [placeMark.addressDictionary description];
+                 
+             } else {
+                 message = @"No Placemarks Found";
+             }
+         }
+         
+         [self actionWithTitle:@"OK" alertTitle:@"Location" alertMessage:message];
+     }];
+    
 }
 
-- (void) showAlertWithTitle:(NSString*)title
-                 andMessage:(NSString*)message {
+- (void) actionDirection:(UIButton*) sender {
     
-    [[[UIAlertView alloc]
-      initWithTitle:title
-      message:message
-      delegate:nil
-      cancelButtonTitle:@"OK"
-      otherButtonTitles:nil] show];
+    [self removeRoutes];
+    
+    MKAnnotationView* annotationView = [sender superAnnotationView];
+    
+    if (!annotationView) {
+        return;
+    }
+    
+//    UIButton* directionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+//    [directionButton setBackgroundImage:[UIImage imageNamed:@"removeButton"] forState:UIControlStateNormal];
+//    [directionButton addTarget:self action:@selector(actionRemoveRoute:) forControlEvents:UIControlEventTouchUpInside];
+//    annotationView.leftCalloutAccessoryView = directionButton;
+//    
+//    if (self.annotationViewRemoveRoute) {
+//        UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//        [directionButton addTarget:self action:@selector(actionDirection:) forControlEvents:UIControlEventTouchUpInside];
+//        self.annotationViewRemoveRoute.leftCalloutAccessoryView = directionButton;
+//        self.annotationViewRemoveRoute = annotationView;
+//    }
+//    else {
+//        self.annotationViewRemoveRoute = annotationView;
+//    }
+    
+    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+    
+    isMainRoute = YES;
+    [self createRouteForAnotationCoordinate:self.mapView.userLocation.coordinate
+                            startCoordinate:coordinate];
+    
+    isMainRoute = NO;
+    [self createRouteForAnotationCoordinate:self.mapView.userLocation.coordinate
+                            startCoordinate:coordinate];
+    
+//    namePointRoute = [NSString stringWithFormat:@"%@ = %@",
+//                      annotationView.annotation.title,
+//                      annotationView.annotation.subtitle];
+}
+
+- (void) actionRemoveRoute:(UIButton*) sender {
+    
+    //self.annotationViewRemoveRoute = nil;
+    
+    MKAnnotationView* annotationView = [sender superAnnotationView];
+    
+    UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    [directionButton addTarget:self action:@selector(actionDirection:) forControlEvents:UIControlEventTouchUpInside];
+    annotationView.leftCalloutAccessoryView = directionButton;
+    
+    [self removeRoutes];
 }
 
 + (void)addNameContinent:(NSString*)continent {
@@ -416,16 +556,16 @@ static NSMutableArray* nameContinents;
 - (void)printPointWithContinent {
     
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Continents"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Countries"];
     self.mapPointArray = [[managedObjectContext executeFetchRequest:fetchRequest
                                                               error:nil] mutableCopy];
     _clusteredAnnotations = [NSMutableArray new];
-    for (Continents* continentTemp in self.mapPointArray) {
+    for (Countries* countriesTemp in self.mapPointArray) {
         for (NSString *nameContinent in nameContinents) {
-            if ([continentTemp.name isEqualToString:nameContinent]) {
+            if ([countriesTemp.name isEqualToString:nameContinent]) {
                 //NSLog(@"%@",continentTemp.placesOnContinent);
                 
-                NSSet* set = [[NSSet alloc] initWithSet:continentTemp.placesOnContinent];
+                NSSet* set = [[NSSet alloc] initWithSet:countriesTemp.place];
                 NSArray* array = [set allObjects];
                 for (NSInteger i=0; i<[array count]; i++) {
                     Place* place = [array objectAtIndex:i];
@@ -451,26 +591,6 @@ static NSMutableArray* nameContinents;
              self.clusteringManager = [[FBClusteringManager alloc] initWithAnnotations:_clusteredAnnotations];
         }
     }
-    
-
-    
-//    for (NSInteger i=0; i<[self.mapPointArray count]; i++) {
-//
-//        MapPoints *mapPoint = [self.mapPointArray objectAtIndex:i];
-//        MapAnnotation *annotation = [[MapAnnotation alloc] init];
-//        
-//        CLLocationCoordinate2D coordinate;
-//        coordinate.latitude = [mapPoint.latitude doubleValue];
-//        coordinate.longitude = [mapPoint.longitude doubleValue];
-//        
-//        annotation.coordinate = coordinate;
-//        annotation.title = mapPoint.namePoint;
-//        annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
-//                               annotation.coordinate.latitude,
-//                               annotation.coordinate.longitude];
-//        
-//        [self.mapView addAnnotation:annotation];
-//    }
 }
 
 

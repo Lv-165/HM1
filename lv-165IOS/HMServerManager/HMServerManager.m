@@ -44,22 +44,20 @@
     return self;
 }
 
-//- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
-//                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
-//    [self.requestOperationManager
-//     GET:@"?countries"
-//     parameters:nil
-//     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-//         
-//         self.countriesResponceObjects = [responseObject allValues];
-//         NSLog(@"Countries get GOOD");// вызов записи в кор дату
-//         [self moveCountriesCoreData];
-//         
-//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//         NSLog(@"Error: %@", error);
-//     }];
-//    
-//}
+- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
+                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+    [self.requestOperationManager
+     GET:@"?countries"
+     parameters:nil
+     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+         
+         success(responseObject.allValues);
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+     }];
+    
+}
 
 - (void) getContinentsWithonSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *, NSInteger))failure {
     [self.requestOperationManager
@@ -75,7 +73,7 @@
 }
 
 - (void) getPlacesByCountryWithISO:(NSString *)iso
-                 onSuccess:(void(^)(NSArray* places)) success
+                 onSuccess:(void(^)(NSDictionary* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     
     NSString* countriesForGet = [NSString stringWithFormat:@"?country=%@",iso];
@@ -86,10 +84,11 @@
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
          //NSLog(@"JSON: %@", responseObject);
          
+         success(responseObject);
+         
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
      }];
-    
 }
 
 - (void)getPlaceWithID:(NSString *)placeID

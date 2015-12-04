@@ -1,19 +1,19 @@
 //
-//  Continents.h
+//  Countries.h
 //  lv-165IOS
 //
-//  Created by AG on 11/30/15.
+//  Created by Admin on 04.12.15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "HMCoreDataObjects.h"
+#import <CoreData/CoreData.h>
 
 @class Place;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Continents : HMCoreDataObjects
+@interface Countries : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Continents+CoreDataProperties.h"
+#import "Countries+CoreDataProperties.h"

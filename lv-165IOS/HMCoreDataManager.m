@@ -33,21 +33,21 @@
 #pragma mark - Create_Delete Objects
 
 
-- (void) saveContinentsToCoreDataWithNSArray:(NSArray*) countryArray {
+- (void) saveCountriesToCoreDataWithNSArray:(NSArray*) countryArray {
     
     NSLog(@"saveContinentsToCoreDataWithNSArray");
 
     for (NSDictionary* dict in countryArray) {
         
-        Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
+        Countries* countries = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
                                                               inManagedObjectContext:[self managedObjectContext]];
         
-        continent.code = [dict objectForKey:@"code"];
-        continent.name = [dict objectForKey:@"name"];
+        countries.iso = [dict objectForKey:@"iso"];
+        countries.name = [dict objectForKey:@"name"];
         NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
-        continent.places = [NSNumber numberWithInteger:tempInteger];
+        countries.places = [NSNumber numberWithInteger:tempInteger];
         
-        NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
+        NSLog(@"%@  AND %@ PLACES",countries.name, countries.iso);
         
     }
     
@@ -59,7 +59,8 @@
 
 }
 
-- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Continents*)continent {
+- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary
+                              continent:(Countries*)countries {
     
     NSLog(@"savePlaceToCoreDataWithNSArray");
     
@@ -89,7 +90,7 @@
     
     //place.continent = continent;
     
-    [continent addPlacesOnContinentObject:place];
+    [countries addPlaceObject:place];
     
     NSError* error = nil;
     if (![[self managedObjectContext] save:&error]) {

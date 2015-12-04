@@ -8,8 +8,8 @@
 
 #import <CoreData/CoreData.h>
 #import "HMServerManager.h"
-#import "Continents.h"
-#import "HMCoreDataObjects.h"
+#import "Countries.h"
+//#import "HMCoreDataObjects.h"
 #import "Place.h"
 
 @interface HMCoreDataManager : NSManagedObject 
@@ -25,8 +25,8 @@
 
 + (HMCoreDataManager*) sharedManager;
 
-- (void) saveContinentsToCoreDataWithNSArray:(NSArray*) countryArray;
+- (void) saveCountriesToCoreDataWithNSArray:(NSArray*) countryArray;
 
-- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Continents*)continent;
+- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Countries*)continent;
 
 @end
