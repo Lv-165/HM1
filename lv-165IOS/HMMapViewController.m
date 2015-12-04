@@ -9,6 +9,7 @@
 #import "HMMapViewController.h"
 #import "HMSettingsViewController.h"
 #import "HMFilterViewController.h"
+#import "FBAnnotationClustering/FBAnnotationClustering.h"
 #import "HMSearchViewController.h"
 #import <MapKit/MapKit.h>
 #import "HMMapAnnotation.h"
@@ -32,6 +33,9 @@
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
 @property (strong, nonatomic) NSMutableArray* mapPointArray;
+@property (strong, nonatomic) NSMutableArray * clusteredAnnotations;
+@property (strong, nonatomic) FBClusteringManager * clusteringManager;
+
 
 @end
 
@@ -53,6 +57,17 @@ static NSMutableArray* nameContinents;
     
     self.locationManager = [[CLLocationManager alloc] init];
     
+    [[NSOperationQueue new] addOperationWithBlock:^{
+        double scale =
+        _mapView.bounds.size.width / self.mapView.visibleMapRect.size.width;
+       //NSArray *annotations = [self.clusteringManager clusteredAnnotationsWithinMapRect:_mapView.visibleMapRect  withZoomScale:scale];
+        
+        self.clusteringManager = [[FBClusteringManager alloc]initWithAnnotations:_clusteredAnnotations];
+        [self.clusteringManager displayAnnotations:_clusteredAnnotations onMapView:_mapView];
+
+    }];
+    
+  
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
@@ -308,6 +323,11 @@ static NSMutableArray* nameContinents;
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
+    } else if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
+        // All clusters will have FBAnnotationCluster class, so when MKMapView delegate methods are called, you can check if current annotation is cluster by checking its class
+        FBAnnotationCluster *cluster = (FBAnnotationCluster *)annotation;
+        NSLog(@"Annotation is cluster. Number of annotations in cluster: %lu",
+              (unsigned long)cluster.annotations.count);
     }
     
     static NSString* identifier = @"Annotation";
@@ -344,6 +364,17 @@ static NSMutableArray* nameContinents;
     
     return pin;
 }
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    [[NSOperationQueue new] addOperationWithBlock:^{
+        double scale = self.mapView.bounds.size.width / self.mapView.visibleMapRect.size.width;
+        NSArray *annotations = [self.clusteringManager clusteredAnnotationsWithinMapRect:mapView.visibleMapRect withZoomScale:scale];
+        
+        [self.clusteringManager displayAnnotations:annotations onMapView:mapView];
+    }];
+}
+
 
 - (void)actionDescription:(id)sender {
     
@@ -388,7 +419,7 @@ static NSMutableArray* nameContinents;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Continents"];
     self.mapPointArray = [[managedObjectContext executeFetchRequest:fetchRequest
                                                               error:nil] mutableCopy];
-    
+    _clusteredAnnotations = [NSMutableArray new];
     for (Continents* continentTemp in self.mapPointArray) {
         for (NSString *nameContinent in nameContinents) {
             if ([continentTemp.name isEqualToString:nameContinent]) {
@@ -412,13 +443,16 @@ static NSMutableArray* nameContinents;
                                            annotation.coordinate.latitude,
                                            annotation.coordinate.longitude];
                     
+                    [_clusteredAnnotations addObject:annotation];
+                    
                     [self.mapView addAnnotation:annotation];
                 }
             }
+             self.clusteringManager = [[FBClusteringManager alloc] initWithAnnotations:_clusteredAnnotations];
         }
     }
     
-    
+
     
 //    for (NSInteger i=0; i<[self.mapPointArray count]; i++) {
 //
