@@ -98,15 +98,15 @@
 
 /* Begin PBXFileReference section */
 		0CC1A03F1C11CE4B00D51A77 /* FBAnnotationClustering */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FBAnnotationClustering; sourceTree = "<group>"; };
-		0CC1A0421C11D25C00D51A77 /* FBAnnotationCluster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationCluster.h; sourceTree = "<group>"; };
-		0CC1A0431C11D25C00D51A77 /* FBAnnotationCluster.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBAnnotationCluster.m; sourceTree = "<group>"; };
-		0CC1A0441C11D25C00D51A77 /* FBAnnotationClustering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClustering.h; sourceTree = "<group>"; };
-		0CC1A0451C11D25C00D51A77 /* FBClusteringManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBClusteringManager.h; sourceTree = "<group>"; };
-		0CC1A0461C11D25C00D51A77 /* FBClusteringManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBClusteringManager.m; sourceTree = "<group>"; };
-		0CC1A0471C11D25C00D51A77 /* FBQuadTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBQuadTree.h; sourceTree = "<group>"; };
-		0CC1A0481C11D25C00D51A77 /* FBQuadTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBQuadTree.m; sourceTree = "<group>"; };
-		0CC1A0491C11D25C00D51A77 /* FBQuadTreeNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBQuadTreeNode.h; sourceTree = "<group>"; };
-		0CC1A04A1C11D25C00D51A77 /* FBQuadTreeNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBQuadTreeNode.m; sourceTree = "<group>"; };
+		0CC1A0421C11D25C00D51A77 /* FBAnnotationCluster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBAnnotationCluster.h; path = ../FBAnnotationCluster.h; sourceTree = "<group>"; };
+		0CC1A0431C11D25C00D51A77 /* FBAnnotationCluster.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBAnnotationCluster.m; path = ../FBAnnotationCluster.m; sourceTree = "<group>"; };
+		0CC1A0441C11D25C00D51A77 /* FBAnnotationClustering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBAnnotationClustering.h; path = ../FBAnnotationClustering.h; sourceTree = "<group>"; };
+		0CC1A0451C11D25C00D51A77 /* FBClusteringManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBClusteringManager.h; path = ../FBClusteringManager.h; sourceTree = "<group>"; };
+		0CC1A0461C11D25C00D51A77 /* FBClusteringManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBClusteringManager.m; path = ../FBClusteringManager.m; sourceTree = "<group>"; };
+		0CC1A0471C11D25C00D51A77 /* FBQuadTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBQuadTree.h; path = ../FBQuadTree.h; sourceTree = "<group>"; };
+		0CC1A0481C11D25C00D51A77 /* FBQuadTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBQuadTree.m; path = ../FBQuadTree.m; sourceTree = "<group>"; };
+		0CC1A0491C11D25C00D51A77 /* FBQuadTreeNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBQuadTreeNode.h; path = ../FBQuadTreeNode.h; sourceTree = "<group>"; };
+		0CC1A04A1C11D25C00D51A77 /* FBQuadTreeNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBQuadTreeNode.m; path = ../FBQuadTreeNode.m; sourceTree = "<group>"; };
 		3018962E1C0895DC00178A04 /* HMServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMServerManager.h; path = HMServerManager/HMServerManager.h; sourceTree = "<group>"; };
 		3018962F1C0895DC00178A04 /* HMServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMServerManager.m; path = HMServerManager/HMServerManager.m; sourceTree = "<group>"; };
 		302A11A21C0371C3002F8FF0 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -258,10 +258,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		302A119C1C037143002F8FF0 /* Libs */ = {
+		0C93B26C1C11DB840032A3AE /* FBAnnotationClustering */ = {
 			isa = PBXGroup;
 			children = (
 				0CC1A03F1C11CE4B00D51A77 /* FBAnnotationClustering */,
+				0CC1A0421C11D25C00D51A77 /* FBAnnotationCluster.h */,
+				0CC1A0431C11D25C00D51A77 /* FBAnnotationCluster.m */,
+				0CC1A0441C11D25C00D51A77 /* FBAnnotationClustering.h */,
+				0CC1A0451C11D25C00D51A77 /* FBClusteringManager.h */,
+				0CC1A0461C11D25C00D51A77 /* FBClusteringManager.m */,
+				0CC1A0471C11D25C00D51A77 /* FBQuadTree.h */,
+				0CC1A0481C11D25C00D51A77 /* FBQuadTree.m */,
+				0CC1A0491C11D25C00D51A77 /* FBQuadTreeNode.h */,
+				0CC1A04A1C11D25C00D51A77 /* FBQuadTreeNode.m */,
+			);
+			name = FBAnnotationClustering;
+			sourceTree = "<group>";
+		};
+		302A119C1C037143002F8FF0 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				0C93B26C1C11DB840032A3AE /* FBAnnotationClustering */,
 				C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */,
 				302A11A11C0371C2002F8FF0 /* AFNetworking */,
 				302A11B51C0371C3002F8FF0 /* UIKit+AFNetworking */,
@@ -372,15 +389,6 @@
 		C01442D51C0333A5000F8F6F = {
 			isa = PBXGroup;
 			children = (
-				0CC1A0421C11D25C00D51A77 /* FBAnnotationCluster.h */,
-				0CC1A0431C11D25C00D51A77 /* FBAnnotationCluster.m */,
-				0CC1A0441C11D25C00D51A77 /* FBAnnotationClustering.h */,
-				0CC1A0451C11D25C00D51A77 /* FBClusteringManager.h */,
-				0CC1A0461C11D25C00D51A77 /* FBClusteringManager.m */,
-				0CC1A0471C11D25C00D51A77 /* FBQuadTree.h */,
-				0CC1A0481C11D25C00D51A77 /* FBQuadTree.m */,
-				0CC1A0491C11D25C00D51A77 /* FBQuadTreeNode.h */,
-				0CC1A04A1C11D25C00D51A77 /* FBQuadTreeNode.m */,
 				7FE4EC5E1C0F11AD0075C9AC /* Extensions */,
 				C0E7DA8C1C08B3AA00541E5E /* Models */,
 				302A119C1C037143002F8FF0 /* Libs */,
