@@ -379,6 +379,83 @@ static NSMutableArray* nameContinents;
     }];
 }
 
+- (void)mapView:(MKMapView *)mapView
+    didSelectAnnotationView:(MKAnnotationView *)view {
+  // TODO:check if this coordinate has been added and activate the accessory
+  // button to allow editing. Activate Favorite button(star) to show that it has
+  // been added
+
+  // _selectedAnnotationView = (MKAnnotationView *)view.annotation;
+  __block HMMapAnnotation *pin = view.annotation;
+
+  CLLocationCoordinate2D coordinate = view.annotation.coordinate;
+  // Coordinate * coord = [[Coordinate alloc]initWithAnnotation:pin];
+  // NSDictionary * coordDict = [coord exportAsDictionary];
+
+  // int i = (int);
+  // [_mapManager checkIfAnnotationIsFavorite:pin];
+  //     [_
+  //  if ( [self checkIfFavorite]){
+  //    [[NSNotificationCenter defaultCenter] postNotificationName:@"Geocoding
+  //    completed"
+  //                                       object:self
+  //                                     userInfo:userInfo];
+  //  }
+
+  CLLocation *location =
+      [[CLLocation alloc] initWithLatitude:coordinate.latitude
+                                 longitude:coordinate.longitude];
+
+  // [_mapManager  geocodeLocationAndPutAnnotation:location];
+  // return;
+  // TODO:FIXIT
+  //[  _mapManager geocodeLocation:location forAnnotation:pin];
+  [[CLGeocoder new]
+      reverseGeocodeLocation:location
+           completionHandler:^(NSArray *placemarks, NSError *error) {
+             if (!(error)) {
+               if ([placemarks count] > 0) {
+                 CLPlacemark *placemark = [placemarks firstObject];
+
+                 //  _currentPlacemark = [placemark copy];
+                 // address = [[placemarks firstObject].addressDictionary
+                 // description];
+
+                 pin.title = placemark.name;
+                 pin.subtitle = [[placemark.addressDictionary
+                     valueForKey:@"FormattedAddressLines"]
+                     componentsJoinedByString:@", "];
+
+                 // [pin setCoordinate:placemark.location.coordinate];
+                 // FBAnnotationCluster *cluster = (FBAnnotationCluster *)pin;
+                 // TODO: FIXIT
+                 //[_clusteringManager addAnnotations:@[cluster]];
+                 //[_mapView addAnnotation:cluster];
+                 // [_mapView addAnnotation:pin];
+
+                 //      [CLGeocoder new]
+                 //      reverseGeocodeLocation:location
+                 //      completionHandler:^(NSArray *placemarks, NSError
+                 //      *error) {
+                 //          CLPlacemark *placemark = placemarks[0];
+                 //          NSArray *lines = placemark.addressDictionary[
+                 //          @"FormattedAddressLines"];
+                 //          _addressString = [lines
+                 //          componentsJoinedByString:@"\n"];
+                 //          NSLog(@"Address: %@", addressString);
+                 //      }];
+               }
+             }
+           }];
+}
+
+- (void)mapView:(MKMapView *)mapView
+    didDeselectAnnotationView:(MKAnnotationView *)view {
+  [[NSNotificationCenter defaultCenter]
+      postNotificationName:@"Switch Off Favorites Button"
+                    object:nil];
+}
+
 #pragma mark - FBClusterManager delegate - optional
 
 - (CGFloat)cellSizeFactorForCoordinator:(FBClusteringManager *)coordinator
