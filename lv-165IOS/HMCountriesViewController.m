@@ -156,7 +156,7 @@
         NSLog(@"%@",continent);
     }
     
-#warning коментувати коли скачали
+//#warning коментувати коли скачали
     for (Continents* continent in self.arrayOfContinent ) {
         if ([cell.continentLable.text isEqualToString:continent.name]) {
             //getPlacesByContinentName
@@ -173,7 +173,7 @@
                     [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
                 }
                 [self downloadPlaces:continent];
-#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
+//#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
                         //Write to CoreData Place
                         //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
                         
@@ -188,22 +188,7 @@
 
 #pragma mark - Utility
 
-- (NSMutableArray *)randomLocationsWithCount:(NSUInteger)count
-{
-    NSMutableArray *array = [NSMutableArray array];
-    for (int i = 0; i < count; i++) {
-        FBAnnotation *a = [[FBAnnotation alloc] init];
-        a.coordinate = CLLocationCoordinate2DMake(drand48() * 40 - 20, drand48() * 80 - 40);
-        
-        [array addObject:a];
-    }
-    return array;
-}
 
-- (void)updateLabelText
-{
-    self.numberOfAnnotationsLabel.text = [NSString stringWithFormat:@"Sum of all annotations: %lu", (unsigned long)self.numberOfLocations];
-}
 
 
 - (void) downloadPlaces:(Continents*)continents {

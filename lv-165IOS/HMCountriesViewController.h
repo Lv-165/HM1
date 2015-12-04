@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HMCoreDataViewController.h"
+#import "FBAnnotationClustering/FBAnnotationClustering.h"
 
 @interface HMCountriesViewController : HMCoreDataViewController
 

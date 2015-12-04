@@ -331,7 +331,6 @@ static NSMutableArray* nameContinents;
     } else if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
         // All clusters will have FBAnnotationCluster class, so when MKMapView delegate methods are called, you can check if current annotation is cluster by checking its class
         FBAnnotationCluster *cluster = (FBAnnotationCluster *)annotation;
-        annotationView.pinColor = MKPinAnnotationColorRed;
         NSLog(@"Annotation is cluster. Number of annotations in cluster: %lu",
               (unsigned long)cluster.annotations.count);
         cluster.title = [NSString stringWithFormat:@"%lu", (unsigned long)cluster.annotations.count];
@@ -390,25 +389,43 @@ static NSMutableArray* nameContinents;
 
 #pragma mark - Add annotations button action handler
 
-- (IBAction)addNewAnnotations:(id)sender
+- (void)addNewAnnotations:(id)sender
 {
     //first clear
-    NSMutableArray *annotationsToRemove = [[NSMutableArray alloc] init];
-    for (int i=0; i<kFIRST_LOCATIONS_TO_REMOVE; i++) {
-        [annotationsToRemove addObject:array[i]];
-    }
-    [self.clusteringManager removeAnnotations:annotationsToRemove];
+//    NSMutableArray *annotationsToRemove = [[NSMutableArray alloc] init];
+//    for (int i=0; i<kFIRST_LOCATIONS_TO_REMOVE; i++) {
+//        [annotationsToRemove addObject:array[i]];
+//    }
+//    [self.clusteringManager removeAnnotations:annotationsToRemove];
     
     //then add
-    NSMutableArray *array = [self randomLocationsWithCount:kNUMBER_OF_LOCATIONS];
-    [self.clusteringManager addAnnotations:array];
-    
-    self.numberOfLocations += kNUMBER_OF_LOCATIONS;
-    [self updateLabelText];
-    
-    // Update annotations on the map
-    [self mapView:self.mapView regionDidChangeAnimated:NO];
+//    NSMutableArray *array = [self randomLocationsWithCount:kNUMBER_OF_LOCATIONS];
+//    [self.clusteringManager addAnnotations:array];
+//    
+//    self.numberOfLocations += kNUMBER_OF_LOCATIONS;
+//    //[self updateLabelText];
+//    
+//    // Update annotations on the map
+//    [self mapView:self.mapView regionDidChangeAnimated:NO];
 }
+
+//- (NSMutableArray *)randomLocationsWithCount:(NSUInteger)count
+//{
+//    NSMutableArray *array = [NSMutableArray array];
+//    for (int i = 0; i < count; i++) {
+//        FBAnnotation *a = [[FBAnnotation alloc] init];
+//        a.coordinate = CLLocationCoordinate2DMake(drand48() * 40 - 20, drand48() * 80 - 40);
+//        
+//        [array addObject:a];
+//    }
+//    return array;
+//}
+
+
+//- (void)updateLabelText
+//{
+//    self.numberOfAnnotationsLabel.text = [NSString stringWithFormat:@"Sum of all annotations: %lu", (unsigned long)self.numberOfLocations];
+//}
 
 
 - (void)actionDescription:(id)sender {
