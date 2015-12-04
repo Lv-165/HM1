@@ -10,8 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "HMCoreDataManager.h"
 #import "HMServerManager.h"
+#import "FBAnnotationClustering/FBAnnotationClustering.h"
 
-@interface HMMapViewController : UIViewController <MKMapViewDelegate>
+@interface HMMapViewController : UIViewController <MKMapViewDelegate, FBClusteringManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *downToolBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

@@ -151,39 +151,60 @@
     [HMMapViewController addNameContinent:cell.continentLable.text];
     
     
-//    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
-//        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
-//        NSLog(@"%@",continent);
-//    }
+    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
+        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
+        NSLog(@"%@",continent);
+    }
     
-//#warning коментувати коли скачали
-//    for (Continents* continent in self.arrayOfContinent ) {
-//        if ([cell.continentLable.text isEqualToString:continent.name]) {
-//            //getPlacesByContinentName
-//            
-//            
-//            
-//            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
-//                //NSLog(@"%@/n", places);
-//                
-//                for (NSDictionary* dict in places) {
-//                    
-//                    //NSLog(@"%@", [dict objectForKey:@"id"]);
-//                    
-//                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
-//                }
-//                [self downloadPlaces:continent];
-//#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
-//                        //Write to CoreData Place
-//                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
-//                        
-//                    } onFailure:^(NSError *error, NSInteger statusCode) {
-//                        
-//                    }];
-//            return;
-//        }
-//    }
+#warning коментувати коли скачали
+    for (Continents* continent in self.arrayOfContinent ) {
+        if ([cell.continentLable.text isEqualToString:continent.name]) {
+            //getPlacesByContinentName
+            
+            
+            
+            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
+                //NSLog(@"%@/n", places);
+                
+                for (NSDictionary* dict in places) {
+                    
+                    //NSLog(@"%@", [dict objectForKey:@"id"]);
+                    
+                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
+                }
+                [self downloadPlaces:continent];
+#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
+                        //Write to CoreData Place
+                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
+                        
+                    } onFailure:^(NSError *error, NSInteger statusCode) {
+                        
+                    }];
+            return;
+        }
+    }
 }
+
+
+#pragma mark - Utility
+
+- (NSMutableArray *)randomLocationsWithCount:(NSUInteger)count
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < count; i++) {
+        FBAnnotation *a = [[FBAnnotation alloc] init];
+        a.coordinate = CLLocationCoordinate2DMake(drand48() * 40 - 20, drand48() * 80 - 40);
+        
+        [array addObject:a];
+    }
+    return array;
+}
+
+- (void)updateLabelText
+{
+    self.numberOfAnnotationsLabel.text = [NSString stringWithFormat:@"Sum of all annotations: %lu", (unsigned long)self.numberOfLocations];
+}
+
 
 - (void) downloadPlaces:(Continents*)continents {
     

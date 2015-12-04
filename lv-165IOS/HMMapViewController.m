@@ -9,7 +9,6 @@
 #import "HMMapViewController.h"
 #import "HMSettingsViewController.h"
 #import "HMFilterViewController.h"
-#import "FBAnnotationClustering/FBAnnotationClustering.h"
 #import "HMSearchViewController.h"
 #import <MapKit/MapKit.h>
 #import "HMMapAnnotation.h"
@@ -41,6 +40,7 @@
 
 @implementation HMMapViewController
 
+static NSString *const annotationIdentifier = @"AnnotationIdentifier";
 static NSMutableArray* nameContinents;
 
 - (NSManagedObjectContext*) managedObjectContext {
@@ -320,49 +320,54 @@ static NSMutableArray* nameContinents;
 #pragma mark - Annotation View
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+
+    MKPinAnnotationView* annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
     
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
+    }
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     } else if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
         // All clusters will have FBAnnotationCluster class, so when MKMapView delegate methods are called, you can check if current annotation is cluster by checking its class
         FBAnnotationCluster *cluster = (FBAnnotationCluster *)annotation;
+        annotationView.pinColor = MKPinAnnotationColorRed;
         NSLog(@"Annotation is cluster. Number of annotations in cluster: %lu",
               (unsigned long)cluster.annotations.count);
+        cluster.title = [NSString stringWithFormat:@"%lu", (unsigned long)cluster.annotations.count];
+        
+        annotationView.pinColor = MKPinAnnotationColorGreen;
+        annotationView.canShowCallout = NO;
+        annotationView.animatesDrop = NO;
+        annotationView.draggable = NO;
+    }  else {
+        annotationView.pinColor = MKPinAnnotationColorRed;
+        annotationView.canShowCallout = YES;
+        annotationView.animatesDrop = YES;
+        annotationView.draggable = YES;
+        
+//        UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//        
+//        [descriptionButton addTarget:self
+//                              action:@selector(actionDescription:)
+//                    forControlEvents:UIControlEventTouchUpInside];
+//        
+//        annotationView.rightCalloutAccessoryView = descriptionButton;
+//        
+//        
+//        UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//        
+//        [directionButton addTarget:self
+//                            action:@selector(actionDirection:)
+//                  forControlEvents:UIControlEventTouchUpInside];
+//        annotationView.leftCalloutAccessoryView = directionButton;
+        
     }
+//    else {
+//        annotationView.annotation = annotation;
+//    }
     
-    static NSString* identifier = @"Annotation";
-    
-    MKPinAnnotationView* pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    
-    if (!pin) {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        pin.pinColor = MKPinAnnotationColorRed;
-        pin.animatesDrop = YES;
-        pin.canShowCallout = YES;
-        pin.draggable = YES;
-        
-        
-        UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
-        [descriptionButton addTarget:self
-                              action:@selector(actionDescription:)
-                    forControlEvents:UIControlEventTouchUpInside];
-        
-        pin.rightCalloutAccessoryView = descriptionButton;
-        
-        
-        UIButton* directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        
-        [directionButton addTarget:self
-                            action:@selector(actionDirection:)
-                  forControlEvents:UIControlEventTouchUpInside];
-        pin.leftCalloutAccessoryView = directionButton;
-        
-    } else {
-        pin.annotation = annotation;
-    }
-    
-    return pin;
+    return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
@@ -373,6 +378,36 @@ static NSMutableArray* nameContinents;
         
         [self.clusteringManager displayAnnotations:annotations onMapView:mapView];
     }];
+}
+
+#pragma mark - FBClusterManager delegate - optional
+
+- (CGFloat)cellSizeFactorForCoordinator:(FBClusteringManager *)coordinator
+{
+    return 1.5;
+}
+
+
+#pragma mark - Add annotations button action handler
+
+- (IBAction)addNewAnnotations:(id)sender
+{
+    //first clear
+    NSMutableArray *annotationsToRemove = [[NSMutableArray alloc] init];
+    for (int i=0; i<kFIRST_LOCATIONS_TO_REMOVE; i++) {
+        [annotationsToRemove addObject:array[i]];
+    }
+    [self.clusteringManager removeAnnotations:annotationsToRemove];
+    
+    //then add
+    NSMutableArray *array = [self randomLocationsWithCount:kNUMBER_OF_LOCATIONS];
+    [self.clusteringManager addAnnotations:array];
+    
+    self.numberOfLocations += kNUMBER_OF_LOCATIONS;
+    [self updateLabelText];
+    
+    // Update annotations on the map
+    [self mapView:self.mapView regionDidChangeAnimated:NO];
 }
 
 
