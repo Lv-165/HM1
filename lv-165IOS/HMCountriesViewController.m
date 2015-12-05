@@ -51,10 +51,6 @@
 //        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
 //        [self presentViewController:vc animated:YES completion:nil];
     }
-    
-//    [self getContinentFromServer];
-    //[self getCountryFromServer:@"ua"];
-    // [self getPlaceFromServerByID:@"355"];
 
     self.arrayOfContinent = [[NSMutableArray alloc] init];
     self.arrayOfPlaces = [[NSMutableArray alloc] init];
@@ -150,7 +146,7 @@
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
-    [HMMapViewController addNameContinent:cell.continentLable.text];
+    //[HMMapViewController addNameContinent:cell.continentLable.text];
     
     
 //    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {

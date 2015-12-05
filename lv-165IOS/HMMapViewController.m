@@ -41,7 +41,7 @@
 
 @implementation HMMapViewController
 
-static NSMutableArray* nameContinents;
+static NSMutableArray* nameCountries;
 static bool isMainRoute;
 
 - (NSManagedObjectContext*) managedObjectContext {
@@ -68,7 +68,6 @@ static bool isMainRoute;
 
     }];
     
-  
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
@@ -130,23 +129,26 @@ static bool isMainRoute;
                                                   name:@"ChangeMapTypeNotification"
                                                 object:nil];
     
-    // Experiment
-    
-//    HMMapAnnotation* annotation = [[HMMapAnnotation alloc] init];
-//    
-//    CLLocationCoordinate2D coord;
-//    
-//    coord.latitude = 49;
-//    coord.longitude = 24;
-//    
-//    annotation.title = @"Some title";
-//    annotation.subtitle = @"Yes, it's me";
-//    annotation.coordinate = coord;
-//    
-//    [self.mapView addAnnotation:annotation];
-    
     [self printPointWithContinent];
-
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Countries"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    
+    NSError* error;
+    
+    NSUInteger count = [[self managedObjectContext] countForFetchRequest:fetchRequest
+                                                                   error:&error];
+    
+    if (!count) {
+        NSString * storyboardName = @"Main";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -544,14 +546,19 @@ static bool isMainRoute;
     [self removeRoutes];
 }
 
-+ (void)addNameContinent:(NSString*)continent {
-    
-    if (!nameContinents) {
-        nameContinents = [[NSMutableArray alloc] init];
-    }
-    
-    [nameContinents addObject:continent];
-}
+//+ (void)addNameContinent:(NSString*)continent {
+//    
+//    if (!nameCountries) {
+//        nameCountries = [[NSMutableArray alloc] init];
+//    }
+//    
+//    nameCountries = [[NSMutableArray alloc] init];
+//    
+//    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Countries"];
+//    
+//    [nameCountries addObject:continent];
+//}
 
 - (void)printPointWithContinent {
     
@@ -560,36 +567,64 @@ static bool isMainRoute;
     self.mapPointArray = [[managedObjectContext executeFetchRequest:fetchRequest
                                                               error:nil] mutableCopy];
     _clusteredAnnotations = [NSMutableArray new];
+//    for (Countries* countriesTemp in self.mapPointArray) {
+//        for (NSString *nameContinent in nameCountries) {
+//            if ([countriesTemp.name isEqualToString:nameContinent]) {
+//                //NSLog(@"%@",continentTemp.placesOnContinent);
+//                
+//                NSSet* set = [[NSSet alloc] initWithSet:countriesTemp.place];
+//                NSArray* array = [set allObjects];
+//                for (NSInteger i=0; i<[array count]; i++) {
+//                    Place* place = [array objectAtIndex:i];
+//                    NSLog(@"\nid = %@, lat = %@, lon = %@",place.id, place.lat, place.lon);
+//                    
+//                    HMMapAnnotation *annotation = [[HMMapAnnotation alloc] init];
+//                    
+//                    CLLocationCoordinate2D coordinate;
+//                    coordinate.latitude = [place.lat doubleValue];
+//                    coordinate.longitude = [place.lon doubleValue];
+//                    
+//                    annotation.coordinate = coordinate;
+//                    annotation.title = [NSString stringWithFormat:@"%@", place.id];
+//                    annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
+//                                           annotation.coordinate.latitude,
+//                                           annotation.coordinate.longitude];
+//                    
+//                    [_clusteredAnnotations addObject:annotation];
+//                    
+//                    [self.mapView addAnnotation:annotation];
+//                }
+//            }
+//            
+//        }
+//    }
+    
     for (Countries* countriesTemp in self.mapPointArray) {
-        for (NSString *nameContinent in nameContinents) {
-            if ([countriesTemp.name isEqualToString:nameContinent]) {
-                //NSLog(@"%@",continentTemp.placesOnContinent);
+        if ([countriesTemp.place count] != 0) {
+            NSSet* set = [[NSSet alloc] initWithSet:countriesTemp.place];
+            NSArray* array = [set allObjects];
+            for (NSInteger i=0; i<[array count]; i++) {
+                Place* place = [array objectAtIndex:i];
+                NSLog(@"\nid = %@, lat = %@, lon = %@",place.id, place.lat, place.lon);
                 
-                NSSet* set = [[NSSet alloc] initWithSet:countriesTemp.place];
-                NSArray* array = [set allObjects];
-                for (NSInteger i=0; i<[array count]; i++) {
-                    Place* place = [array objectAtIndex:i];
-                    NSLog(@"\nid = %@, lat = %@, lon = %@",place.id, place.lat, place.lon);
-                    
-                    HMMapAnnotation *annotation = [[HMMapAnnotation alloc] init];
-                    
-                    CLLocationCoordinate2D coordinate;
-                    coordinate.latitude = [place.lat doubleValue];
-                    coordinate.longitude = [place.lon doubleValue];
-                    
-                    annotation.coordinate = coordinate;
-                    annotation.title = [NSString stringWithFormat:@"%@", place.id];
-                    annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
-                                           annotation.coordinate.latitude,
-                                           annotation.coordinate.longitude];
-                    
-                    [_clusteredAnnotations addObject:annotation];
-                    
-                    [self.mapView addAnnotation:annotation];
-                }
+                HMMapAnnotation *annotation = [[HMMapAnnotation alloc] init];
+                
+                CLLocationCoordinate2D coordinate;
+                coordinate.latitude = [place.lat doubleValue];
+                coordinate.longitude = [place.lon doubleValue];
+                
+                annotation.coordinate = coordinate;
+                annotation.title = [NSString stringWithFormat:@"%@", place.id];
+                annotation.subtitle = [NSString stringWithFormat:@"%.5g, %.5g",
+                                       annotation.coordinate.latitude,
+                                       annotation.coordinate.longitude];
+                
+                [_clusteredAnnotations addObject:annotation];
+                
+                [self.mapView addAnnotation:annotation];
             }
-             self.clusteringManager = [[FBClusteringManager alloc] initWithAnnotations:_clusteredAnnotations];
         }
+        self.clusteringManager = [[FBClusteringManager alloc] initWithAnnotations:_clusteredAnnotations];
     }
 }
 

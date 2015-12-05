@@ -126,12 +126,12 @@
 //    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
 //   
 //}
-
-- (void) printAllObjects {
-    
-    NSArray* allObjects = [self allObjects];
-    
-}
+//
+//- (void) printAllObjects {
+//    
+//    NSArray* allObjects = [self allObjects];
+//    
+//}
 
 
 - (NSArray*) allObjects {

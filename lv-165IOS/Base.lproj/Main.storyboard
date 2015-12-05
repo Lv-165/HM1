@@ -97,7 +97,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yby-eI-Ej4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-691" y="-477"/>
+            <point key="canvasLocation" x="-891" y="300"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -162,12 +162,28 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="uMb-gy-xUI" kind="relationship" relationship="rootViewController" id="neX-kE-a5b"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pi6-pB-44T"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gs-SO-6V9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1465" y="-477"/>
+            <point key="canvasLocation" x="-891" y="-477"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PwZ-4a-fy2">
+            <objects>
+                <navigationController storyboardIdentifier="downloadCountries" id="Urs-jP-F2I" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I27-hN-el5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uMb-gy-xUI" kind="relationship" relationship="rootViewController" id="ow1-kZ-bfu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YLM-Kl-drx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1749" y="300"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="YyT-CF-isM">
@@ -265,4 +281,7 @@
             <point key="canvasLocation" x="1055" y="300"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ST5-gB-6jr"/>
+    </inferredMetricsTieBreakers>
 </document>
