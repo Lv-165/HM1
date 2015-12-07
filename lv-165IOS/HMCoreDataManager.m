@@ -47,7 +47,7 @@
         NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
         countries.places = [NSNumber numberWithInteger:tempInteger];
         
-        NSLog(@"%@  AND %@ PLACES",countries.name, countries.iso);
+        NSLog(@"%@  AND %@ PLACES",countries.name, countries.places);
         
     }
     
@@ -60,7 +60,7 @@
 }
 
 - (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary
-                              continent:(Countries*)countries {
+                              contries:(Countries*)countries {
     
     NSLog(@"savePlaceToCoreDataWithNSArray");
     
@@ -83,14 +83,12 @@
     double latDounble = [[placeNSDictionary valueForKey:@"lat"] doubleValue];
     place.lat = [NSNumber numberWithDouble:latDounble];
     
-    //NSLog(@"\n\nID - %@\n LON - %@\n LAT - %@\n RATING - %@\n  RATCOUNT - %@\n ELEVATION -%@",
-       //   place.id, place.lon,place.lat, place.rating, place.rating_count, place.elevation);
     
-//    Continents* continents = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"                                                              inManagedObjectContext:[self managedObjectContext]];
     
-    //place.continent = continent;
-    
+//    countries.place = place;
+
     [countries addPlaceObject:place];
+    NSLog(@"COUNTRY PLACE %@",countries.place);
     
     NSError* error = nil;
     if (![[self managedObjectContext] save:&error]) {
@@ -112,20 +110,21 @@
 
 #pragma mark - Print Objects
 
-//- (void) printCountries {
-//    
-//    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-//    
-//    NSEntityDescription* description =
-//    [NSEntityDescription entityForName:@"Countries"
-//                inManagedObjectContext:self.managedObjectContext];
-//    
-//    [request setEntity:description];
-//    
-//    NSError* requestError = nil;
-//    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
-//   
-//}
+- (void) printCountryA{
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:@"Country"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH %@", @"A"];
+    [request setPredicate:predicate];
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    NSLog(@"Print Country Entities %@",resultArray);
+}
 //
 //- (void) printAllObjects {
 //    

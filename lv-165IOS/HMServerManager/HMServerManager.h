@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Reachability.h"
 
 @protocol HMCoreDataDelegate;
 @class NSManagedObjectContext;
 
 @interface HMServerManager : NSObject
+@property (strong, nonatomic) Reachability* reachability;
+@property (assign, nonatomic,readwrite) BOOL isServerReachable;
 
 + (HMServerManager*) sharedManager;
 

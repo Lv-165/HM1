@@ -16,7 +16,7 @@
 
 @interface HMCountriesViewController ()
 
-@property (strong, nonatomic)NSMutableArray *arrayOfContinent;
+@property (strong, nonatomic)NSMutableArray *arrayOfContries;
 @property (strong, nonatomic)NSMutableArray *arrayOfPlaces;
 @property (strong, nonatomic)NSMutableArray *arrayOfDownloadedContinents;
 
@@ -37,37 +37,39 @@
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
 
-    
+    NSLog(@"%@",fetchRequest);
     NSError* error;
     
     NSUInteger count = [[self managedObjectContext] countForFetchRequest:fetchRequest
                                                             error:&error];
+
     if (!count) {
-        [self getContinentFromServer];
-    }
-    else {
-//        NSString * storyboardName = @"Main";
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-//        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
-//        [self presentViewController:vc animated:YES completion:nil];
+ 
+            [self getContinentFromServer];
     }
 
-    self.arrayOfContinent = [[NSMutableArray alloc] init];
+    self.arrayOfContries = [[NSMutableArray alloc] init];
     self.arrayOfPlaces = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view.
 }
 - (void)getContinentFromServer {
 
-    [[HMServerManager sharedManager]
-     
-     getCountriesWithonSuccess:^(NSArray *continents) {
-         
-         [[HMCoreDataManager sharedManager] saveCountriesToCoreDataWithNSArray:continents];
-     }
-     onFailure:^(NSError *error, NSInteger statusCode) {
-         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-     }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[HMServerManager sharedManager]getCountriesWithonSuccess:^(NSArray *continents) {
+            
+#warning MAIN QUEUE            //we need save only in main queue? c асинхронной вроде быстрей
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 [[HMCoreDataManager sharedManager] saveCountriesToCoreDataWithNSArray:continents];
+            });
+            
+        }
+                                                        onFailure:^(NSError *error, NSInteger statusCode) {
+                                                            NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
+                                                        }];
+    });
+
 }
 
 
@@ -87,8 +89,6 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Countries"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    
-    
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
@@ -122,12 +122,8 @@
 - (void)configureCell:(HMDownloadCellTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Countries *countries = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    //static NSString* identifier = @"downloadContinent";
     
-    //HMDownloadCellTableViewCell* cell1 = [self.tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    [self.arrayOfContinent addObject:countries];
+    [self.arrayOfContries addObject:countries];
     
     cell.continentsImage = nil;
     cell.continentLable.text = countries.name;
@@ -140,45 +136,41 @@
     }
 }
 
+
+#pragma mark Switcher
+
 - (IBAction)actionDwnloadSwitch:(id)sender {
     
     HMDownloadCellTableViewCell* cell = [sender superCell];
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
-    //[HMMapViewController addNameContinent:cell.continentLable.text];
-    
-    
-//    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
-//        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
-//        NSLog(@"%@",continent);
-//    }
-    
 #warning коментувати коли скачали
-    for (Countries* countries in self.arrayOfContinent ) {
+    for (Countries* countries in self.arrayOfContries ) {
         if ([cell.continentLable.text isEqualToString:countries.name]) {
             //getPlacesByContinentName
             
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[HMServerManager sharedManager] getPlacesByCountryWithISO:countries.iso onSuccess:^(NSDictionary *places)  {
-                NSLog(@"%@/n", places);
+//                NSLog(@"%@/n", places);
                 
                 for (NSDictionary* dict in places) {
                     
-                    //NSLog(@"%@", [dict objectForKey:@"id"]);
-                    
                     [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
                 }
+#warning можно ли записывать не на главном потоке
                 [self downloadPlaces:countries];
-#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
-                        //Write to CoreData Place
-                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
+                
                         
                     } onFailure:^(NSError *error, NSInteger statusCode) {
                         
                     }];
-            return;
+            return;});
+            
         }
+//        [[HMCoreDataManager sharedManager]printCountryA];//не выводит
     }
+
 }
 
 - (void) downloadPlaces:(Countries*)countries {
@@ -187,11 +179,11 @@
     
     for (NSString* idPlaces in self.arrayOfPlaces) {
         
-        dispatch_after(DISPATCH_TIME_NOW+1, dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[HMServerManager sharedManager] getPlaceWithID:idPlaces onSuccess:^(NSDictionary *places) {
                 NSLog(@"\n\ni = %d\tPLACE%@\n",i++, places);
                 
-                [[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places continent:countries];
+                [[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places contries:countries];
                 
             } onFailure:^(NSError *error, NSInteger statusCode) {
                     NSLog(@"err");
