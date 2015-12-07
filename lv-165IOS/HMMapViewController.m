@@ -383,7 +383,7 @@ static NSMutableArray *nameContinents;
         [UIColor clearColor];
     clusterAnnotationView.annotationLabel.layer.borderWidth = 5;
 
-    clusterAnnotationView.annotationLabel.layer.cornerRadius = 30;
+    clusterAnnotationView.annotationLabel.layer.cornerRadius = 25;
     //[clusterAnnotationView.annotationLabel sizeToFit]; // get the right
     // vertical size
 

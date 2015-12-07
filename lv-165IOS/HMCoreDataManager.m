@@ -179,6 +179,9 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"lv_165IOS.sqlite"];
     NSError *error = nil;
     
+     // MARK: Deleting previous sqlite db before creating a new one
+    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
@@ -194,19 +197,6 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
-    
-//    NSURL *  url = [[[NSFileManager defaultManager]
-//                     URLsForDirectory:NSDocumentDirectory
-//                     inDomains:NSUserDomainMask] lastObject];
-//    
-//    NSURL *storeURL = [url
-//                       URLByAppendingPathComponent:@"lv-165IOS.sqlite"];
-//    // MARK: Deleting previous sqlite db before creating a new one
-//    // NSLog(@"deleting previous sqlite db before creating a new one");
-//    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-//    
-
     
     return _persistentStoreCoordinator;
 }
