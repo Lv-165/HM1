@@ -134,6 +134,9 @@
     if ([countries.place count] != 0) {
         [cell.downloadSwitch setOn:YES];
     }
+    else {
+        [cell.downloadSwitch setOn:NO];
+    }
 }
 
 
@@ -145,7 +148,6 @@
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
-#warning коментувати коли скачали
     for (Countries* countries in self.arrayOfContries ) {
         if ([cell.continentLable.text isEqualToString:countries.name]) {
             //getPlacesByContinentName
@@ -158,7 +160,6 @@
                     
                     [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
                 }
-#warning можно ли записывать не на главном потоке
                 [self downloadPlaces:countries];
                 
                         

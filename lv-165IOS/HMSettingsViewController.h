@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSNumber *mapType;
 
 - (IBAction)segmentedControlForMapTypeValueChanged:(id)sender;
+- (IBAction)actionDownloadsCountries:(id)sender;
 
 @end

@@ -43,6 +43,14 @@
     
 }
 
+- (IBAction)actionDownloadsCountries:(id)sender {
+    
+    NSString * storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 

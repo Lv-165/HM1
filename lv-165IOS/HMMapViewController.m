@@ -341,13 +341,13 @@ static bool isMainRoute;
         
         if (!isMainRoute) {
             
-            renderer.lineWidth = 3.f;
+            renderer.lineWidth = 2.5f;
             renderer.strokeColor = [UIColor colorWithRed:0.f green:0.1f blue:1.f alpha:0.9f];
             return renderer;
         }
         else {
             
-            renderer.lineWidth = 1.8f;
+            renderer.lineWidth = 1.5f;
             renderer.strokeColor = [UIColor colorWithRed:0.f green:0.5f blue:1.f alpha:0.6f];
             return renderer;
         }
