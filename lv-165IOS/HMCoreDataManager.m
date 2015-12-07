@@ -88,7 +88,7 @@
 //    countries.place = place;
 
     [countries addPlaceObject:place];
-    NSLog(@"COUNTRY PLACE %@",countries.place);
+    //NSLog(@"COUNTRY PLACE %@",countries.place);
     
     NSError* error = nil;
     if (![[self managedObjectContext] save:&error]) {

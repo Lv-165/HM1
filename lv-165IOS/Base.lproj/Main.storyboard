@@ -116,7 +116,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="doc-Ae-qTV"/>
                                 </connections>
                             </mapView>
-                            <toolbar clearsContextBeforeDrawing="NO" tag="1" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-J0-Ekk">
+                            <toolbar clearsContextBeforeDrawing="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-J0-Ekk">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
