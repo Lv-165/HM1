@@ -440,7 +440,7 @@ static NSMutableArray *nameContinents;
 
     [clusterAnnotationView setTag:1];
     [clusterAnnotationView.annotationLabel setTag:2];
-   clusterAnnotationView.annotationLabel.userInteractionEnabled = YES;
+  // clusterAnnotationView.annotationLabel.userInteractionEnabled = YES;
     clusterAnnotationView.userInteractionEnabled = YES;
 
     // TODO: try UIButton
@@ -461,18 +461,12 @@ static NSMutableArray *nameContinents;
     return clusterAnnotationView;
   } else {
 
-//    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView
-//        dequeueReusableAnnotationViewWithIdentifier:
-//            NSStringFromClass([MKPinAnnotationView class])];
-
-    //if (!annotationView) {
        MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc]
           initWithAnnotation:annotation
              reuseIdentifier:NSStringFromClass([MKPinAnnotationView class])];
-   // }
 
     annotationView.pinColor = MKPinAnnotationColorRed;
-    annotationView.canShowCallout = NO;
+    annotationView.canShowCallout = YES;
     annotationView.animatesDrop = NO;
     annotationView.draggable = NO;
     return annotationView;
@@ -570,55 +564,16 @@ static NSMutableArray *nameContinents;
       //        [annotations addObject:annotation];
       //      }
 
-      // FBAnnotationClusterView  * annotationClusterView =
-      // (FBAnnotationClusterView *) touch.view.subviews[0];
-
-      //  CGPoint point = [touch locationInView:annotationClusterView];
-      //  UIView* view = [annotationClusterView hitTest:point withEvent:nil];
-
-      // if (annotationClusterView.tag == 1){
      
+        NSArray *array = [selectedAnnotationView.annotation.annotations copy];
+      
         
-     // [self zoomInToCenter:touchMapCoordinate];
-    
-      //
+     //[self.mapView showAnnotations:array animated:YES];
+       // [self.mapView removeAnnotations:array];
+//        [self.mapView removeAnnotations:self.mapView.annotations];
+       [self.mapView addAnnotations:array];
         
-        
-      ////TODO: update labels
-      ////    for (FBAnnotationClusterView
-      ////                 *clusterAnnotationView in
-      ///selectedAnnotationView.subviews) {
-      ////
-      ////          clusterAnnotationView.annotationLabel.text = [NSString
-      ////              stringWithFormat:@"%lu", (unsigned
-      ///long)clusterAnnotationView
-      //// .annotation.annotations.count];
-      ////        }
-
-      //
-      //        [self.clusteringManager displayAnnotations:annotations
-      //                                         onMapView:self.mapView];
-      //      }];
-      //
-
-      // [self.clusteringManager setAnnotations:array];
-
-      //      [self.clusteringManager
-      //      removeAnnotations:self.mapView.annotations];
-
-      //
-      //           NSArray *annotations = [self.clusteringManager
-      //        clusteredAnnotationsWithinMapRect:mapView.visibleMapRect
-      //                            withZoomScale:scale];
-      //   [self.clusteringManager removeAnnotations:self.mapView.annotations];
-
-        
-        
-     NSArray *array = [selectedAnnotationView.annotation.annotations copy];
-     [self.mapView showAnnotations:array animated:YES];
-  
-        
-        
+    if(array.count > 1){
         
         [[NSOperationQueue new] addOperationWithBlock:^{
             double scale = self.mapView.bounds.size.width /
@@ -627,36 +582,38 @@ static NSMutableArray *nameContinents;
             NSArray *annotations = [self.clusteringManager
                                     clusteredAnnotationsWithinMapRect:self.mapView.visibleMapRect
                                     withZoomScale:scale];
-             [self.clusteringManager displayAnnotations:array
+             [self.clusteringManager displayAnnotations:annotations
              onMapView:self.mapView];
         }];
-      
+    }
+        
     }
   }
 }
 
-- (void)zoomInToCenter:(CLLocationCoordinate2D)coordinate {
 
-  //TODO:get span from currentspan
-    MKCoordinateRegion region;
-    if (_currentZoomLevel == 0) {
-      region = MKCoordinateRegionMake(coordinate, _span1);
-      _currentZoomLevel++;
-      //    _currentAnnotation = _currentAnnotationView.annotation;
-      //    region.center = _currentAnnotation.coordinate;
-      //    region.span = _span1;
-    } else if (_currentZoomLevel == 1) {
-      region = MKCoordinateRegionMake(coordinate, _span01);
-      _currentZoomLevel++;
-    } else if (_currentZoomLevel == 2) {
-      region = MKCoordinateRegionMake(coordinate, _span001);
-      _currentZoomLevel++;
-    } else if (_currentZoomLevel == 3) {
-      region = MKCoordinateRegionMake(coordinate, _span1);
-      _currentZoomLevel = 0;
-    }
-    [_mapView setRegion:region animated:YES];
-}
+//- (void)zoomInToCenter:(CLLocationCoordinate2D)coordinate {
+//
+//  //TODO:get span from currentspan
+//    MKCoordinateRegion region;
+//    if (_currentZoomLevel == 0) {
+//      region = MKCoordinateRegionMake(coordinate, _span1);
+//      _currentZoomLevel++;
+//      //    _currentAnnotation = _currentAnnotationView.annotation;
+//      //    region.center = _currentAnnotation.coordinate;
+//      //    region.span = _span1;
+//    } else if (_currentZoomLevel == 1) {
+//      region = MKCoordinateRegionMake(coordinate, _span01);
+//      _currentZoomLevel++;
+//    } else if (_currentZoomLevel == 2) {
+//      region = MKCoordinateRegionMake(coordinate, _span001);
+//      _currentZoomLevel++;
+//    } else if (_currentZoomLevel == 3) {
+//      region = MKCoordinateRegionMake(coordinate, _span1);
+//      _currentZoomLevel = 0;
+//    }
+//    [_mapView setRegion:region animated:YES];
+//}
 
 
 

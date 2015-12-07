@@ -24,6 +24,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
         manager = [[HMCoreDataManager alloc] init];
     });
     
@@ -193,6 +194,19 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+    
+//    NSURL *  url = [[[NSFileManager defaultManager]
+//                     URLsForDirectory:NSDocumentDirectory
+//                     inDomains:NSUserDomainMask] lastObject];
+//    
+//    NSURL *storeURL = [url
+//                       URLByAppendingPathComponent:@"lv-165IOS.sqlite"];
+//    // MARK: Deleting previous sqlite db before creating a new one
+//    // NSLog(@"deleting previous sqlite db before creating a new one");
+//    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+//    
+
     
     return _persistentStoreCoordinator;
 }
