@@ -156,6 +156,7 @@
             [[HMServerManager sharedManager] getPlacesByCountryWithISO:countries.iso onSuccess:^(NSDictionary *places)  {
 //                NSLog(@"%@/n", places);
                 
+                [self.arrayOfPlaces removeAllObjects];
                 for (NSDictionary* dict in places) {
                     
                     [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
