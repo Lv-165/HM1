@@ -17,17 +17,6 @@
 #import "UIView+MKAnnotationView.h"
 #import <MapKit/MapKit.h>
 
-static CGFloat kMaxViewWidth = 150.0;
-
-static CGFloat kViewWidth = 90;
-static CGFloat kViewLength = 100;
-
-static CGFloat kLeftMargin = 15.0;
-static CGFloat kRightMargin = 5.0;
-static CGFloat kTopMargin = 5.0;
-static CGFloat kBottomMargin = 10.0;
-static CGFloat kRoundBoxLeft = 10.0;
-
 @interface HMMapViewController ()
 
 @property(strong, nonatomic) CLLocationManager *locationManager;
@@ -366,17 +355,6 @@ static NSMutableArray *nameContinents;
     return nil;
   } else if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
 
-    //    FBAnnotationClusterView *clusterAnnotationView =
-    //        (FBAnnotationClusterView *)[mapView
-    //            dequeueReusableAnnotationViewWithIdentifier:
-    //                NSStringFromClass([FBAnnotationClusterView class])];
-    //
-    //    if (!clusterAnnotationView) {
-    //      clusterAnnotationView = [[FBAnnotationClusterView alloc]
-    //          initWithAnnotation:annotation
-    //             reuseIdentifier:NSStringFromClass(
-    //                                 [FBAnnotationClusterView class])];
-    //    }
     FBAnnotationCluster *clusterAnnotation = annotation;
     FBAnnotationClusterView *clusterAnnotationView =
         [FBAnnotationClusterView new];
@@ -440,7 +418,7 @@ static NSMutableArray *nameContinents;
 
     [clusterAnnotationView setTag:1];
     [clusterAnnotationView.annotationLabel setTag:2];
-  // clusterAnnotationView.annotationLabel.userInteractionEnabled = YES;
+    // clusterAnnotationView.annotationLabel.userInteractionEnabled = YES;
     clusterAnnotationView.userInteractionEnabled = YES;
 
     // TODO: try UIButton
@@ -461,9 +439,9 @@ static NSMutableArray *nameContinents;
     return clusterAnnotationView;
   } else {
 
-       MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc]
-          initWithAnnotation:annotation
-             reuseIdentifier:NSStringFromClass([MKPinAnnotationView class])];
+    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc]
+        initWithAnnotation:annotation
+           reuseIdentifier:NSStringFromClass([MKPinAnnotationView class])];
 
     annotationView.pinColor = MKPinAnnotationColorRed;
     annotationView.canShowCallout = YES;
@@ -471,9 +449,6 @@ static NSMutableArray *nameContinents;
     annotationView.draggable = NO;
     return annotationView;
   }
-  //    else {
-  //        annotationView.annotation = annotation;
-  //    }
 }
 
 - (void)labelTapped:(UITapGestureRecognizer *)sender {
@@ -485,41 +460,12 @@ static NSMutableArray *nameContinents;
                        animated:YES];
 }
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//  UITouch *touch = [touches anyObject];
-//  //getting from touch MKAnnotationView container with array of
-//  MKAnnotationViews and casting it
-//  if (touch.view.subviews){
-// FBAnnotationClusterView  * annotationClusterView = (FBAnnotationClusterView
-// *) touch.view.subviews[0];
-//    CGPoint point = [touch locationInView:annotationClusterView];
-//    UIView* view = [annotationClusterView hitTest:point withEvent:nil];
-//
-// if (annotationClusterView.tag == 1){
-//
-//    [self.mapView showAnnotations:annotationClusterView.annotation.annotations
-//    animated:YES];
-//  //if (touch.view isKindOfClass:[FBAnnotationClusterView class]) {
-//   NSLog(@"catched touchesBegan with tags for view %ld and label
-//   %ld",(long)annotationClusterView.tag,(long)annotationClusterView.annotationLabel.tag);
-//  }
-// else if  (annotationClusterView.tag == 2){
-//     [self.mapView
-//     showAnnotations:annotationClusterView.annotation.annotations
-//     animated:YES];
-//  //if (touch.view isKindOfClass:[FBAnnotationClusterView class]) {
-//   NSLog(@"catched touchesBegan with tags for view %ld and label
-//   %ld",(long)annotationClusterView.tag,(long)annotationClusterView.annotationLabel.tag);
-//}
-//}
-//}
-
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
   if ([touches count] == 1) {
     UITouch *touch = [touches anyObject];
     if (touch.view.subviews && [touch tapCount] == 1) {
-        
+
       CGPoint point = [touch locationInView:self.view];
       CLLocationCoordinate2D touchMapCoordinate =
           [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
@@ -527,95 +473,42 @@ static NSMutableArray *nameContinents;
       FBAnnotationClusterView *selectedAnnotationView;
 
       for (id View in touch.view.subviews) {
-          if ([View isKindOfClass:[FBAnnotationClusterView class]]){
-       
-    FBAnnotationClusterView *  annotationView = (FBAnnotationClusterView * ) View;
-          
-        // TODO: try hit test
-        // FBAnnotationClusterView  * annotationClusterView =
-        // [annotationView hitTest:point withEvent:nil];
-        //      if (annotationClusterView)
-        //      break;
-              
-        CGRect frame =
-            [annotationView convertRect:annotationView.annotationLabel.frame
-                                 toView:self.view];
+        if ([View isKindOfClass:[FBAnnotationClusterView class]]) {
 
-        if (CGRectContainsPoint(frame, point)) {
-            
-          selectedAnnotationView = annotationView;
-          break;
+          FBAnnotationClusterView *annotationView =
+              (FBAnnotationClusterView *)View;
+
+          CGRect frame =
+              [annotationView convertRect:annotationView.annotationLabel.frame
+                                   toView:self.view];
+
+          if (CGRectContainsPoint(frame, point)) {
+
+            selectedAnnotationView = annotationView;
+            break;
+          }
         }
       }
-       }
-        
-      // FBAnnotationClusterView  * annotationClusterView =
-      // [touch.view.subviews[0] hitTest:point withEvent:nil];
 
-      //      NSMutableArray *annotations = [NSMutableArray new];
-      //
-      //      for (MKAnnotationView *annotationView in
-      //      FBAnnotationClusterView.annotations) {
-      //        // maybe clustering manager will need FBAnnotationCluster,
-      //        otherwise it
-      //        // can just filter out them
-      //        HMMapAnnotation *annotation =
-      //            (HMMapAnnotation *)annotationView.annotation;
-      //        [annotations addObject:annotation];
-      //      }
+      NSArray *array = [selectedAnnotationView.annotation.annotations copy];
 
-     
-        NSArray *array = [selectedAnnotationView.annotation.annotations copy];
-      
-        
-     //[self.mapView showAnnotations:array animated:YES];
-       // [self.mapView removeAnnotations:array];
-//        [self.mapView removeAnnotations:self.mapView.annotations];
-       [self.mapView addAnnotations:array];
-        
-    if(array.count > 1){
-        
+      [self.mapView showAnnotations:array animated:YES];
+
+      if (array.count > 1) {
         [[NSOperationQueue new] addOperationWithBlock:^{
-            double scale = self.mapView.bounds.size.width /
-            self.mapView.visibleMapRect.size.width;
-            
-            NSArray *annotations = [self.clusteringManager
-                                    clusteredAnnotationsWithinMapRect:self.mapView.visibleMapRect
-                                    withZoomScale:scale];
-             [self.clusteringManager displayAnnotations:annotations
-             onMapView:self.mapView];
+          double scale = self.mapView.bounds.size.width /
+                         self.mapView.visibleMapRect.size.width;
+
+          NSArray *annotations = [self.clusteringManager
+              clusteredAnnotationsWithinMapRect:self.mapView.visibleMapRect
+                                  withZoomScale:scale];
+          [self.clusteringManager displayAnnotations:annotations
+                                           onMapView:self.mapView];
         }];
-    }
-        
+      }
     }
   }
 }
-
-
-//- (void)zoomInToCenter:(CLLocationCoordinate2D)coordinate {
-//
-//  //TODO:get span from currentspan
-//    MKCoordinateRegion region;
-//    if (_currentZoomLevel == 0) {
-//      region = MKCoordinateRegionMake(coordinate, _span1);
-//      _currentZoomLevel++;
-//      //    _currentAnnotation = _currentAnnotationView.annotation;
-//      //    region.center = _currentAnnotation.coordinate;
-//      //    region.span = _span1;
-//    } else if (_currentZoomLevel == 1) {
-//      region = MKCoordinateRegionMake(coordinate, _span01);
-//      _currentZoomLevel++;
-//    } else if (_currentZoomLevel == 2) {
-//      region = MKCoordinateRegionMake(coordinate, _span001);
-//      _currentZoomLevel++;
-//    } else if (_currentZoomLevel == 3) {
-//      region = MKCoordinateRegionMake(coordinate, _span1);
-//      _currentZoomLevel = 0;
-//    }
-//    [_mapView setRegion:region animated:YES];
-//}
-
-
 
 - (void)mapView:(MKMapView *)mapView
     didSelectAnnotationView:(MKAnnotationView *)view {
@@ -627,29 +520,12 @@ static NSMutableArray *nameContinents;
         (FBAnnotationCluster *)selectedAnnotation;
     FBAnnotationClusterView *clusterAnnotationView =
         (FBAnnotationClusterView *)view;
-    // clusterView.annotationLabel.text = [NSString stringWithFormat: @"%lu",
-    // (unsigned long)cluster.annotations.count];
-    NSLog(
-        @"selectedAnnotation is cluster. Number of annotations in cluster: %lu",
-        (unsigned long)clusterAnnotation.annotations.count);
-    // cluster.title = [NSString stringWithFormat:@"%lu", (unsigned
-    // long)cluster.annotations.count];
-
-    clusterAnnotationView.tintColor = [UIColor greenColor];
     clusterAnnotationView.canShowCallout = NO;
     clusterAnnotationView.draggable = NO;
     [self.mapView showAnnotations:clusterAnnotation.annotations animated:YES];
 
   } else if ([selectedAnnotation isKindOfClass:[HMMapAnnotation class]]) {
 
-    HMMapAnnotation *mapAnnotation = (HMMapAnnotation *)selectedAnnotation;
-
-    //        mapAnnotation.pinColor = MKPinAnnotationColorRed;
-    //        mapAnnotation.canShowCallout = YES;
-    //        mapAnnotation.animatesDrop = YES;
-    //        mapAnnotation.draggable = YES;
-
-    // _selectedAnnotationView = (MKAnnotationView *)view.annotation;
     __block HMMapAnnotation *pin = view.annotation;
 
     CLLocationCoordinate2D coordinate = view.annotation.coordinate;
@@ -664,34 +540,10 @@ static NSMutableArray *nameContinents;
                if (!(error)) {
                  if ([placemarks count] > 0) {
                    CLPlacemark *placemark = [placemarks firstObject];
-
-                   //  _currentPlacemark = [placemark copy];
-                   // address = [[placemarks firstObject].addressDictionary
-                   // description];
-
                    pin.title = placemark.name;
                    pin.subtitle = [[placemark.addressDictionary
                        valueForKey:@"FormattedAddressLines"]
                        componentsJoinedByString:@", "];
-
-                   // [pin setCoordinate:placemark.location.coordinate];
-                   // FBAnnotationCluster *cluster = (FBAnnotationCluster *)pin;
-                   // TODO: FIXIT
-                   //[_clusteringManager addAnnotations:@[cluster]];
-                   //[_mapView addAnnotation:cluster];
-                   // [_mapView addAnnotation:pin];
-
-                   //      [CLGeocoder new]
-                   //      reverseGeocodeLocation:location
-                   //      completionHandler:^(NSArray *placemarks, NSError
-                   //      *error) {
-                   //          CLPlacemark *placemark = placemarks[0];
-                   //          NSArray *lines = placemark.addressDictionary[
-                   //          @"FormattedAddressLines"];
-                   //          _addressString = [lines
-                   //          componentsJoinedByString:@"\n"];
-                   //          NSLog(@"Address: %@", addressString);
-                   //      }];
                  }
                }
              }];
@@ -706,7 +558,6 @@ static NSMutableArray *nameContinents;
     NSArray *annotations = [self.clusteringManager
         clusteredAnnotationsWithinMapRect:mapView.visibleMapRect
                             withZoomScale:scale];
-    //   [self.clusteringManager removeAnnotations:self.mapView.annotations];
     [self.clusteringManager displayAnnotations:annotations onMapView:mapView];
   }];
 }
@@ -720,6 +571,7 @@ static NSMutableArray *nameContinents;
 - (CGFloat)cellSizeFactorForCoordinator:(FBClusteringManager *)coordinator {
   return 2;
 }
+
 
 #pragma mark - Add annotations button action handler
 
