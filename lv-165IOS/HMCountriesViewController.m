@@ -125,10 +125,11 @@
     
     [self.arrayOfContries addObject:countries];
     
-    cell.continentsImage = nil;
     cell.continentLable.text = countries.name;
     cell.countLable.text = [NSString stringWithFormat:@"%@", countries.places];
-
+    NSString* countriesIso = [countries.iso lowercaseString];
+    cell.continentsImage.image = [UIImage imageNamed:countriesIso];
+    
     //cell.downloadProgress.hidden = YES;
     
     if ([countries.place count] != 0) {
@@ -206,6 +207,14 @@
     
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    NSLog(@"%@",searchBar);
+    
+    [self.tableView reloadData];
     
 }
 

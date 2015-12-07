@@ -69,7 +69,7 @@
 		C0729E881C09FD9200ADF283 /* HMCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */; };
 		C09A7CF61C0A1ED300F6DEBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */; };
 		C0E7DA8F1C08B4DB00541E5E /* HMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */; };
-		CE4CC48A1C14EB6F002C4358 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4CC4891C14EB6F002C4358 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
+		CE4CC48A1C14EB6F002C4358 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4CC4891C14EB6F002C4358 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,7 +353,7 @@
 			name = "HMCoreDate Manager";
 			sourceTree = "<group>";
 		};
-		7FA55BE21C0DAFCD00B99CC1 /* Download Continents */ = {
+		7FA55BE21C0DAFCD00B99CC1 /* Download Countries */ = {
 			isa = PBXGroup;
 			children = (
 				C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */,
@@ -365,7 +365,7 @@
 				7FA55BE61C0DB08200B99CC1 /* UIView+HMUItableViewCell.h */,
 				7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */,
 			);
-			name = "Download Continents";
+			name = "Download Countries";
 			sourceTree = "<group>";
 		};
 		7FE4EC5E1C0F11AD0075C9AC /* Extensions */ = {
@@ -403,7 +403,7 @@
 		C01442E01C0333A5000F8F6F /* lv-165IOS */ = {
 			isa = PBXGroup;
 			children = (
-				7FA55BE21C0DAFCD00B99CC1 /* Download Continents */,
+				7FA55BE21C0DAFCD00B99CC1 /* Download Countries */,
 				C01442E41C0333A5000F8F6F /* HMAppDelegate.h */,
 				C01442E51C0333A5000F8F6F /* HMAppDelegate.m */,
 				C01442E71C0333A5000F8F6F /* HMMapViewController.h */,
