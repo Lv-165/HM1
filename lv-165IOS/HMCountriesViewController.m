@@ -13,6 +13,7 @@
 #import "UIView+HMUItableViewCell.h"
 #import "Countries.h"
 #import "HMMapViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface HMCountriesViewController ()
 
@@ -98,14 +99,21 @@
     
     [fetchRequest setSortDescriptors:@[nameDescriptor]];
     
+    if ([self.searchString length]>0) {
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", self.searchString];
+    } else
+    {
+        fetchRequest.predicate = [NSPredicate predicateWithValue:YES];
+    }
+    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext
                                           sectionNameKeyPath:nil
-                                                   cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
+                                                   cacheName:self.searchString>0?self.searchString:@"All"];
+//    aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
     NSError *error = nil;
@@ -128,7 +136,13 @@
     cell.continentLable.text = countries.name;
     cell.countLable.text = [NSString stringWithFormat:@"%@", countries.places];
     NSString* countriesIso = [countries.iso lowercaseString];
-    cell.continentsImage.image = [UIImage imageNamed:countriesIso];
+//    cell.continentsImage.image = [UIImage imageNamed:countriesIso];
+//    if (cell.continentsImage.image == nil) {
+//        cell.continentsImage.image = [UIImage imageNamed:@"noFlag"];
+//    }
+    
+    [cell.continentsImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.geonames.org/flags/x/%@.gif",countriesIso]]
+                         placeholderImage:[UIImage imageNamed:@"noFlag"]];
     
     //cell.downloadProgress.hidden = YES;
     
@@ -200,7 +214,6 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     
     [searchBar setShowsCancelButton:YES animated:YES];
-    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -213,9 +226,10 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     NSLog(@"%@",searchBar);
+    self.fetchedResultsController = nil;
+    self.searchString = searchText;
     
-    [self.tableView reloadData];
-    
+//    [self.tableView reloadData];
 }
 
 @end

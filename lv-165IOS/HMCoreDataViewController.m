@@ -24,6 +24,11 @@
     return _managedObjectContext;
 }
 
+- (void)setSearchString:(NSString *)value {
+    _searchString = value;
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

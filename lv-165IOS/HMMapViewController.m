@@ -138,17 +138,17 @@ static bool isMainRoute;
     [fetchRequest setEntity:entity];
     
     
-    NSError* error;
-    
-    NSUInteger count = [[self managedObjectContext] countForFetchRequest:fetchRequest
-                                                                   error:&error];
-    
-    if (!count) {
-        NSString * storyboardName = @"Main";
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
-        [self presentViewController:vc animated:YES completion:nil];
-    }
+//    NSError* error;
+//    
+//    NSUInteger count = [[self managedObjectContext] countForFetchRequest:fetchRequest
+//                                                                   error:&error];
+//    
+//    if (!count) {
+//        NSString * storyboardName = @"Main";
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+//        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+//        [self presentViewController:vc animated:YES completion:nil];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -31,6 +31,23 @@
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
   
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    if (![userDef boolForKey:@"firstStart"]) {
+        //        todo when first run
+        NSString * storyboardName = @"Main";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+        self.window.rootViewController = vc;
+        [userDef setBool:YES forKey:@"firstStart"];
+        [userDef synchronize];
+    } else {
+        NSString * storyboardName = @"Main";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        UIViewController * vc = [storyboard instantiateInitialViewController];
+//        [storyboard instantiateViewControllerWithIdentifier:@"mainVC"];
+        self.window.rootViewController = vc;
+    }
+    
     return YES;
 }
 

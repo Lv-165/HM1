@@ -155,7 +155,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zVh-Tb-0VY">
             <objects>
-                <navigationController id="MnQ-Mm-xcN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainVC" id="MnQ-Mm-xcN" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2GO-J2-TNp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -293,6 +293,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ST5-gB-6jr"/>
+        <segue reference="pi6-pB-44T"/>
     </inferredMetricsTieBreakers>
 </document>
