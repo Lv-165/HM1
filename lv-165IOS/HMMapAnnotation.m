@@ -34,6 +34,7 @@
         returnedAnnotationView =
         [[HMMapAnnotationView alloc] initWithAnnotation:annotation
                                          reuseIdentifier:NSStringFromClass([HMMapAnnotation class])];
+
     }
     
     return returnedAnnotationView;

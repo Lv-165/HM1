@@ -34,6 +34,7 @@
 		7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */; };
 		7FE4EC611C0F12160075C9AC /* NSNumber+HMNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4EC601C0F12160075C9AC /* NSNumber+HMNumber.m */; };
 		842E0C5E1C1209C8004B7B5E /* HMMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842E0C5D1C1209C8004B7B5E /* HMMapAnnotationView.m */; };
+		84A03EDF1C14F412000FE430 /* FBAnnotationClusterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A03EDE1C14F412000FE430 /* FBAnnotationClusterView.m */; };
 		A10299261C0F153E00BA5896 /* HMMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A10299251C0F153E00BA5896 /* HMMapAnnotation.m */; };
 		A10299291C0F1A7800BA5896 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10299281C0F1A7800BA5896 /* UIView+MKAnnotationView.m */; };
 		A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5EDE21C0CA7C900F94400 /* HMSettingsViewController.m */; };
@@ -151,6 +152,8 @@
 		7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotation.m; sourceTree = "<group>"; };
 		842E0C5C1C1209C8004B7B5E /* HMMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMapAnnotationView.h; sourceTree = "<group>"; };
 		842E0C5D1C1209C8004B7B5E /* HMMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotationView.m; sourceTree = "<group>"; };
+		84A03EDD1C14F412000FE430 /* FBAnnotationClusterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClusterView.h; sourceTree = "<group>"; };
+		84A03EDE1C14F412000FE430 /* FBAnnotationClusterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAnnotationClusterView.m; sourceTree = "<group>"; };
 		A10299241C0F153E00BA5896 /* HMMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMapAnnotation.h; sourceTree = "<group>"; };
 		A10299251C0F153E00BA5896 /* HMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMMapAnnotation.m; sourceTree = "<group>"; };
 		A10299271C0F1A7800BA5896 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
@@ -257,9 +260,11 @@
 		0C93B26C1C11DB840032A3AE /* FBAnnotationClustering */ = {
 			isa = PBXGroup;
 			children = (
+				0C93B2781C11DECB0032A3AE /* FBAnnotationClustering.h */,
 				0C93B2761C11DECB0032A3AE /* FBAnnotationCluster.h */,
 				0C93B2771C11DECB0032A3AE /* FBAnnotationCluster.m */,
-				0C93B2781C11DECB0032A3AE /* FBAnnotationClustering.h */,
+				84A03EDD1C14F412000FE430 /* FBAnnotationClusterView.h */,
+				84A03EDE1C14F412000FE430 /* FBAnnotationClusterView.m */,
 				0C93B2791C11DECB0032A3AE /* FBClusteringManager.h */,
 				0C93B27A1C11DECB0032A3AE /* FBClusteringManager.m */,
 				0C93B27B1C11DECB0032A3AE /* FBQuadTree.h */,
@@ -695,6 +700,7 @@
 				C0B0B71B1C0C7D27007A91A7 /* Comments+CoreDataProperties.m in Sources */,
 				302A11CF1C0371C3002F8FF0 /* AFURLResponseSerialization.m in Sources */,
 				C0B0B71F1C0C7D27007A91A7 /* User+CoreDataProperties.m in Sources */,
+				84A03EDF1C14F412000FE430 /* FBAnnotationClusterView.m in Sources */,
 				302A11D81C0371C3002F8FF0 /* UIWebView+AFNetworking.m in Sources */,
 				C0B0B7281C0C7D27007A91A7 /* DescriptionInfo.m in Sources */,
 				7FA55BE11C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m in Sources */,
