@@ -90,8 +90,6 @@ static NSMutableArray* nameContinents;
     [viewForSearchButton addSubview:searchButton];
     UIBarButtonItem *buttonSearchButton = [[UIBarButtonItem alloc] initWithCustomView:viewForSearchButton];
 
-    
-    
     UIButton *moveToFilterController = [UIButton buttonWithType:UIButtonTypeCustom];
     [moveToFilterController setBackgroundImage:[UIImage imageNamed:@"filter"]
                                        forState:UIControlStateNormal];
@@ -161,72 +159,6 @@ static NSMutableArray* nameContinents;
     [self performSegueWithIdentifier:@"showSearchViewController" sender:sender];
     
 }
-
-#pragma mark - API
-
-//- (void)getCountriesFromServer {
-//    [[HMServerManager sharedManager]
-//     
-//     getCountriesWithonSuccess:^(NSArray *countries) {
-//         [self.arrayOfCountries addObjectsFromArray:countries];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//}
-
-//- (void)getContinentsFromServer {
-//    [[HMServerManager sharedManager]
-//     
-//     getContinentsWithonSuccess:^(NSArray *continents) {
-//         //[self.araryOfContinents addObjectsFromArray:continents];
-//         [[HMCoreDataManager sharedManager] saveContinentsToCoreDataWithNSArray:continents];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//}
-//
-//- (void)getPlacesFromServerByISOCountryName:(NSString *)iso {
-//    [[HMServerManager sharedManager]
-//     getPlacesByCountryWithISO:iso
-//     onSuccess:^(NSArray *countriesWithISO) {
-//         [self.arrayOfCountriesByISO addObjectsFromArray:countriesWithISO];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//    
-//}
-//
-//- (void)getPlaceFromServerByID:(NSString *)placeID {
-//    [[HMServerManager sharedManager]
-//     getPlaceWithID:placeID
-//     onSuccess:^(NSDictionary* places) {
-//         [self.arrayOfPlaces addObjectsFromArray:places];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//    
-//}
-//
-//- (void)getPlaceFromServerByIDandDot:(NSString *)placeID {
-//    NSString *stringForRequest = [NSString stringWithFormat:@"%@&dot",placeID];
-//    [self getPlaceFromServerByID:stringForRequest];
-//}
-//
-//- (void)getPlacesFromServerByContinent:(NSString *)continentCode {
-//    [[HMServerManager sharedManager]
-//     getPlacesByContinentName:continentCode
-//     onSuccess:^(NSDictionary* places) {
-//         //[self.arrayOfPlacesByContinent addObjectsFromArray:places];
-//     }
-//     onFailure:^(NSError *error, NSInteger statusCode) {
-//         NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
-//     }];
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -316,7 +248,7 @@ static NSMutableArray* nameContinents;
     
     if (!pin) {
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        pin.pinColor = MKPinAnnotationColorRed;
+        pin.pinTintColor = MKPinAnnotationColorRed;
         pin.animatesDrop = YES;
         pin.canShowCallout = YES;
         pin.draggable = YES;

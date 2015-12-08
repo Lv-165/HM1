@@ -7,10 +7,12 @@
 //
 
 #import "HMSearchViewController.h"
+#import "SVGeocoder.h"
+#import "UICellForInfo.h"
 
 @interface HMSearchViewController ()
 
-@property (strong, nonatomic) NSMutableArray *arrayForPlacesMarks;
+@property (strong, nonatomic)NSArray *arrayForPlacesMarks;
 
 @end
 
@@ -36,13 +38,18 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.tableView.backgroundView = nil;
     self.arrayForPlacesMarks = [NSArray array];
-    [ geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (!error) {
-            self.arrayForPlacesMarks = placemarks;
-        }
-        [self.tableView reloadData];
-    }];
+    [SVGeocoder geocode:searchBar.text
+             completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 if ([placemarks count]) {
+                      self.arrayForPlacesMarks = placemarks;
+                 } else {
+                     self.tableView.backgroundView = nil;
+                     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search"]]];
+                 }
+                 [self.tableView reloadData];
+             }];
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -53,30 +60,40 @@
 {
     searchBar.text = @"";
     [searchBar resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.arrayForPlacesMarks count];
+}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UICellForInfo *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString* identifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UICellForInfo *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (!cell) {
         [tableView registerNib:[UINib nibWithNibName:@"UITableViewCell" bundle:nil] forCellReuseIdentifier:identifier];
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
-    MKPlacemark *object = self.arrayForPlacesMarks[indexPath.row];
+    SVPlacemark *object = self.arrayForPlacesMarks[indexPath.row];
     
-    NSArray *levelOfLocality = [NSArray arrayWithObjects:
-                                object.country,
-                                object.locality,
-                                object.administrativeArea,
-                                object.subAdministrativeArea,
-                                object.thoroughfare,
-                                nil];
+    NSMutableArray *levelOfLocality = [NSMutableArray array];
+    if (object.formattedAddress) {
+        [levelOfLocality addObject:object.formattedAddress];
+    }
+    if (object.administrativeArea) {
+        [levelOfLocality addObject:object.administrativeArea];
+    }
+    if (object.subAdministrativeArea) {
+        [levelOfLocality addObject:object.subAdministrativeArea];
+    }
+    if (object.thoroughfare) {
+        [levelOfLocality addObject:object.thoroughfare];
+    }
     NSInteger count = 0;
     NSMutableString *str = [NSMutableString stringWithFormat:@""];
     for (id dataOfLocality in levelOfLocality) {
@@ -88,34 +105,31 @@
             [str appendFormat:@", %@",dataOfLocality];
             count ++;
         }
+        
     }
     [str deleteCharactersInRange:NSMakeRange(0, 1)];
-    cell.textLabel.text = [NSString stringWithString:str];
+    cell.infoLabel.text = [NSString stringWithString:str];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self.arrayForPlacesMarks count];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

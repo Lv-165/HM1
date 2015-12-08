@@ -145,6 +145,7 @@
                         <outlet property="mapView" destination="eIw-hm-dci" id="YBP-2t-6ao"/>
                         <segue destination="FcZ-ur-xTB" kind="show" identifier="showSettingsViewController" id="kTR-gT-Ouf"/>
                         <segue destination="dMV-LU-WqC" kind="show" identifier="showFilterViewController" id="H6g-fj-adH"/>
+                        <segue destination="Rv7-Fp-mQe" kind="show" identifier="showSearchViewController" id="O40-KN-1qg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -236,25 +237,68 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8T-2P-P3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="-463"/>
+            <point key="canvasLocation" x="1127" y="-477"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="llf-Lk-Nxs">
+        <!--Search View Controller-->
+        <scene sceneID="gMZ-YO-USN">
             <objects>
-                <viewController id="HX8-a7-6R5" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="crW-Wi-fdb"/>
-                        <viewControllerLayoutGuide type="bottom" id="m9Q-gg-6Ia"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FFf-3z-Qlq">
+                <tableViewController id="Rv7-Fp-mQe" customClass="HMSearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fof-0u-feC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ePm-UQ-UfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="3dR-N7-rHM">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Rv7-Fp-mQe" id="xZP-bt-NZe"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="vrD-a9-fRj" customClass="UICellForInfo">
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vrD-a9-fRj" id="cUu-zF-Tvg">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Info" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhS-wr-ce7">
+                                            <rect key="frame" x="8" y="0.0" width="579" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="jhS-wr-ce7" firstAttribute="leading" secondItem="cUu-zF-Tvg" secondAttribute="leadingMargin" id="Iej-a0-uMx"/>
+                                        <constraint firstItem="jhS-wr-ce7" firstAttribute="top" secondItem="cUu-zF-Tvg" secondAttribute="topMargin" constant="-8" id="WnR-Kn-KLP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jhS-wr-ce7" secondAttribute="trailing" constant="5" id="ayH-xf-Urz"/>
+                                        <constraint firstItem="jhS-wr-ce7" firstAttribute="bottom" secondItem="cUu-zF-Tvg" secondAttribute="bottomMargin" id="cC1-L6-0KY"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <connections>
+                                    <outlet property="infoLabel" destination="jhS-wr-ce7" id="paE-gC-axA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Rv7-Fp-mQe" id="nQZ-jq-Exd"/>
+                            <outlet property="delegate" destination="Rv7-Fp-mQe" id="kj9-Xd-RZt"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="3dR-N7-rHM" id="bdf-js-Rdn"/>
+                        <outlet property="tableView" destination="Fof-0u-feC" id="PDT-xX-cQG"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FeB-95-uFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="330"/>
+            <point key="canvasLocation" x="757" y="311"/>
         </scene>
     </scenes>
 </document>

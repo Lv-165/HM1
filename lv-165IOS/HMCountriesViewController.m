@@ -157,32 +157,32 @@
 //    }
     
 #warning коментувати коли скачали
-//    for (Continents* continent in self.arrayOfContinent ) {
-//        if ([cell.continentLable.text isEqualToString:continent.name]) {
-//            //getPlacesByContinentName
-//            
-//            
-//            
-//            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
-//                //NSLog(@"%@/n", places);
-//                
-//                for (NSDictionary* dict in places) {
-//                    
-//                    //NSLog(@"%@", [dict objectForKey:@"id"]);
-//                    
-//                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
-//                }
-//                [self downloadPlaces:continent];
-//#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
-//                        //Write to CoreData Place
-//                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
-//                        
-//                    } onFailure:^(NSError *error, NSInteger statusCode) {
-//                        
-//                    }];
-//            return;
-//        }
-//    }
+    for (Continents* continent in self.arrayOfContinent ) {
+        if ([cell.continentLable.text isEqualToString:continent.name]) {
+            //getPlacesByContinentName
+            
+            
+            
+            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
+                //NSLog(@"%@/n", places);
+                
+                for (NSDictionary* dict in places) {
+                    
+                    //NSLog(@"%@", [dict objectForKey:@"id"]);
+                    
+                    [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
+                }
+                [self downloadPlaces:continent];
+#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
+                        //Write to CoreData Place
+                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
+                        
+                    } onFailure:^(NSError *error, NSInteger statusCode) {
+                        
+                    }];
+            return;
+        }
+    }
 }
 
 - (void) downloadPlaces:(Continents*)continents {
