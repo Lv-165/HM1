@@ -290,8 +290,8 @@ static bool isMainRoute;
     
     if (!pin) {
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        pin.pinTintColor = MKPinAnnotationColorRed;
-        pin.animatesDrop = YES;
+        pin.pinColor = MKPinAnnotationColorRed;
+        //pin.animatesDrop = YES;
         pin.canShowCallout = YES;
         //pin.draggable = YES;
         

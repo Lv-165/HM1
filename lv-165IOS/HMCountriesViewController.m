@@ -163,41 +163,30 @@
     
     NSLog(@"name = %@, count = %@\n", cell.continentLable.text, cell.countLable.text);
     
-    [HMMapViewController addNameContinent:cell.continentLable.text];
-    
-    
-//    for (NSInteger i=0; i<[self.arrayOfContinent count]; i++) {
-//        Continents* continent = [self.arrayOfContinent objectAtIndex:i];
-//        NSLog(@"%@",continent);
-//    }
-    
-#warning коментувати коли скачали
-    for (Continents* continent in self.arrayOfContinent ) {
-        if ([cell.continentLable.text isEqualToString:continent.name]) {
+    for (Countries* countries in self.arrayOfContries ) {
+        if ([cell.continentLable.text isEqualToString:countries.name]) {
             //getPlacesByContinentName
             
-            
-            
-            [[HMServerManager sharedManager] getPlacesByContinentName:continent.code onSuccess:^(NSDictionary *places)  {
-                //NSLog(@"%@/n", places);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [[HMServerManager sharedManager] getPlacesByCountryWithISO:countries.iso onSuccess:^(NSDictionary *places)  {
+//                NSLog(@"%@/n", places);
                 
+                [self.arrayOfPlaces removeAllObjects];
                 for (NSDictionary* dict in places) {
                     
                     //NSLog(@"%@", [dict objectForKey:@"id"]);
                     
                     [self.arrayOfPlaces addObject:[dict objectForKey:@"id"]];
                 }
-                [self downloadPlaces:continent];
-#warning СПИТАТИ ЯК ПРАВИЛЬНО ВИКЛИКАТИ!
-                        //Write to CoreData Place
-                        //[[HMCoreDataManager sharedManager] savePlaceToCoreDataWithNSArray:places];
+                [self downloadPlaces:countries];
+                
                         
-                    } onFailure:^(NSError *error, NSInteger statusCode) {
-                        
-                    }];
+            return;
             return;
         }
+//        [[HMCoreDataManager sharedManager]printCountryA];//не выводит
     }
+
 }
 
 - (void) downloadPlaces:(Countries*)countries {
