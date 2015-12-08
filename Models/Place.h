@@ -2,18 +2,18 @@
 //  Place.h
 //  lv-165IOS
 //
-//  Created by AG on 11/30/15.
+//  Created by Admin on 04.12.15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "HMCoreDataObjects.h"
+#import <CoreData/CoreData.h>
 
-@class Comments, Continents, Description, Location, User;
+@class Comments, Countries, Description, Location, User;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Place : HMCoreDataObjects
+@interface Place : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 

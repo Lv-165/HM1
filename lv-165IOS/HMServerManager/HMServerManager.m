@@ -31,12 +31,32 @@
     
     return manager;
 }
+- (BOOL) isServerReachable {
+    return self.reachability.isReachable;
+}
+- (void) checkServerConnection {
 
-- (id)init
-{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"Status server - %i",[[HMServerManager sharedManager] isServerReachable]);
+        [self checkServerConnection];
+        
+    });
+}
+
+- (id)init {
     self = [super init];
     if (self) {
-       
+        self.reachability = [Reachability reachabilityWithHostName:@"http://hitchwiki.org/"];
+        [self.reachability startNotifier];
+        [self checkServerConnection];
+        
+//        self.reachability.reachabilityBlock = ^void (Reachability* reachability){
+//            
+//        };
+        self.reachability.unreachableBlock = ^void (Reachability* reachability){
+            
+        };
+
         NSURL* url = [NSURL URLWithString:@"http://hitchwiki.org/maps/api/"];
 
         self.requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
@@ -44,24 +64,24 @@
     return self;
 }
 
-//- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
-//                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
-//    [self.requestOperationManager
-//     GET:@"?countries"
-//     parameters:nil
-//     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-//         
-//         self.countriesResponceObjects = [responseObject allValues];
-//         NSLog(@"Countries get GOOD");// вызов записи в кор дату
-//         [self moveCountriesCoreData];
-//         
-//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//         NSLog(@"Error: %@", error);
-//     }];
-//    
-//}
+- (void) getCountriesWithonSuccess:(void(^)(NSArray* countries)) success
+                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+    [self.requestOperationManager
+     GET:@"?countries"
+     parameters:nil
+     success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+         
+         success(responseObject.allValues);
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+     }];
+    
+}
 
-- (void) getContinentsWithonSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *, NSInteger))failure {
+- (void) getContinentsWithonSuccess:(void (^)(NSArray *))success
+                          onFailure:(void (^)(NSError *, NSInteger))failure {
+    
     [self.requestOperationManager
      GET:@"?continents"
      parameters:nil
@@ -75,8 +95,10 @@
 }
 
 - (void) getPlacesByCountryWithISO:(NSString *)iso
-                 onSuccess:(void(^)(NSArray* places)) success
+                 onSuccess:(void(^)(NSDictionary* places)) success
                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+    
+    
     
     NSString* countriesForGet = [NSString stringWithFormat:@"?country=%@",iso];
     
@@ -86,10 +108,11 @@
      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
          //NSLog(@"JSON: %@", responseObject);
          
+         success(responseObject);
+         
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"Error: %@", error);
      }];
-    
 }
 
 - (void)getPlaceWithID:(NSString *)placeID

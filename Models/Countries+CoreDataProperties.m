@@ -1,21 +1,21 @@
 //
-//  HMCoreDataObjects+CoreDataProperties.h
+//  Countries+CoreDataProperties.m
 //  lv-165IOS
 //
-//  Created by AG on 11/30/15.
+//  Created by Admin on 04.12.15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "HMCoreDataObjects.h"
+#import "Countries+CoreDataProperties.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation Countries (CoreDataProperties)
 
-@interface HMCoreDataObjects (CoreDataProperties)
-
+@dynamic name;
+@dynamic iso;
+@dynamic places;
+@dynamic place;
 
 @end
-
-NS_ASSUME_NONNULL_END

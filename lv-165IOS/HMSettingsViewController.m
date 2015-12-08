@@ -18,14 +18,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
     self.segmentedControlForMapType.selectedSegmentIndex = [self.mapType intValue];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +41,14 @@
                                                         object:self
                                                       userInfo:dictionary];
     
+}
+
+- (IBAction)actionDownloadsCountries:(id)sender {
+    
+    NSString * storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 /*

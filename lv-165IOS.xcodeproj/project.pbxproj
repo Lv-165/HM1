@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C93B27F1C11DECB0032A3AE /* FBAnnotationCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93B2771C11DECB0032A3AE /* FBAnnotationCluster.m */; };
+		0C93B2801C11DECB0032A3AE /* FBClusteringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93B27A1C11DECB0032A3AE /* FBClusteringManager.m */; };
+		0C93B2811C11DECB0032A3AE /* FBQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93B27C1C11DECB0032A3AE /* FBQuadTree.m */; };
+		0C93B2821C11DECB0032A3AE /* FBQuadTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93B27E1C11DECB0032A3AE /* FBQuadTreeNode.m */; };
 		301896301C0895DC00178A04 /* HMServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3018962F1C0895DC00178A04 /* HMServerManager.m */; };
 		302A11C81C0371C3002F8FF0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11A31C0371C3002F8FF0 /* AFHTTPRequestOperation.m */; };
 		302A11C91C0371C3002F8FF0 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 302A11A51C0371C3002F8FF0 /* AFHTTPRequestOperationManager.m */; };
@@ -49,27 +53,8 @@
 		C0729E401C09FBF700ADF283 /* HMCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E3F1C09FBF700ADF283 /* HMCountriesViewController.m */; };
 		C0729E881C09FD9200ADF283 /* HMCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */; };
 		C09A7CF61C0A1ED300F6DEBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */; };
-		C0B0B7151C0C7D27007A91A7 /* Continents+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6EE1C0C7D27007A91A7 /* Continents+CoreDataProperties.m */; };
-		C0B0B7161C0C7D27007A91A7 /* Continents.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6F01C0C7D27007A91A7 /* Continents.m */; };
-		C0B0B7171C0C7D27007A91A7 /* Description+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6F21C0C7D27007A91A7 /* Description+CoreDataProperties.m */; };
-		C0B0B7181C0C7D27007A91A7 /* Description.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6F41C0C7D27007A91A7 /* Description.m */; };
-		C0B0B7191C0C7D27007A91A7 /* Place+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6F61C0C7D27007A91A7 /* Place+CoreDataProperties.m */; };
-		C0B0B71A1C0C7D27007A91A7 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6F81C0C7D27007A91A7 /* Place.m */; };
-		C0B0B71B1C0C7D27007A91A7 /* Comments+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6FA1C0C7D27007A91A7 /* Comments+CoreDataProperties.m */; };
-		C0B0B71C1C0C7D27007A91A7 /* Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6FC1C0C7D27007A91A7 /* Comments.m */; };
-		C0B0B71D1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B6FE1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m */; };
-		C0B0B71E1C0C7D27007A91A7 /* HMCoreDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7001C0C7D27007A91A7 /* HMCoreDataObjects.m */; };
-		C0B0B71F1C0C7D27007A91A7 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7021C0C7D27007A91A7 /* User+CoreDataProperties.m */; };
-		C0B0B7201C0C7D27007A91A7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7041C0C7D27007A91A7 /* User.m */; };
-		C0B0B7211C0C7D27007A91A7 /* Location+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7061C0C7D27007A91A7 /* Location+CoreDataProperties.m */; };
-		C0B0B7221C0C7D27007A91A7 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7081C0C7D27007A91A7 /* Location.m */; };
-		C0B0B7231C0C7D27007A91A7 /* Country+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B70A1C0C7D27007A91A7 /* Country+CoreDataProperties.m */; };
-		C0B0B7241C0C7D27007A91A7 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B70C1C0C7D27007A91A7 /* Country.m */; };
-		C0B0B7251C0C7D27007A91A7 /* Continent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B70E1C0C7D27007A91A7 /* Continent+CoreDataProperties.m */; };
-		C0B0B7261C0C7D27007A91A7 /* Continent.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7101C0C7D27007A91A7 /* Continent.m */; };
-		C0B0B7271C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7121C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.m */; };
-		C0B0B7281C0C7D27007A91A7 /* DescriptionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B0B7141C0C7D27007A91A7 /* DescriptionInfo.m */; };
 		C0E7DA8F1C08B4DB00541E5E /* HMCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */; };
+		CE4CC48A1C14EB6F002C4358 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4CC4891C14EB6F002C4358 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +75,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C93B2761C11DECB0032A3AE /* FBAnnotationCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBAnnotationCluster.h; path = FBAnnotationClustering/FBAnnotationCluster.h; sourceTree = "<group>"; };
+		0C93B2771C11DECB0032A3AE /* FBAnnotationCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBAnnotationCluster.m; path = FBAnnotationClustering/FBAnnotationCluster.m; sourceTree = "<group>"; };
+		0C93B2781C11DECB0032A3AE /* FBAnnotationClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBAnnotationClustering.h; path = FBAnnotationClustering/FBAnnotationClustering.h; sourceTree = "<group>"; };
+		0C93B2791C11DECB0032A3AE /* FBClusteringManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBClusteringManager.h; path = FBAnnotationClustering/FBClusteringManager.h; sourceTree = "<group>"; };
+		0C93B27A1C11DECB0032A3AE /* FBClusteringManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBClusteringManager.m; path = FBAnnotationClustering/FBClusteringManager.m; sourceTree = "<group>"; };
+		0C93B27B1C11DECB0032A3AE /* FBQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBQuadTree.h; path = FBAnnotationClustering/FBQuadTree.h; sourceTree = "<group>"; };
+		0C93B27C1C11DECB0032A3AE /* FBQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBQuadTree.m; path = FBAnnotationClustering/FBQuadTree.m; sourceTree = "<group>"; };
+		0C93B27D1C11DECB0032A3AE /* FBQuadTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBQuadTreeNode.h; path = FBAnnotationClustering/FBQuadTreeNode.h; sourceTree = "<group>"; };
+		0C93B27E1C11DECB0032A3AE /* FBQuadTreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBQuadTreeNode.m; path = FBAnnotationClustering/FBQuadTreeNode.m; sourceTree = "<group>"; };
 		3018962E1C0895DC00178A04 /* HMServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMServerManager.h; path = HMServerManager/HMServerManager.h; sourceTree = "<group>"; };
 		3018962F1C0895DC00178A04 /* HMServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMServerManager.m; path = HMServerManager/HMServerManager.m; sourceTree = "<group>"; };
 		302A11A21C0371C3002F8FF0 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -176,48 +170,10 @@
 		C0729E861C09FD9200ADF283 /* HMCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCoreDataViewController.h; sourceTree = "<group>"; };
 		C0729E871C09FD9200ADF283 /* HMCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCoreDataViewController.m; sourceTree = "<group>"; };
 		C09A7CF51C0A1ED300F6DEBC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		C0B0B6ED1C0C7D27007A91A7 /* Continents+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Continents+CoreDataProperties.h"; path = "Models/Continents+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B6EE1C0C7D27007A91A7 /* Continents+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Continents+CoreDataProperties.m"; path = "Models/Continents+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B6EF1C0C7D27007A91A7 /* Continents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Continents.h; path = Models/Continents.h; sourceTree = "<group>"; };
-		C0B0B6F01C0C7D27007A91A7 /* Continents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Continents.m; path = Models/Continents.m; sourceTree = "<group>"; };
-		C0B0B6F11C0C7D27007A91A7 /* Description+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Description+CoreDataProperties.h"; path = "Models/Description+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B6F21C0C7D27007A91A7 /* Description+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Description+CoreDataProperties.m"; path = "Models/Description+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B6F31C0C7D27007A91A7 /* Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Description.h; path = Models/Description.h; sourceTree = "<group>"; };
-		C0B0B6F41C0C7D27007A91A7 /* Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Description.m; path = Models/Description.m; sourceTree = "<group>"; };
-		C0B0B6F51C0C7D27007A91A7 /* Place+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Place+CoreDataProperties.h"; path = "Models/Place+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B6F61C0C7D27007A91A7 /* Place+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Place+CoreDataProperties.m"; path = "Models/Place+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B6F71C0C7D27007A91A7 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = Models/Place.h; sourceTree = "<group>"; };
-		C0B0B6F81C0C7D27007A91A7 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = Models/Place.m; sourceTree = "<group>"; };
-		C0B0B6F91C0C7D27007A91A7 /* Comments+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Comments+CoreDataProperties.h"; path = "Models/Comments+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B6FA1C0C7D27007A91A7 /* Comments+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Comments+CoreDataProperties.m"; path = "Models/Comments+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B6FB1C0C7D27007A91A7 /* Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comments.h; path = Models/Comments.h; sourceTree = "<group>"; };
-		C0B0B6FC1C0C7D27007A91A7 /* Comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comments.m; path = Models/Comments.m; sourceTree = "<group>"; };
-		C0B0B6FD1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HMCoreDataObjects+CoreDataProperties.h"; path = "Models/HMCoreDataObjects+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B6FE1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HMCoreDataObjects+CoreDataProperties.m"; path = "Models/HMCoreDataObjects+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B6FF1C0C7D27007A91A7 /* HMCoreDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMCoreDataObjects.h; path = Models/HMCoreDataObjects.h; sourceTree = "<group>"; };
-		C0B0B7001C0C7D27007A91A7 /* HMCoreDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMCoreDataObjects.m; path = Models/HMCoreDataObjects.m; sourceTree = "<group>"; };
-		C0B0B7011C0C7D27007A91A7 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataProperties.h"; path = "Models/User+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B7021C0C7D27007A91A7 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+CoreDataProperties.m"; path = "Models/User+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B7031C0C7D27007A91A7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		C0B0B7041C0C7D27007A91A7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
-		C0B0B7051C0C7D27007A91A7 /* Location+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Location+CoreDataProperties.h"; path = "Models/Location+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B7061C0C7D27007A91A7 /* Location+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Location+CoreDataProperties.m"; path = "Models/Location+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B7071C0C7D27007A91A7 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Models/Location.h; sourceTree = "<group>"; };
-		C0B0B7081C0C7D27007A91A7 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = Models/Location.m; sourceTree = "<group>"; };
-		C0B0B7091C0C7D27007A91A7 /* Country+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Country+CoreDataProperties.h"; path = "Models/Country+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B70A1C0C7D27007A91A7 /* Country+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Country+CoreDataProperties.m"; path = "Models/Country+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B70B1C0C7D27007A91A7 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Country.h; path = Models/Country.h; sourceTree = "<group>"; };
-		C0B0B70C1C0C7D27007A91A7 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Country.m; path = Models/Country.m; sourceTree = "<group>"; };
-		C0B0B70D1C0C7D27007A91A7 /* Continent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Continent+CoreDataProperties.h"; path = "Models/Continent+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B70E1C0C7D27007A91A7 /* Continent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Continent+CoreDataProperties.m"; path = "Models/Continent+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B70F1C0C7D27007A91A7 /* Continent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Continent.h; path = Models/Continent.h; sourceTree = "<group>"; };
-		C0B0B7101C0C7D27007A91A7 /* Continent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Continent.m; path = Models/Continent.m; sourceTree = "<group>"; };
-		C0B0B7111C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DescriptionInfo+CoreDataProperties.h"; path = "Models/DescriptionInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0B0B7121C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DescriptionInfo+CoreDataProperties.m"; path = "Models/DescriptionInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0B0B7131C0C7D27007A91A7 /* DescriptionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionInfo.h; path = Models/DescriptionInfo.h; sourceTree = "<group>"; };
-		C0B0B7141C0C7D27007A91A7 /* DescriptionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionInfo.m; path = Models/DescriptionInfo.m; sourceTree = "<group>"; };
 		C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCoreDataManager.h; sourceTree = "<group>"; };
 		C0E7DA8E1C08B4DB00541E5E /* HMCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCoreDataManager.m; sourceTree = "<group>"; };
+		CE4CC4881C14EB6F002C4358 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CE4CC4891C14EB6F002C4358 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +203,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C93B26C1C11DB840032A3AE /* FBAnnotationClustering */ = {
+			isa = PBXGroup;
+			children = (
+				0C93B2761C11DECB0032A3AE /* FBAnnotationCluster.h */,
+				0C93B2771C11DECB0032A3AE /* FBAnnotationCluster.m */,
+				0C93B2781C11DECB0032A3AE /* FBAnnotationClustering.h */,
+				0C93B2791C11DECB0032A3AE /* FBClusteringManager.h */,
+				0C93B27A1C11DECB0032A3AE /* FBClusteringManager.m */,
+				0C93B27B1C11DECB0032A3AE /* FBQuadTree.h */,
+				0C93B27C1C11DECB0032A3AE /* FBQuadTree.m */,
+				0C93B27D1C11DECB0032A3AE /* FBQuadTreeNode.h */,
+				0C93B27E1C11DECB0032A3AE /* FBQuadTreeNode.m */,
+			);
+			name = FBAnnotationClustering;
+			sourceTree = "<group>";
+		};
 		302A119C1C037143002F8FF0 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,7 +317,7 @@
 			name = "HMCoreDate Manager";
 			sourceTree = "<group>";
 		};
-		7FA55BE21C0DAFCD00B99CC1 /* Download Continents */ = {
+		7FA55BE21C0DAFCD00B99CC1 /* Download Countries */ = {
 			isa = PBXGroup;
 			children = (
 				C0729E3E1C09FBF700ADF283 /* HMCountriesViewController.h */,
@@ -357,7 +329,7 @@
 				7FA55BE61C0DB08200B99CC1 /* UIView+HMUItableViewCell.h */,
 				7FA55BE71C0DB08200B99CC1 /* UIView+HMUItableViewCell.m */,
 			);
-			name = "Download Continents";
+			name = "Download Countries";
 			sourceTree = "<group>";
 		};
 		7FE4EC5E1C0F11AD0075C9AC /* Extensions */ = {
@@ -395,19 +367,19 @@
 		C01442E01C0333A5000F8F6F /* lv-165IOS */ = {
 			isa = PBXGroup;
 			children = (
-				7FA55BE21C0DAFCD00B99CC1 /* Download Continents */,
+				7FA55BE21C0DAFCD00B99CC1 /* Download Countries */,
 				C01442E41C0333A5000F8F6F /* HMAppDelegate.h */,
 				C01442E51C0333A5000F8F6F /* HMAppDelegate.m */,
 				C01442E71C0333A5000F8F6F /* HMMapViewController.h */,
 				C01442E81C0333A5000F8F6F /* HMMapViewController.m */,
 				7FE6FF3D1C105F43005C6CB0 /* HMMapAnnotation.h */,
 				7FE6FF3E1C105F43005C6CB0 /* HMMapAnnotation.m */,
+				C01442E11C0333A5000F8F6F /* Supporting Files */,
 				C01442EA1C0333A5000F8F6F /* Main.storyboard */,
 				C01442F01C0333A5000F8F6F /* Assets.xcassets */,
 				C01442F21C0333A5000F8F6F /* LaunchScreen.storyboard */,
 				C01442F51C0333A5000F8F6F /* Info.plist */,
 				C01442ED1C0333A5000F8F6F /* lv_165IOS.xcdatamodeld */,
-				C01442E11C0333A5000F8F6F /* Supporting Files */,
 				3018962E1C0895DC00178A04 /* HMServerManager.h */,
 				3018962F1C0895DC00178A04 /* HMServerManager.m */,
 				C0E7DA8D1C08B4DB00541E5E /* HMCoreDataManager.h */,
@@ -458,46 +430,42 @@
 		C0E7DA8C1C08B3AA00541E5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C0B0B6ED1C0C7D27007A91A7 /* Continents+CoreDataProperties.h */,
-				C0B0B6EE1C0C7D27007A91A7 /* Continents+CoreDataProperties.m */,
-				C0B0B6EF1C0C7D27007A91A7 /* Continents.h */,
-				C0B0B6F01C0C7D27007A91A7 /* Continents.m */,
-				C0B0B6F11C0C7D27007A91A7 /* Description+CoreDataProperties.h */,
-				C0B0B6F21C0C7D27007A91A7 /* Description+CoreDataProperties.m */,
-				C0B0B6F31C0C7D27007A91A7 /* Description.h */,
-				C0B0B6F41C0C7D27007A91A7 /* Description.m */,
-				C0B0B6F51C0C7D27007A91A7 /* Place+CoreDataProperties.h */,
-				C0B0B6F61C0C7D27007A91A7 /* Place+CoreDataProperties.m */,
-				C0B0B6F71C0C7D27007A91A7 /* Place.h */,
-				C0B0B6F81C0C7D27007A91A7 /* Place.m */,
-				C0B0B6F91C0C7D27007A91A7 /* Comments+CoreDataProperties.h */,
-				C0B0B6FA1C0C7D27007A91A7 /* Comments+CoreDataProperties.m */,
-				C0B0B6FB1C0C7D27007A91A7 /* Comments.h */,
-				C0B0B6FC1C0C7D27007A91A7 /* Comments.m */,
-				C0B0B6FD1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.h */,
-				C0B0B6FE1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m */,
-				C0B0B6FF1C0C7D27007A91A7 /* HMCoreDataObjects.h */,
-				C0B0B7001C0C7D27007A91A7 /* HMCoreDataObjects.m */,
-				C0B0B7011C0C7D27007A91A7 /* User+CoreDataProperties.h */,
-				C0B0B7021C0C7D27007A91A7 /* User+CoreDataProperties.m */,
-				C0B0B7031C0C7D27007A91A7 /* User.h */,
-				C0B0B7041C0C7D27007A91A7 /* User.m */,
-				C0B0B7051C0C7D27007A91A7 /* Location+CoreDataProperties.h */,
-				C0B0B7061C0C7D27007A91A7 /* Location+CoreDataProperties.m */,
-				C0B0B7071C0C7D27007A91A7 /* Location.h */,
-				C0B0B7081C0C7D27007A91A7 /* Location.m */,
-				C0B0B7091C0C7D27007A91A7 /* Country+CoreDataProperties.h */,
-				C0B0B70A1C0C7D27007A91A7 /* Country+CoreDataProperties.m */,
-				C0B0B70B1C0C7D27007A91A7 /* Country.h */,
-				C0B0B70C1C0C7D27007A91A7 /* Country.m */,
-				C0B0B70D1C0C7D27007A91A7 /* Continent+CoreDataProperties.h */,
-				C0B0B70E1C0C7D27007A91A7 /* Continent+CoreDataProperties.m */,
-				C0B0B70F1C0C7D27007A91A7 /* Continent.h */,
-				C0B0B7101C0C7D27007A91A7 /* Continent.m */,
-				C0B0B7111C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.h */,
-				C0B0B7121C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.m */,
-				C0B0B7131C0C7D27007A91A7 /* DescriptionInfo.h */,
-				C0B0B7141C0C7D27007A91A7 /* DescriptionInfo.m */,
+				841135321C124399004AEDCA /* Continent+CoreDataProperties.h */,
+				841135331C124399004AEDCA /* Continent+CoreDataProperties.m */,
+				841135341C124399004AEDCA /* Continent.h */,
+				841135351C124399004AEDCA /* Continent.m */,
+				841135361C124399004AEDCA /* Comments+CoreDataProperties.h */,
+				841135371C124399004AEDCA /* Comments+CoreDataProperties.m */,
+				841135381C124399004AEDCA /* Comments.h */,
+				841135391C124399004AEDCA /* Comments.m */,
+				8411353A1C124399004AEDCA /* DescriptionInfo+CoreDataProperties.h */,
+				8411353B1C124399004AEDCA /* DescriptionInfo+CoreDataProperties.m */,
+				8411353C1C124399004AEDCA /* DescriptionInfo.h */,
+				8411353D1C124399004AEDCA /* DescriptionInfo.m */,
+				8411353E1C124399004AEDCA /* Countries+CoreDataProperties.h */,
+				8411353F1C124399004AEDCA /* Countries+CoreDataProperties.m */,
+				841135401C124399004AEDCA /* Countries.h */,
+				841135411C124399004AEDCA /* Countries.m */,
+				841135421C124399004AEDCA /* User+CoreDataProperties.h */,
+				841135431C124399004AEDCA /* User+CoreDataProperties.m */,
+				841135441C124399004AEDCA /* User.h */,
+				841135451C124399004AEDCA /* User.m */,
+				841135461C124399004AEDCA /* Description+CoreDataProperties.h */,
+				841135471C124399004AEDCA /* Description+CoreDataProperties.m */,
+				841135481C124399004AEDCA /* Description.h */,
+				841135491C124399004AEDCA /* Description.m */,
+				8411354A1C124399004AEDCA /* Place+CoreDataProperties.h */,
+				8411354B1C124399004AEDCA /* Place+CoreDataProperties.m */,
+				8411354C1C124399004AEDCA /* Place.h */,
+				8411354D1C124399004AEDCA /* Place.m */,
+				8411354E1C124399004AEDCA /* Location+CoreDataProperties.h */,
+				8411354F1C124399004AEDCA /* Location+CoreDataProperties.m */,
+				841135501C124399004AEDCA /* Location.h */,
+				841135511C124399004AEDCA /* Location.m */,
+				841135521C124399004AEDCA /* Country+CoreDataProperties.h */,
+				841135531C124399004AEDCA /* Country+CoreDataProperties.m */,
+				841135541C124399004AEDCA /* Country.h */,
+				841135551C124399004AEDCA /* Country.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -633,35 +601,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0B0B7201C0C7D27007A91A7 /* User.m in Sources */,
-				C0B0B7221C0C7D27007A91A7 /* Location.m in Sources */,
 				7FE4EC611C0F12160075C9AC /* NSNumber+HMNumber.m in Sources */,
-				C0B0B71D1C0C7D27007A91A7 /* HMCoreDataObjects+CoreDataProperties.m in Sources */,
-				C0B0B71A1C0C7D27007A91A7 /* Place.m in Sources */,
+				0C93B2811C11DECB0032A3AE /* FBQuadTree.m in Sources */,
 				A10299291C0F1A7800BA5896 /* UIView+MKAnnotationView.m in Sources */,
 				C0729E401C09FBF700ADF283 /* HMCountriesViewController.m in Sources */,
 				302A11D61C0371C3002F8FF0 /* UIProgressView+AFNetworking.m in Sources */,
-				C0B0B71E1C0C7D27007A91A7 /* HMCoreDataObjects.m in Sources */,
+				841135651C124399004AEDCA /* Location.m in Sources */,
 				C0729E881C09FD9200ADF283 /* HMCoreDataViewController.m in Sources */,
 				C0B0B7181C0C7D27007A91A7 /* Description.m in Sources */,
 				30E905F31C12FEEE007F4BE5 /* UICellForInfo.m in Sources */,
 				302A11D41C0371C3002F8FF0 /* UIButton+AFNetworking.m in Sources */,
-				C0B0B7261C0C7D27007A91A7 /* Continent.m in Sources */,
+				841135631C124399004AEDCA /* Place.m in Sources */,
+				8411355F1C124399004AEDCA /* User.m in Sources */,
+				8411355D1C124399004AEDCA /* Countries.m in Sources */,
+				841135641C124399004AEDCA /* Location+CoreDataProperties.m in Sources */,
+				0C93B27F1C11DECB0032A3AE /* FBAnnotationCluster.m in Sources */,
 				302A11D71C0371C3002F8FF0 /* UIRefreshControl+AFNetworking.m in Sources */,
-				C0B0B71C1C0C7D27007A91A7 /* Comments.m in Sources */,
 				A1C5EDEB1C0CC4D500F94400 /* HMSearchViewController.m in Sources */,
+				0C93B2821C11DECB0032A3AE /* FBQuadTreeNode.m in Sources */,
+				841135671C124399004AEDCA /* Country.m in Sources */,
 				302A11D31C0371C3002F8FF0 /* UIAlertView+AFNetworking.m in Sources */,
-				C0B0B7151C0C7D27007A91A7 /* Continents+CoreDataProperties.m in Sources */,
-				C0B0B7161C0C7D27007A91A7 /* Continents.m in Sources */,
+				841135591C124399004AEDCA /* Comments.m in Sources */,
 				A1C5EDE41C0CA7C900F94400 /* HMSettingsViewController.m in Sources */,
+				841135611C124399004AEDCA /* Description.m in Sources */,
 				C01442E91C0333A5000F8F6F /* HMMapViewController.m in Sources */,
+				8411355C1C124399004AEDCA /* Countries+CoreDataProperties.m in Sources */,
 				302A11CC1C0371C3002F8FF0 /* AFSecurityPolicy.m in Sources */,
+				841135601C124399004AEDCA /* Description+CoreDataProperties.m in Sources */,
 				C01442E61C0333A5000F8F6F /* HMAppDelegate.m in Sources */,
+				8411355A1C124399004AEDCA /* DescriptionInfo+CoreDataProperties.m in Sources */,
+				841135581C124399004AEDCA /* Comments+CoreDataProperties.m in Sources */,
 				302A11C91C0371C3002F8FF0 /* AFHTTPRequestOperationManager.m in Sources */,
 				302A11CD1C0371C3002F8FF0 /* AFURLConnectionOperation.m in Sources */,
 				30E65EBF1C11A6C200F5055B /* SVPlacemark.m in Sources */,
 				302A11D51C0371C3002F8FF0 /* UIImageView+AFNetworking.m in Sources */,
 				302A11C81C0371C3002F8FF0 /* AFHTTPRequestOperation.m in Sources */,
+				8411355E1C124399004AEDCA /* User+CoreDataProperties.m in Sources */,
 				A10299261C0F153E00BA5896 /* HMMapAnnotation.m in Sources */,
 				301896301C0895DC00178A04 /* HMServerManager.m in Sources */,
 				7FA55BE81C0DB08200B99CC1 /* UIView+HMUItableViewCell.m in Sources */,
@@ -673,21 +648,15 @@
 				C01442EF1C0333A5000F8F6F /* lv_165IOS.xcdatamodeld in Sources */,
 				302A11CE1C0371C3002F8FF0 /* AFURLRequestSerialization.m in Sources */,
 				302A11CA1C0371C3002F8FF0 /* AFHTTPSessionManager.m in Sources */,
-				C0B0B7271C0C7D27007A91A7 /* DescriptionInfo+CoreDataProperties.m in Sources */,
+				841135571C124399004AEDCA /* Continent.m in Sources */,
 				302A11CB1C0371C3002F8FF0 /* AFNetworkReachabilityManager.m in Sources */,
-				C0B0B7251C0C7D27007A91A7 /* Continent+CoreDataProperties.m in Sources */,
-				C0B0B7231C0C7D27007A91A7 /* Country+CoreDataProperties.m in Sources */,
-				C0B0B7241C0C7D27007A91A7 /* Country.m in Sources */,
-				C0B0B71B1C0C7D27007A91A7 /* Comments+CoreDataProperties.m in Sources */,
 				302A11CF1C0371C3002F8FF0 /* AFURLResponseSerialization.m in Sources */,
-				C0B0B71F1C0C7D27007A91A7 /* User+CoreDataProperties.m in Sources */,
+				841135561C124399004AEDCA /* Continent+CoreDataProperties.m in Sources */,
 				302A11D81C0371C3002F8FF0 /* UIWebView+AFNetworking.m in Sources */,
-				C0B0B7281C0C7D27007A91A7 /* DescriptionInfo.m in Sources */,
 				7FA55BE11C0DAFC700B99CC1 /* HMDownloadCellTableViewCell.m in Sources */,
 				302A11D01C0371C3002F8FF0 /* AFURLSessionManager.m in Sources */,
-				C0B0B7191C0C7D27007A91A7 /* Place+CoreDataProperties.m in Sources */,
 				302A11D11C0371C3002F8FF0 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				C0B0B7211C0C7D27007A91A7 /* Location+CoreDataProperties.m in Sources */,
+				8411355B1C124399004AEDCA /* DescriptionInfo.m in Sources */,
 				C01442E31C0333A5000F8F6F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -830,6 +799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "lv-165IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lv-165IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -841,6 +811,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "lv-165IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lv-165IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";

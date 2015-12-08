@@ -9,8 +9,11 @@
 #import "HMAppDelegate.h"
 #import "HMCountriesViewController.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "Reachability.h"
 
 @interface HMAppDelegate ()
+
+
 
 @end
 
@@ -24,11 +27,30 @@
 //    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:vc];
 //    
 //    self.window.rootViewController = nav;
+
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+  
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    if (![userDef boolForKey:@"firstStart"]) {
+        //        todo when first run
+        NSString * storyboardName = @"Main";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"downloadCountries"];
+        self.window.rootViewController = vc;
+        [userDef setBool:YES forKey:@"firstStart"];
+        [userDef synchronize];
+    } else {
+        NSString * storyboardName = @"Main";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        UIViewController * vc = [storyboard instantiateInitialViewController];
+//        [storyboard instantiateViewControllerWithIdentifier:@"mainVC"];
+        self.window.rootViewController = vc;
+    }
     
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

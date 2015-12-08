@@ -33,21 +33,21 @@
 #pragma mark - Create_Delete Objects
 
 
-- (void) saveContinentsToCoreDataWithNSArray:(NSArray*) countryArray {
+- (void) saveCountriesToCoreDataWithNSArray:(NSArray*) countryArray {
     
     NSLog(@"saveContinentsToCoreDataWithNSArray");
 
     for (NSDictionary* dict in countryArray) {
         
-        Continents* continent = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"
+        Countries* countries = [NSEntityDescription insertNewObjectForEntityForName:@"Countries"
                                                               inManagedObjectContext:[self managedObjectContext]];
         
-        continent.code = [dict objectForKey:@"code"];
-        continent.name = [dict objectForKey:@"name"];
+        countries.iso = [dict objectForKey:@"iso"];
+        countries.name = [dict objectForKey:@"name"];
         NSInteger tempInteger = [[dict valueForKey:@"places"] doubleValue];
-        continent.places = [NSNumber numberWithInteger:tempInteger];
+        countries.places = [NSNumber numberWithInteger:tempInteger];
         
-        NSLog(@"%@  AND %@ PLACES",continent.name, continent.code);
+        NSLog(@"%@  AND %@ PLACES",countries.name, countries.places);
         
     }
     
@@ -59,7 +59,8 @@
 
 }
 
-- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary continent:(Continents*)continent {
+- (void) savePlaceToCoreDataWithNSArray:(NSDictionary*) placeNSDictionary
+                              contries:(Countries*)countries {
     
     NSLog(@"savePlaceToCoreDataWithNSArray");
     
@@ -82,14 +83,12 @@
     double latDounble = [[placeNSDictionary valueForKey:@"lat"] doubleValue];
     place.lat = [NSNumber numberWithDouble:latDounble];
     
-    //NSLog(@"\n\nID - %@\n LON - %@\n LAT - %@\n RATING - %@\n  RATCOUNT - %@\n ELEVATION -%@",
-       //   place.id, place.lon,place.lat, place.rating, place.rating_count, place.elevation);
     
-//    Continents* continents = [NSEntityDescription insertNewObjectForEntityForName:@"Continents"                                                              inManagedObjectContext:[self managedObjectContext]];
     
-    //place.continent = continent;
-    
-    [continent addPlacesOnContinentObject:place];
+//    countries.place = place;
+
+    [countries addPlaceObject:place];
+    //NSLog(@"COUNTRY PLACE %@",countries.place);
     
     NSError* error = nil;
     if (![[self managedObjectContext] save:&error]) {
@@ -111,26 +110,27 @@
 
 #pragma mark - Print Objects
 
-//- (void) printCountries {
-//    
-//    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-//    
-//    NSEntityDescription* description =
-//    [NSEntityDescription entityForName:@"Countries"
-//                inManagedObjectContext:self.managedObjectContext];
-//    
-//    [request setEntity:description];
-//    
-//    NSError* requestError = nil;
-//    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
-//   
-//}
-
-- (void) printAllObjects {
+- (void) printCountryA{
     
-    NSArray* allObjects = [self allObjects];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
     
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:@"Country"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH %@", @"A"];
+    [request setPredicate:predicate];
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    NSLog(@"Print Country Entities %@",resultArray);
 }
+//
+//- (void) printAllObjects {
+//    
+//    NSArray* allObjects = [self allObjects];
+//    
+//}
 
 
 - (NSArray*) allObjects {

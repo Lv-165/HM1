@@ -1,15 +1,15 @@
 //
-//  Continents.m
+//  Countries.m
 //  lv-165IOS
 //
-//  Created by AG on 11/30/15.
+//  Created by Admin on 04.12.15.
 //  Copyright © 2015 SS. All rights reserved.
 //
 
-#import "Continents.h"
+#import "Countries.h"
 #import "Place.h"
 
-@implementation Continents
+@implementation Countries
 
 // Insert code here to add functionality to your managed object subclass
 
